@@ -1,0 +1,56 @@
+<div class='main' ng-controller='jobsController'>
+	<button class='Lbutton' ng-click='count_down()'></button>
+	<div class='main_table'>
+	<table>
+		<thead>
+			<th> Job Title </th>
+			<th colspan="1"> Company </th>
+			<th> Location </th>
+			<th> Source </th>
+			<th class='date'> Date Added </th>
+			<th id='add'colspan="3"> Add to MyJobs </th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="job in pages | orderBy:'-date'">
+				<td >
+					<a href="#" ng-click="showMe = !showMe"> {{  job.job_title }} </a>
+				</td>
+				<td>
+					<div ng-if="job.indeed_url">
+						<p>{{ job.company }}</p>
+					</div>
+					<div ng-if="job.git_url">
+						<a href="{{ job.url }}">{{ job.company }}</a>
+					</div>
+				</td>
+				<td>{{ job.location }}</td>
+				<td><div ng-if="job.git_url">
+						<a href="{{ job.git_url }}">
+							<button class='source_git'></button>
+						</a>
+					</div>
+					<div ng-if="job.indeed_url">
+						<a href="{{ job.indeed_url }}">
+							<button class='source_indeed'></button>
+						</a>
+					</div>
+				</td>
+				<td ng-model="num_limit">{{ job.date | date : 'shortDate' }}</td>
+				<td >
+					<button class='apply'></button>
+				</td>
+				<td class='check'><input type="checkbox"></td>
+				<td colspan="9" rowspan="5" ng-show="showMe" id='show'>
+					<p>{{ job.job_title }}</p>
+					<p> 
+						<a href="{{ job.url }}">{{ job.company }}</a> 
+					</p>
+					<button class="hide" ng-click="showMe = ''"></button>
+					<div class="des" ng-bind-html="renderHtml( job.description )"></div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	<button class='Rbutton' ng-click='count_up()'></button>
+</div>

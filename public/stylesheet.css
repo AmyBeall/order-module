@@ -1,0 +1,187 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+.container {
+	width: 100%;
+	height: 100%;
+	background: url('https://ununsplash.imgix.net/reserve/fawrXCzwSsOUMmJr9GGD_alcatraz.jpg?q=75&fm=jpg&s=581307737e7c9f8b24e46d7e770f5769'); 
+    background-size: 100% 100%;
+    position: absolute;
+}
+.navbar {
+	width: 100%;
+	height: 40px;
+	border: 1px solid transparent;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: grey;
+}
+.navbar div{
+	width: 194px;
+	height: 28px;
+	font-size: 18px;
+	display: inline-block;
+	text-align: center;
+	padding-top: 8px;
+	background-color: grey;
+}
+.navbar a{
+	text-decoration: none;
+	color: white;
+	background-color: grey;
+}
+a:hover{
+	color: black;
+}
+.hide{
+	display: hidden;
+}
+.main button{
+	display: inline-block;
+	vertical-align: top;
+	padding: 20px;
+}
+.main_table{
+	width: 1100px;
+	height: 650px;
+	display: inline-block;
+	margin: 60px auto;
+	/*overflow: hidden;*/
+}
+.main table{
+	width: 1200px;
+	height: 470px;
+	border: none;
+	margin-top: 60px auto;
+	border-collapse: collapse;
+	overflow: hidden;
+}
+.main tr{
+	overflow: hidden;
+}
+.main td{
+	border-bottom: 2px solid lightgray;
+	font-size: 18px;
+	text-align: center;
+	background-color: white;
+	padding: 10px;
+	height: 76px;
+}
+.main thead{
+	border: none;
+}
+.main th{
+	background-color: grey;
+	height: 20px;
+	text-align: center;
+}
+.Lbutton{
+	margin-top: 302px;
+	margin-left: 100px;
+	width: 17px;
+	height: 45px;
+	background: url('http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/3d-transparent-glass-icons-arrows/006763-3d-transparent-glass-icon-arrows-arrowhead-solid-left.png');
+	background-size: 12px 40px;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	border-color: transparent;
+}
+.Rbutton{
+	margin-top: 302px;
+	margin-left: 150px;
+	width: 17px;
+	height: 45px;
+	background: url('http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/3d-transparent-glass-icons-arrows/006764-3d-transparent-glass-icon-arrows-arrowhead-solid-right.png');
+	background-size: 12px 40px;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	border-color: transparent;
+}
+.image{
+	width: 50px;
+}
+#show li{
+	background-color: white;
+	list-style-type: none;
+}
+#show{
+	height: 500px;
+	overflow:scroll;
+	padding: 10px;
+	z-index: 5;
+	width: 1179px;
+	position: absolute;
+	top: 114px;
+	left: 152px;
+	border-bottom: none;
+}
+#show p{
+	margin-bottom: 10px;
+}
+.apply{
+	background: url('https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRjdvKN9pIDdIq9EnhaUjvKN3C8x9qJfeoi5z8lvPx0iAxHes8BJw');
+	background-size: 78px 30px;
+	background-repeat: no-repeat;
+	width: 80px;
+	height: 34px;
+	border-radius:8px;
+	border-color: transparent;
+}
+.apply a{
+	color: transparent;
+}
+.apply p{
+	color: transparent;
+}
+.apply>p>a>img{
+	display:none;
+}
+#add{
+	width: 115px;
+}
+.check{
+	width: 30px;
+}
+.date{
+	width: 90px;
+}
+.source_git{
+	width: 82px;
+	height: 34px;
+	background: url('http://www.programmableweb.com/sites/default/files/styles/article_profile_150x150/public/apis/at9673.png?itok=E8VU8CKl');
+	background-size: 78px 30px;
+	background-repeat: no-repeat;
+	border-color: transparent;
+}
+.source_indeed{
+	width: 82px;
+	height: 34px;
+	background: url('http://www.indeed.com/images/indeed.png');
+	background-size: 78px 30px;
+	background-repeat: no-repeat;
+	border-color: transparent;
+}
+.hide{
+	width: 20px;
+	height: 20px;
+	background: url('http://www.clker.com/cliparts/t/f/J/i/7/C/amazon-style-close-button-md.png');
+	background-size: 19px 19px;
+	background-repeat: no-repeat;
+	position: absolute;
+	top: 10px;
+	left: 1163px;
+	border-color: transparent;
+}
+.des{
+	text-align: left;
+	padding: 20px;
+}
+.bar-link{
+	display: inline-block;
+	width: 20%;
+}
+.top-bar-section{
+	text-align: right;
+}
