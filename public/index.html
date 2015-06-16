@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" ng-app='jobBoardApp'>
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Job Board</title>
-
+	<base href="/">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="./foundation/css/foundation.css" />
 	<link rel="stylesheet" href="stylesheet.css">
@@ -17,7 +17,7 @@
 	<script type='text/javascript' src='./app/services/jobsService.js'></script>
 	
 </head>	
-<body>
+<body ng-app="jobBoardApp" ng-controller="jobsController as jobs">
 	<div class='container'>
 		<nav class="top-bar">
 		  <ul class="title-area">

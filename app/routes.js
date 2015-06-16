@@ -2,8 +2,11 @@ var https = require('https');
 var http = require('http');
 var parseString = require('xml2js').parseString;
 
-module.exports = function(app) {
-	app.get('/gitJobs.json', function(req2, res2){
+module.exports = function(app, express) {
+
+	var myApiRouter = express.Router();
+
+	myApiRouter.get('/gitJobs.json', function(req2, res2){
 			//The url we want is: 'www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new'
 		var options = {
 		  host: 'jobs.github.com',
@@ -34,7 +37,7 @@ module.exports = function(app) {
 
 		req.end();
 	});
-	app.get('/indeedJobs.json', function(req2, res2){
+	myApiRouter.get('/indeedJobs.json', function(req2, res2){
 			//The url we want is: 'www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new'
 		var options = {
 		  host: 'api.indeed.com',
@@ -69,4 +72,6 @@ module.exports = function(app) {
 
 		req.end();
 	});
+
+	return myApiRouter;
 }

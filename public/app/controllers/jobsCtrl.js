@@ -1,6 +1,10 @@
 angular.module('jobsCtrl', [])
 .controller('jobsController', function($scope, jobFactory, $location, $sce, $filter, $rootScope){
 	
+	var gitJobs = {};
+	var indeedJobs = {};
+
+	$scope.jobs = [];
 	$scope.filtered_jobs = [];
 	$scope.jobs1 = [];
 	$scope.jobs2 = [];
@@ -59,30 +63,14 @@ angular.module('jobsCtrl', [])
 		} else if (count == 12) {
 			$scope.pages = $scope.jobs12;
 		} 
-	};		 
-	jobFactory.getGitJobs(function(data){
-		for(i in data){
-			data[i].company = data[i].company;
-			data[i].job_title = data[i].title;
-			data[i].location = data[i].location;
-			data[i].date = new Date(data[i].created_at);
-			data[i].git_url = data[i].url;
-			data[i].url = data[i].company_url;
-			data[i].description = data[i].description;
-			
-		};
-	});		
+	};	
 
+	jobFactory.getGitJobs(function(data){
+		gitJobs = data;
+	});
 	jobFactory.getIndeedJobs(function(data){
-		for(i in data){
-			data[i].company = data[i].company[0];
-			data[i].job_title = data[i].jobtitle[0];
-			data[i].location = data[i].formattedLocationFull[0];
-			data[i].date = new Date(data[i].date[0]);
-			data[i].dataeed_url = data[i].url[0];
-			data[i].description = data[i].snippet[0];
-		};
-	});	
+		indeedJobs = data;
+	});
 	
 	// $q.all([gitJobs, indeedJobs]).then(function(result) {
 	// 	var jobs = [];
@@ -94,7 +82,7 @@ angular.module('jobsCtrl', [])
 	// 	$scope.filtered_jobs = $filter('orderBy')(jobsResult, 'date');	
 	// });
 		$scope.filtered_jobs = $filter('orderBy')($scope.jobs, 'date');	
-				console.log($scope.filtered_jobs);	
+				// console.log($scope.filtered_jobs);	
 			for (i in $scope.filtered_jobs){
 				if( i < 5 ){
 					$scope.jobs1.push($scope.jobs[i]);
