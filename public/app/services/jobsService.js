@@ -1,12 +1,11 @@
 angular.module('jobsService', [])
-.factory('jobFactory', function($http){
+.factory('jobFactory', function($http, $q){
+	var factory = this;
+	jobs = [];
 
-	var factory = {};
-	var git_jobs = {};
-	var indeed_jobs = {};
-
-	factory.getGitJobs = function(callback){
-		$http({
+	factory.getJobs = function(){
+		var deferred = $q.defer();
+		var promise1 = $http({
 			url:'/api/gitJobs.json',
 			method: 'get'
 			}).success(function(data){
@@ -18,13 +17,11 @@ angular.module('jobsService', [])
 					data[i].git_url = data[i].url;
 					data[i].url = data[i].company_url;
 					data[i].description = data[i].description;
-				};
-				git_jobs = data;
-				callback(git_jobs);
+					jobs.push(data[i]);
+				}
+				return data;
 			});	
-	};
-	factory.getIndeedJobs = function(callback){
-		$http({
+		var promise2 = $http({
 			url:'/api/indeedJobs.json',
 			method: 'get'
 			}).success(function(output){
@@ -36,11 +33,18 @@ angular.module('jobsService', [])
 						data[i].date = new Date(data[i].date[0]);
 						data[i].indeed_url = data[i].url[0];
 						data[i].description = data[i].snippet[0];
-					};
-				indeed_jobs = data;	
-				callback(indeed_jobs);	
+						jobs.push(data[i]);
+					}	
 			});
-	}
+		$q.all([promise1, promise2]).then(function(results){
+			var data = [];
+		        angular.forEach(results, function(result) {
+		          data = data.concat(result.data);
+		          console.log(result.data);
+		        });
+        	return data;
+		});
+			
+	};
 	return factory;	
-
 });	

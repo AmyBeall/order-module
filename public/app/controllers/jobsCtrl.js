@@ -1,10 +1,6 @@
 angular.module('jobsCtrl', [])
-.controller('jobsController', function($scope, jobFactory, $location, $sce, $filter, $rootScope){
-	
-	var gitJobs = {};
-	var indeedJobs = {};
+.controller('jobsController', function($scope, jobFactory, $location, $sce, $filter, $rootScope, $q, $http){
 
-	$scope.jobs = [];
 	$scope.filtered_jobs = [];
 	$scope.jobs1 = [];
 	$scope.jobs2 = [];
@@ -63,63 +59,87 @@ angular.module('jobsCtrl', [])
 		} else if (count == 12) {
 			$scope.pages = $scope.jobs12;
 		} 
-	};	
-
-	jobFactory.getGitJobs(function(data){
-		gitJobs = data;
-	});
-	jobFactory.getIndeedJobs(function(data){
-		indeedJobs = data;
-	});
-	
-	// $q.all([gitJobs, indeedJobs]).then(function(result) {
-	// 	var jobs = [];
-	// 	angular.forEach(result, function(response) {
-	// 	jobs.push(response[i]);
-	// });
-	// 	return jobs;
-	// }).then(function(jobsResult) {
-	// 	$scope.filtered_jobs = $filter('orderBy')(jobsResult, 'date');	
-	// });
-		$scope.filtered_jobs = $filter('orderBy')($scope.jobs, 'date');	
-				// console.log($scope.filtered_jobs);	
+	};
+	var jobs = [];
+	getJobs = function(){
+		var promise1 = $http({
+			url:'/api/gitJobs.json',
+			method: 'get'
+			}).success(function(data){
+				for(i in data){
+					data[i].company = data[i].company;
+					data[i].job_title = data[i].title;
+					data[i].location = data[i].location;
+					data[i].date = new Date(data[i].created_at);
+					data[i].git_url = data[i].url;
+					data[i].url = data[i].company_url;
+					data[i].description = data[i].description;
+					jobs.push(data[i]);
+				}
+				return data;
+			});	
+		var promise2 = $http({
+			url:'/api/indeedJobs.json',
+			method: 'get'
+			}).success(function(output){
+				data = output.response.results[0].result;
+					for(i in data){
+						data[i].company = data[i].company[0];
+						data[i].job_title = data[i].jobtitle[0];
+						data[i].location = data[i].formattedLocationFull[0];
+						data[i].date = new Date(data[i].date[0]);
+						data[i].indeed_url = data[i].url[0];
+						data[i].description = data[i].snippet[0];
+						jobs.push(data[i]);
+					}
+				return data;		
+			});
+		$q.all([promise1, promise2]).then(function(results){
+			$scope.filtered_jobs = $filter('orderBy')(jobs, '-date');
+			console.log($scope.filtered_jobs);	
+		}).then(function(){
 			for (i in $scope.filtered_jobs){
 				if( i < 5 ){
-					$scope.jobs1.push($scope.jobs[i]);
+					$scope.jobs1.push($scope.filtered_jobs[i]);
+					console.log($scope.jobs1);
 				}
 				else if(i >= 5 && i < 10){
-					$scope.jobs2.push($scope.jobs[i]);
+					$scope.jobs2.push($scope.filtered_jobs[i]);
 				}
 				else if(i >= 10 && i < 15){
-					$scope.jobs3.push($scope.jobs[i]);
+					$scope.jobs3.push($scope.filtered_jobs[i]);
 				}
 				else if(i >= 15 && i < 20){
-					$scope.jobs4.push($scope.jobs[i]);
+					$scope.jobs4.push($scope.filtered_jobs[i]);
 				}
 				else if(i >= 20 && i < 25){
-					$scope.jobs5.push($scope.jobs[i]);
+					$scope.jobs5.push($scope.filtered_jobs[i]);
 				}
 				else if(i >= 25 && i < 30){
-					$scope.jobs6.push($scope.jobs[i]);
+					$scope.jobs6.push($scope.filtered_jobs[i]);
 				}
 				else if(i >= 30 && i < 35){
-					$scope.jobs7.push($scope.jobs[i]);
+					$scope.jobs7.push($scope.filtered_jobs[i]);
 				}
 				else if(i >= 35 && i < 40){
-					$scope.jobs8.push($scope.jobs[i]);
+					$scope.jobs8.push($scope.filtered_jobs[i]);
 				}
 				else if(i >= 40 && i < 45){
-					$scope.jobs9.push($scope.jobs[i]);
+					$scope.jobs9.push($scope.filtered_jobs[i]);
 				}
 				else if(i >= 45 && i < 50){
-					$scope.jobs10.push($scope.jobs[i]);
+					$scope.jobs10.push($scope.filtered_jobs[i]);
 				}
 				else if(i >= 50 && i < 55){
-					$scope.jobs11.push($scope.jobs[i]);
+					$scope.jobs11.push($scope.filtered_jobs[i]);
 				}
 				else if(i >= 55 && i < 60){
-					$scope.jobs12.push($scope.jobs[i]);
+					$scope.jobs12.push($scope.filtered_jobs[i]);
 				}
-			}		
+			}	
+		});
+	}
+	
+	getJobs();	
 
 });	
