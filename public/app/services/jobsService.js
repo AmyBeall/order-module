@@ -1,7 +1,7 @@
 angular.module('jobsService', [])
 .factory('jobFactory', function($http, $q){
-	// var factory = this;
-	// jobs = [];
+	var factory = this;
+	jobs = [];
 
 	// factory.getJobs = function(){
 	// 	var deferred = $q.defer();
@@ -45,6 +45,6 @@ angular.module('jobsService', [])
  //        	return data;
 	// 	});
 			
-	};
+	// };
 	return factory;	
 });	
