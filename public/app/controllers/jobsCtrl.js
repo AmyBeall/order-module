@@ -1,6 +1,7 @@
 angular.module('jobsCtrl', [])
 .controller('jobsController', function($scope, jobFactory, $location, $sce, $filter, $rootScope, $q, $http){
 
+	var jobs = [];
 	$scope.filtered_jobs = [];
 	$scope.jobs1 = [];
 	$scope.jobs2 = [];
@@ -60,12 +61,13 @@ angular.module('jobsCtrl', [])
 			$scope.pages = $scope.jobs12;
 		} 
 	};
-	var jobs = [];
+	
 	getJobs = function(){
 		var promise1 = $http({
 			url:'/api/gitJobs.json',
 			method: 'get'
 			}).success(function(data){
+
 				for(i in data){
 					data[i].company = data[i].company;
 					data[i].job_title = data[i].title;
@@ -76,12 +78,13 @@ angular.module('jobsCtrl', [])
 					data[i].description = data[i].description;
 					jobs.push(data[i]);
 				}
-				return data;
+				return data.location;
 			});	
 		var promise2 = $http({
 			url:'/api/indeedJobs.json',
 			method: 'get'
 			}).success(function(output){
+
 				data = output.response.results[0].result;
 					for(i in data){
 						data[i].company = data[i].company[0];
@@ -92,12 +95,13 @@ angular.module('jobsCtrl', [])
 						data[i].description = data[i].snippet[0];
 						jobs.push(data[i]);
 					}
-				return data;		
+				return output;		
 			});
 		$q.all([promise1, promise2]).then(function(results){
+
 			$scope.filtered_jobs = $filter('orderBy')(jobs, '-date');
-			console.log($scope.filtered_jobs);	
 		}).then(function(){
+
 			for (i in $scope.filtered_jobs){
 				if( i < 5 ){
 					$scope.jobs1.push($scope.filtered_jobs[i]);

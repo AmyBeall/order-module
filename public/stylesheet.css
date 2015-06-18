@@ -2,6 +2,14 @@
 	padding: 0;
 	margin: 0;
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	overflow-x: hidden;
+}
+body{
+	overflow-x: hidden;
+}
+.job_board{
+	margin: 60px auto;
+	overflow-x: hidden;
 }
 .container {
 	width: 100%;
@@ -9,6 +17,8 @@
 	background: url('https://ununsplash.imgix.net/reserve/fawrXCzwSsOUMmJr9GGD_alcatraz.jpg?q=75&fm=jpg&s=581307737e7c9f8b24e46d7e770f5769'); 
     background-size: 100% 100%;
     position: absolute;
+    overflow-x: hidden;
+    text-align: center;
 }
 .navbar {
 	width: 100%;
@@ -32,37 +42,30 @@
 	color: white;
 	background-color: grey;
 }
-a:hover{
+.navbar a:hover{
 	color: black;
 }
 .hide{
 	display: hidden;
 }
-.main button{
+.job_board>table>button{
 	display: inline-block;
 	vertical-align: top;
 	padding: 20px;
 }
-.main_table{
+.job_board table{
 	width: 1100px;
-	height: 650px;
 	display: inline-block;
-	margin: 60px auto;
-	overflow: scroll;
-	/*overflow: hidden;*/
-}
-.main table{
-	width: 1100px;
 	height: 470px;
 	border: none;
-	margin-top: 60px auto;
+	margin: 60px auto;
 	border-collapse: collapse;
 	overflow: hidden;
 }
-.main tr{
-	overflow: hidden;
+.job_board tr{
+	width: 100%;
 }
-.main td{
+.job_board td{
 	border-bottom: 2px solid lightgray;
 	font-size: 18px;
 	text-align: center;
@@ -70,35 +73,38 @@ a:hover{
 	padding: 10px;
 	height: 76px;
 }
-.main thead{
+.job_board table>thead{
 	border: none;
+	width: 100%;
+	padding: 0;
+	margin: 0;
 }
-.main th{
+.job_board th{
 	background-color: grey;
 	height: 20px;
 	text-align: center;
 }
-.Lbutton{
-	margin-top: 302px;
-	margin-left: 100px;
+.job_board>button{
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 16%;
 	width: 17px;
 	height: 45px;
+}
+
+button.Lbutton{
+	padding:0 20px 0 0;
 	background: url('http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/3d-transparent-glass-icons-arrows/006763-3d-transparent-glass-icon-arrows-arrowhead-solid-left.png');
 	background-size: 12px 40px;
-	background-repeat: no-repeat;
 	background-color: transparent;
-	border-color: transparent;
+	background-repeat: no-repeat;
 }
-.Rbutton{
-	margin-top: 302px;
-	margin-left: 150px;
-	width: 17px;
-	height: 45px;
+button.Rbutton{
+	padding:0 0 0 30px;
 	background: url('http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/3d-transparent-glass-icons-arrows/006764-3d-transparent-glass-icon-arrows-arrowhead-solid-right.png');
 	background-size: 12px 40px;
-	background-repeat: no-repeat;
 	background-color: transparent;
-	border-color: transparent;
+	background-repeat: no-repeat;
 }
 .image{
 	width: 50px;
