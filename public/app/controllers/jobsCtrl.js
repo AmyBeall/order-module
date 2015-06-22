@@ -1,66 +1,85 @@
 angular.module('jobsCtrl', [])
 .controller('jobsController', function($scope, jobFactory, $location, $sce, $filter, $rootScope, $q, $http){
 
-	var jobs = [];
+	var jobs = [],
+		count = 1;
 	$scope.filtered_jobs = [];
-	$scope.jobs1 = [];
-	$scope.jobs2 = [];
-	$scope.jobs3 = [];
-	$scope.jobs4 = [];
-	$scope.jobs5 = [];
-	$scope.jobs6 = [];
-	$scope.jobs7 = [];
-	$scope.jobs8 = [];
-	$scope.jobs9 = [];
-	$scope.jobs10 = [];
-	$scope.jobs11 = [];
-	$scope.jobs12 = [];
-	$scope.pages = $scope.jobs1;
+	$scope.pages = [];
 
-	count = 1;
 	$scope.count_down = function(){
 		if (count > 1 && count <= 12){
 			count = count - 1;
-			$scope.paginate();
+			paginate();
 		}
 	}
 	$scope.count_up = function(){
 		if (count >= 1 && count < 12){
 			count = count + 1;
-			$scope.paginate();
+			paginate();
 		}
+	}
+	function paginate(){
+		if (count == 2) {
+			$scope.pages = [];
+			for(var i = 5; i <10; i++){ 
+				$scope.pages.push($scope.filtered_jobs[i]);
+			}
+		} else if (count == 3) {
+			$scope.pages = [];
+			for(var i = 10; i <15; i++){ 
+				$scope.pages.push($scope.filtered_jobs[i]);
+			}
+		} else if (count == 4) {
+			$scope.pages = [];
+			for(var i = 15; i <20; i++){ 
+				$scope.pages.push($scope.filtered_jobs[i]);
+			}
+		} else if (count == 5) {
+			$scope.pages = [];
+			for(var i = 20; i <25; i++){ 
+				$scope.pages.push($scope.filtered_jobs[i]);
+			}
+		} else if (count == 6) {
+			$scope.pages = [];
+			for(var i = 25; i <30; i++){ 
+				$scope.pages.push($scope.filtered_jobs[i]);
+			}
+		} else if (count == 7) {
+			$scope.pages = [];
+			for(var i = 30; i <35; i++){ 
+				$scope.pages.push($scope.filtered_jobs[i]);
+			}
+		} else if (count == 8) {
+			$scope.pages = [];
+			for(var i = 35; i <40; i++){ 
+				$scope.pages.push($scope.filtered_jobs[i]);
+			}
+		} else if (count == 9) {
+			$scope.pages = [];
+			for(var i = 40; i <45; i++){ 
+				$scope.pages.push($scope.filtered_jobs[i]);
+			}
+		} else if (count == 10) {
+			$scope.pages = [];
+			for(var i = 45; i <50; i++){ 
+				$scope.pages.push($scope.filtered_jobs[i]);
+			}
+		} else if (count == 11) {
+			$scope.pages = [];
+			for(var i = 50; i <55; i++){ 
+				$scope.pages.push($scope.filtered_jobs[i]);
+			}
+		} else if (count == 12) {
+			$scope.pages = [];
+			for(var i = 55; i <60; i++){ 
+				$scope.pages.push($scope.filtered_jobs[i]);
+			}
+		} 
 	}
 	$scope.renderHtml = function(htmlCode){
 		return $sce.trustAsHtml(htmlCode);
 	}
-	$scope.paginate = function(){
-		if (count == 1){
-			$scope.pages = $scope.jobs1;
-		} else if (count == 2) {
-			$scope.pages = $scope.jobs2;
-		} else if (count == 3) {
-			$scope.pages = $scope.jobs3;
-		} else if (count == 4) {
-			$scope.pages = $scope.jobs4;
-		} else if (count == 5) {
-			$scope.pages = $scope.jobs5;
-		} else if (count == 6) {
-			$scope.pages = $scope.jobs6;
-		} else if (count == 7) {
-			$scope.pages = $scope.jobs7;
-		} else if (count == 8) {
-			$scope.pages = $scope.jobs8;
-		} else if (count == 9) {
-			$scope.pages = $scope.jobs9;
-		} else if (count == 10) {
-			$scope.pages = $scope.jobs10;
-		} else if (count == 11) {
-			$scope.pages = $scope.jobs11;
-		} else if (count == 12) {
-			$scope.pages = $scope.jobs12;
-		} 
-	};
-	
+
 	getJobs = function(){
 		var promise1 = $http({
 			url:'/api/gitJobs.json',
@@ -84,7 +103,7 @@ angular.module('jobsCtrl', [])
 			method: 'get'
 			}).success(function(output){
 
-				data = output.response.results[0].result;
+				var data = output.response.results[0].result;
 					for(i in data){
 						data[i].company = data[i].company[0];
 						data[i].job_title = data[i].jobtitle[0];
@@ -94,50 +113,15 @@ angular.module('jobsCtrl', [])
 						data[i].description = data[i].snippet[0];
 						jobs.push(data[i]);
 					}
+				var output = data;	
 				return output;		
 			});
 		$q.all([promise1, promise2]).then(function(results){
-
 			$scope.filtered_jobs = $filter('orderBy')(jobs, '-date');
 		}).then(function(){
-
-			for (i in $scope.filtered_jobs){
-				if( i < 5 ){
-					$scope.jobs1.push($scope.filtered_jobs[i]);
-					console.log($scope.jobs1);
-				}
-				else if(i >= 5 && i < 10){
-					$scope.jobs2.push($scope.filtered_jobs[i]);
-				}
-				else if(i >= 10 && i < 15){
-					$scope.jobs3.push($scope.filtered_jobs[i]);
-				}
-				else if(i >= 15 && i < 20){
-					$scope.jobs4.push($scope.filtered_jobs[i]);
-				}
-				else if(i >= 20 && i < 25){
-					$scope.jobs5.push($scope.filtered_jobs[i]);
-				}
-				else if(i >= 25 && i < 30){
-					$scope.jobs6.push($scope.filtered_jobs[i]);
-				}
-				else if(i >= 30 && i < 35){
-					$scope.jobs7.push($scope.filtered_jobs[i]);
-				}
-				else if(i >= 35 && i < 40){
-					$scope.jobs8.push($scope.filtered_jobs[i]);
-				}
-				else if(i >= 40 && i < 45){
-					$scope.jobs9.push($scope.filtered_jobs[i]);
-				}
-				else if(i >= 45 && i < 50){
-					$scope.jobs10.push($scope.filtered_jobs[i]);
-				}
-				else if(i >= 50 && i < 55){
-					$scope.jobs11.push($scope.filtered_jobs[i]);
-				}
-				else if(i >= 55 && i < 60){
-					$scope.jobs12.push($scope.filtered_jobs[i]);
+			if (count == 1){
+				for(var i = 0; i <5; i++){ 
+					$scope.pages.push($scope.filtered_jobs[i]);
 				}
 			}	
 		});
