@@ -16,7 +16,6 @@ angular.module('jobsCtrl', [])
 	$scope.jobs11 = [];
 	$scope.jobs12 = [];
 	$scope.pages = $scope.jobs1;
-	$scope.num_limit = 11;
 
 	count = 1;
 	$scope.count_down = function(){
