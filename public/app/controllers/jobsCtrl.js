@@ -1,5 +1,5 @@
 angular.module('jobsCtrl', [])
-.controller('jobsController', function($scope, jobFactory, $location, $sce, $filter, $rootScope, $q, $http){
+.controller('jobsController', function($scope, $sce, $filter, $q, $http){
 
 	var jobs = [],
 		count = 1;
@@ -20,61 +20,34 @@ angular.module('jobsCtrl', [])
 	}
 	function paginate(){
 		if (count == 2) {
-			$scope.pages = [];
-			for(var i = 5; i <10; i++){ 
-				$scope.pages.push($scope.filtered_jobs[i]);
-			}
+			addPages(5,10);
 		} else if (count == 3) {
-			$scope.pages = [];
-			for(var i = 10; i <15; i++){ 
-				$scope.pages.push($scope.filtered_jobs[i]);
-			}
+			addPages(10,15);
 		} else if (count == 4) {
-			$scope.pages = [];
-			for(var i = 15; i <20; i++){ 
-				$scope.pages.push($scope.filtered_jobs[i]);
-			}
+			addPages(15,20);
 		} else if (count == 5) {
-			$scope.pages = [];
-			for(var i = 20; i <25; i++){ 
-				$scope.pages.push($scope.filtered_jobs[i]);
-			}
+			addPages(20,25);
 		} else if (count == 6) {
-			$scope.pages = [];
-			for(var i = 25; i <30; i++){ 
-				$scope.pages.push($scope.filtered_jobs[i]);
-			}
+			addPages(25,30);
 		} else if (count == 7) {
-			$scope.pages = [];
-			for(var i = 30; i <35; i++){ 
-				$scope.pages.push($scope.filtered_jobs[i]);
-			}
+			addPages(30,35);
 		} else if (count == 8) {
-			$scope.pages = [];
-			for(var i = 35; i <40; i++){ 
-				$scope.pages.push($scope.filtered_jobs[i]);
-			}
+			addPages(35,40);
 		} else if (count == 9) {
-			$scope.pages = [];
-			for(var i = 40; i <45; i++){ 
-				$scope.pages.push($scope.filtered_jobs[i]);
-			}
+			addPages(40,45);
 		} else if (count == 10) {
-			$scope.pages = [];
-			for(var i = 45; i <50; i++){ 
-				$scope.pages.push($scope.filtered_jobs[i]);
-			}
+			addPages(45,50);
 		} else if (count == 11) {
-			$scope.pages = [];
-			for(var i = 50; i <55; i++){ 
-				$scope.pages.push($scope.filtered_jobs[i]);
-			}
+			addPages(50,55);
 		} else if (count == 12) {
-			$scope.pages = [];
-			for(var i = 55; i <60; i++){ 
+			addPages(55,60);
+		} 
+	}
+	function addPages(start, finish){
+		$scope.pages = [];
+		for(var i = start; i < finish; i++){ 
 				$scope.pages.push($scope.filtered_jobs[i]);
 			}
-		} 
 	}
 	$scope.renderHtml = function(htmlCode){
 		return $sce.trustAsHtml(htmlCode);
@@ -120,9 +93,7 @@ angular.module('jobsCtrl', [])
 			$scope.filtered_jobs = $filter('orderBy')(jobs, '-date');
 		}).then(function(){
 			if (count == 1){
-				for(var i = 0; i <5; i++){ 
-					$scope.pages.push($scope.filtered_jobs[i]);
-				}
+				addPages(0,5);
 			}	
 		});
 	}
