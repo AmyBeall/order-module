@@ -3,18 +3,20 @@ angular.module('jobsCtrl', [])
 
 	var filtered_jobs = [],
 		count = 1;
-	$scope.pages = [];
+		ctrl = this;
 
-	$scope.renderHtml = function(htmlCode){
+	ctrl.pages = [];
+
+	ctrl.renderHtml = function(htmlCode){
 		return $sce.trustAsHtml(htmlCode);
 	}
-	$scope.count_down = function(){
+	ctrl.count_down = function(){
 		if (count > 1 && count <= 12){
 			count -= 1;
 			paginate();
 		}
 	}
-	$scope.count_up = function(){
+	ctrl.count_up = function(){
 		if (count >= 1 && count < 12){
 			count += 1;
 			paginate();
@@ -49,10 +51,10 @@ angular.module('jobsCtrl', [])
 	}
 
 	function addPages(start, finish){
-		$scope.pages = [];
+		ctrl.pages = [];
 		for(var i = start; i < finish; i++){ 
-				$scope.pages.push(filtered_jobs[i]);
-			}
+			ctrl.pages.push(filtered_jobs[i]);
+		}
 	}
 
 	(function getJobs(){

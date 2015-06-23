@@ -1,5 +1,5 @@
 <div class="job_view" ng-controller="jobsController as jobs">
-	<button class='Lbutton' ng-click='count_down()'></button>
+	<button class='Lbutton' ng-click='jobs.count_down()'></button>
 	<table class='job_board'>
 		<thead>
 			<th> Job Title </th>
@@ -10,7 +10,7 @@
 			<th colspan="2"> Add to MyJobs </th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="job in pages | orderBy:'-date'">
+			<tr ng-repeat="job in jobs.pages | orderBy:'-date'">
 				<td>
 					<p class='des_link' ng-click="showMe = !showMe"> {{  job.job_title | limitTo : 30}} </p>
 				</td>
@@ -45,10 +45,10 @@
 						<a href="{{ job.url }}">{{ job.company }}</a> 
 					</p>
 					<button class="hide" ng-click="showMe = ''"></button>
-					<div class="des" ng-bind-html="renderHtml( job.description )"></div>
+					<div class="des" ng-bind-html="jobs.renderHtml( job.description )"></div>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<button class='Rbutton' ng-click='count_up()'></button>
+	<button class='Rbutton' ng-click='jobs.count_up()'></button>
 </div>

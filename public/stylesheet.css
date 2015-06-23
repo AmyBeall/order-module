@@ -69,9 +69,8 @@ table.job_board{
 .hide{
 	width: 20px;
 	height: 20px;
-	background: url('http://www.clker.com/cliparts/t/f/J/i/7/C/amazon-style-close-button-md.png');
+	background: url('http://www.clker.com/cliparts/t/f/J/i/7/C/amazon-style-close-button-md.png')no-repeat;
 	background-size: 19px 19px;
-	background-repeat: no-repeat;
 	position: absolute;
 	top: 10px;
 	left: 1060px;
