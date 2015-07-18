@@ -1,1 +1,2 @@
-angular.module('jobBoardApp', ['app.routes', 'jobsCtrl', 'jobsService']);
+angular.module('jobBoardApp', ['app.routes', 'jobsCtrl', 'jobsService', 'gitAPIProvider', 'indeedAPIProvider'])
+; 

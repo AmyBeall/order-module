@@ -1,4 +1,10 @@
 <div class="job_view" ng-controller="jobsController as jobs">
+	<form action="">
+		<label for="user_position">Desired Job Title</label>
+		<input type="text" id="user_position" ng-model="position">
+		<label for="user_location"> Desired Zip Code</label>
+		<input type="text" id="user_location" ng-model="location">
+	</form>
 	<button class='Lbutton' ng-click='jobs.count_down()'></button>
 	<table class='job_board'>
 		<thead>
@@ -7,7 +13,7 @@
 			<th> Location </th>
 			<th> Source </th>
 			<th> Date Added </th>
-			<th colspan="2"> Add to MyJobs </th>
+			<th> Add to MyJobs </th>
 		</thead>
 		<tbody>
 			<tr ng-repeat="job in jobs.pages | orderBy:'-date'">
@@ -23,21 +29,19 @@
 					</div>
 				</td>
 				<td>{{ job.location }}</td>
-				<td><div ng-if="job.git_url">
-						<a href="{{ job.git_url }}">
+				<td>
+					<div ng-if="job.git_url">
+						<a href="{{ job.git_url }}" target="_blank">
 							<button class='source git'></button>
 						</a>
 					</div>
 					<div ng-if="job.indeed_url">
-						<a href="{{ job.indeed_url }}">
+						<a href="{{ job.indeed_url }}" target="_blank">
 							<button class='source indeed'></button>
 						</a>
 					</div>
 				</td>
 				<td ng-model="num_limit">{{ job.date | date : 'shortDate' }}</td>
-				<td>
-					<button class='apply'></button>
-				</td>
 				<td><input type="checkbox"></td>
 				<td colspan="8" rowspan="5" ng-show="showMe" id='show'>
 					<p>{{ job.job_title }}</p>

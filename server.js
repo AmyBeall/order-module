@@ -3,7 +3,6 @@ var app = express();
 var path = require("path");
 var morgan  = require('morgan');
  
-// for image upload use multer
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -15,13 +14,9 @@ app.use(function(req, res, next) {
 	next();
 });
 
-// log all requests to the console
 app.use(morgan('dev'));
 
 app.use(express.static(__dirname + "/public"));
-
-var appRoutes = require('./app/routes.js')(app,express);
-app.use('/api', appRoutes);
 
 app.get('*', function(req,res){
 	res.sendFile(path.join(__dirname + '/public/index.html'));

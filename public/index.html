@@ -5,17 +5,17 @@
 	<title>Job Board</title>
 	<base href="/">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- <link rel="stylesheet" href="./foundation/css/foundation.css" /> -->
 	<link rel="stylesheet" href="stylesheet.css">
-	
-	
+	<script type='text/javascript' src="https://x2js.googlecode.com/hg/xml2json.js"></script>
 	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'/></script>
 	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js'/></script>
 	<script type='text/javascript' src='./app.js'></script>
 	<script type='text/javascript' src='./app.routes.js'></script>
 	<script type='text/javascript' src='./app/controllers/jobsCtrl.js'></script>
 	<script type='text/javascript' src='./app/services/jobsService.js'></script>
-	
+	<script type='text/javascript' src='./app/services/gitAPIProvider.js'></script>
+	<script type='text/javascript' src='./app/services/indeedAPIProvider.js'></script>
+
 </head>	
 <body ng-app="jobBoardApp">
 	<div class='container'>

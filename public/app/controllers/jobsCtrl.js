@@ -6,6 +6,13 @@ angular.module('jobsCtrl', [])
 		ctrl = this;
 
 	ctrl.pages = [];
+		
+	jobFactory.getJobsData
+	.then(function(response){
+		filtered_jobs = $filter('orderBy')(response, '-date');
+	}).then(function(){
+		addPages(0,5);
+	});
 
 	ctrl.renderHtml = function(htmlCode){
 		return $sce.trustAsHtml(htmlCode);
@@ -21,7 +28,15 @@ angular.module('jobsCtrl', [])
 			count += 1;
 			paginate();
 		}
+	}		
+
+	function addPages(start, finish){
+		ctrl.pages = [];
+		for(var i = start; i < finish; i++){ 
+			ctrl.pages.push(filtered_jobs[i]);
+		}
 	}
+
 	function paginate(){
 		if (count == 1){
 			addPages(0,5);
@@ -49,20 +64,5 @@ angular.module('jobsCtrl', [])
 			addPages(55,60);
 		} 
 	}
-
-	function addPages(start, finish){
-		ctrl.pages = [];
-		for(var i = start; i < finish; i++){ 
-			ctrl.pages.push(filtered_jobs[i]);
-		}
-	}
-
-	(function getJobs(){
-		jobFactory.getJobsData.then(function(response){
-			filtered_jobs = $filter('orderBy')(response, '-date');
-		}).then(function(){
-			addPages(0,5);
-		});;
-	})();
 
 });	
