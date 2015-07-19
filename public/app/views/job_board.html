@@ -1,11 +1,12 @@
 <div class="job_view" ng-controller="jobsController as jobs">
-	<form action="">
+	<form id="user_search">
 		<label for="user_position">Desired Job Title</label>
-		<input type="text" id="user_position" ng-model="position">
-		<label for="user_location"> Desired Zip Code</label>
-		<input type="text" id="user_location" ng-model="location">
+		<input type="text" id="user_position" ng-model="position" placeholder="Seach by Job Title or Company">
+		<label for="user_location"> Desired Location</label>
+		<input type="text" id="user_location" ng-model="location" placeholder="Seach by ZipCode or City">
+		<button ng-click="jobs.get_new_jobs(position, location)">Find Me a Job</button>
 	</form>
-	<button class='Lbutton' ng-click='jobs.count_down()'></button>
+	
 	<table class='job_board'>
 		<thead>
 			<th> Job Title </th>
@@ -18,41 +19,45 @@
 		<tbody>
 			<tr ng-repeat="job in jobs.pages | orderBy:'-date'">
 				<td>
-					<p class='des_link' ng-click="showMe = !showMe"> {{  job.job_title | limitTo : 30}} </p>
+					<p class='link' ng-click="showMe = !showMe"> {{  job.job_title | limitTo : 30}} </p>
 				</td>
 				<td>
 					<div ng-if="job.indeed_url">
 						<p>{{ job.company }}</p>
 					</div>
 					<div ng-if="job.git_url">
-						<a href="{{ job.url }}">{{ job.company }}</a>
+						<a class='link' ng-href="{{ job.url }}" target="_blank">{{ job.company }}</a>
 					</div>
 				</td>
 				<td>{{ job.location }}</td>
 				<td>
 					<div ng-if="job.git_url">
-						<a href="{{ job.git_url }}" target="_blank">
+						<a ng-href="{{ job.git_url }}" target="_blank">
 							<button class='source git'></button>
 						</a>
 					</div>
 					<div ng-if="job.indeed_url">
-						<a href="{{ job.indeed_url }}" target="_blank">
+						<a ng-href="{{ job.indeed_url }}" target="_blank">
 							<button class='source indeed'></button>
 						</a>
 					</div>
 				</td>
 				<td ng-model="num_limit">{{ job.date | date : 'shortDate' }}</td>
 				<td><input type="checkbox"></td>
-				<td colspan="8" rowspan="5" ng-show="showMe" id='show'>
+				<td colspan="7" rowspan="5" ng-show="showMe" id='show'>
 					<p>{{ job.job_title }}</p>
 					<p> 
-						<a href="{{ job.url }}">{{ job.company }}</a> 
+						<a class='link' ng-href="{{ job.url }}">{{ job.company }}</a> 
 					</p>
 					<button class="hide" ng-click="showMe = ''"></button>
 					<div class="des" ng-bind-html="jobs.renderHtml( job.description )"></div>
 				</td>
 			</tr>
+			<tr>
+				<td colspan="7"><button class='Lbutton pbutton' ng-click='jobs.page_down()'></button>
+				<p class="page">page {{ jobs.page_number }}</p>
+				<button class='Rbutton pbutton' ng-click='jobs.page_up()'></button></td>
+			</tr>
 		</tbody>
 	</table>
-	<button class='Rbutton' ng-click='jobs.count_up()'></button>
 </div>

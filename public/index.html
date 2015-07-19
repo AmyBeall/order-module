@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Job Board</title>
+	<title>Tech Job Board</title>
 	<base href="/">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="stylesheet.css">
@@ -12,6 +12,7 @@
 	<script type='text/javascript' src='./app.js'></script>
 	<script type='text/javascript' src='./app.routes.js'></script>
 	<script type='text/javascript' src='./app/controllers/jobsCtrl.js'></script>
+	<script type='text/javascript' src='./app/services/paginateService.js'></script>
 	<script type='text/javascript' src='./app/services/jobsService.js'></script>
 	<script type='text/javascript' src='./app/services/gitAPIProvider.js'></script>
 	<script type='text/javascript' src='./app/services/indeedAPIProvider.js'></script>
@@ -19,7 +20,7 @@
 </head>	
 <body ng-app="jobBoardApp">
 	<div class='container'>
-		<h1>Job Board</h1>
+		<h1>Tech Job Board</h1>
 		<div ng-view=''></div>
 	</div>
 

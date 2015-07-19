@@ -12,7 +12,7 @@ angular.module('gitAPIProvider', [])
 			var request = function(){
 				$http.get(gitHub+'?description='+description+'&location='+location+'&page='+page)
 				.then(function(response){
-					
+					console.log(response);
 					if(response.data.length == 0){
 						 if (counter < MAX_REQUESTS) {
 						 	console.log('resent git request');

@@ -15,27 +15,10 @@
 }
 .container h1{
 	padding-top: 30px;
+	color: white;
 }
 .job_view{
 	text-align: center;
-}
-.job_view>button{
-	display: inline-block;
-	vertical-align: top;
-	width: 17px;
-	height: 45px;
-	border-color: transparent;
-	background-color: transparent;
-}
-.Lbutton{
-	margin:320px 20px 0 0;
-	background: url('http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/3d-transparent-glass-icons-arrows/006763-3d-transparent-glass-icon-arrows-arrowhead-solid-left.png')no-repeat;
-	background-size: 12px 40px;
-}
-.Rbutton{
-	margin:320px 0 0 20px;
-	background: url('http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/3d-transparent-glass-icons-arrows/006764-3d-transparent-glass-icon-arrows-arrowhead-solid-right.png')no-repeat;
-	background-size: 12px 40px;	
 }
 table.job_board{
 	display: inline-block;
@@ -45,7 +28,6 @@ table.job_board{
 	margin: 30px auto;
 	padding: 0;
 	width: 1100px;
-	height: 540px;
 	overflow: hidden;
 }
 .job_board tr{
@@ -57,14 +39,35 @@ table.job_board{
 	padding: 10px;
 	text-align: center;
 	width: 20%;
-	height: 68px;
 }
 .job_board thead{
-	background-color: grey;
+	background-color: #DCDCDC;
 }
-.des_link{
-	color: blue;
-	text-decoration: underline;
+.page{
+	display: inline-block;
+	vertical-align: top;
+	padding-top: 5px;
+}
+.pbutton{
+	width: 35px;
+	height: 35px;
+	margin: 0 auto;
+	text-align: center;
+	border: transparent;
+	display: inline-block;
+	vertical-align: top;
+}
+.Lbutton{
+	background: url('./images/left_arrow.svg')no-repeat;
+	background-size: 35px 35px;	
+}
+.Rbutton{
+	background: url('./images/right_arrow.svg')no-repeat;
+	background-size: 35px 35px;	
+}
+.link{
+	color: #004C99;
+	text-decoration: none;
 }
 .hide{
 	width: 20px;
@@ -91,30 +94,18 @@ table.job_board{
 	margin-right: auto;
 	left: 0;
 	right: 0;
-	top: 95px;
+	top: 115px;
 }
 .des{
 	text-align: left;
 	padding: 20px;
-}
-.apply{
-	background: url('https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRjdvKN9pIDdIq9EnhaUjvKN3C8x9qJfeoi5z8lvPx0iAxHes8BJw')no-repeat;
-	background-size: 78px 30px;
-	width: 80px;
-	height: 34px;
-	border-radius:8px;
-	border-color: transparent;
-}
-.apply p, p>a{
-	color: transparent;
-}
-.apply>p>a>img{
-	display:none;
+	line-height: 30px;
 }
 .source{
 	width: 82px;
 	height: 34px;
 	border-color: transparent;
+	vertical-align: top;
 }
 .git{
 	background: url('http://www.programmableweb.com/sites/default/files/styles/article_profile_150x150/public/apis/at9673.png?itok=E8VU8CKl') no-repeat;
@@ -123,4 +114,21 @@ table.job_board{
 .indeed{
 	background: url('http://www.indeed.com/images/indeed.png') no-repeat;
 	background-size: 78px 30px;
+}
+#user_search input,button{
+	margin: 15px 10px 0 0;
+	text-align: center;
+	font-size: 12px;
+}
+#user_search label{
+	color: #87ceeb;
+}
+#user_search input{
+	padding:0px 10px;
+	height: 20px;
+	width: 175px;	 
+}
+#user_search button{
+	height: 24px;
+	width: 100px;	 
 }
