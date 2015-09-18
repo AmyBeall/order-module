@@ -1,0 +1,26 @@
+<div class="users_job_view">
+	<nav>
+		<a href="/"><h1>Tech Job Board</h1></a>
+		<a href="/usersJobs"><h3>My Jobs</h3></a>
+		<h3>Edit Cards</h3>
+	</nav>
+	<div  ng-repeat="jobs in usersJobs.jobs" class="job_card">
+		<h3 class='link' ng-href="{{ jobs.job.url }}" target="_blank">{{ jobs.job.company }}</h3>
+		<p>{{ jobs.job.job_title }}</p>
+		<p>{{ jobs.job.location }}</p>
+		<p>{{ jobs.job.date | date : 'shortDate' }}</p>
+		<div>
+			<a href="#" ng-click="showDes = !showDes">Job Description</a>
+			<p ng-bind-html="usersJobs.renderHtml( jobs.job.description )" ng-show="showDes"></p>
+		</div>
+		<div>
+			<div ng-if="jobs.job.git_url">
+				<a ng-href="{{ jobs.job.git_url }}" target="_blank">Source</a>
+			</div>
+			<div ng-if="jobs.job.indeed_url">
+				<a ng-href="{{ jobs.job.indeed_url }}" target="_blank">Source</a>
+			</div>
+		</div>
+		
+	</div>
+</div>	

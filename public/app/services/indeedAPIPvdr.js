@@ -1,5 +1,6 @@
-angular.module('indeedAPIProvider', [])
+angular.module('indeedAPIPvdr', [])
 .provider('indeedAPI', function indeedAPIProvider(){
+	
 	var indeed = 'http://api.indeed.com',
 		path = '/ads/apisearch?publisher=9067697284373618',
 		ip = '&userip=74.61.150.47',

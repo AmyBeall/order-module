@@ -1,5 +1,6 @@
-angular.module('gitAPIProvider', [])
+angular.module('gitAPIPvdr', [])
 .provider('gitHubAPI', function gitHubAPIProvider(){
+	
 	var gitHub = 'http://jobs.github.com/positions.json',
 		page = '0';
 

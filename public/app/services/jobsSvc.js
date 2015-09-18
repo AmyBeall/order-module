@@ -1,5 +1,6 @@
-angular.module('jobsService', [])
+angular.module('jobsSvc', [])
 .factory('jobFactory', function($q, $filter, gitHubAPI, indeedAPI){
+	
 	var factory = this,
 		indeedAPIdata,
 		gitAPIdata,
@@ -19,7 +20,8 @@ angular.module('jobsService', [])
 						date : new Date(datum.created_at),
 						git_url : datum.url,
 						url : datum.company_url,
-						description : datum.description
+						description : datum.description,
+						checked : false
 						}
 					filtered_jobs.push(datum);	
 				});
@@ -36,7 +38,8 @@ angular.module('jobsService', [])
 						date : new Date(datum.date),
 						indeed_url : datum.url,
 						url : datum.url,
-						description : datum.snippet
+						description : datum.snippet,
+						checked : false
 						}
 					filtered_jobs.push(datum);	
 				});
@@ -44,11 +47,11 @@ angular.module('jobsService', [])
 			})
 			
 			return $q.all([gitAPIdata, indeedAPIdata])
-					.then(function(results){
-						return filtered_jobs;
-					}, function(error){
-						console.log(error);
-					});
+				.then(function(results){
+					return filtered_jobs;
+				}, function(error){
+					console.log(error);
+				});
 		}	
 	return factory;	
 });	

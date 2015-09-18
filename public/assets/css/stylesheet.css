@@ -4,28 +4,48 @@
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	overflow-x: hidden;
 }
-.container {
-	width: 100%;
-	height: 100%;
+.job_view {
+	width: 100vw;
+	height: 100vh;
 	background: url('https://ununsplash.imgix.net/reserve/fawrXCzwSsOUMmJr9GGD_alcatraz.jpg?q=75&fm=jpg&s=581307737e7c9f8b24e46d7e770f5769'); 
     background-size: 100% 100%;
     position: absolute;
-    overflow-x: hidden;
     text-align: center;
 }
-.container h1{
-	padding-top: 30px;
-	color: white;
-}
-.job_view{
+.users_job_view{
+	width: 100vw;
+	height: 100vh;
 	text-align: center;
+	background-color: #003366;
+}
+nav{
+	background-color:gray;
+	width: 100%;
+	text-align: left;
+	margin-bottom: 45px;
+}	
+nav>a>h1{
+	color: white;
+	padding: 10px;
+	display: inline-block;
+	vertical-align: top;
+	font-weight: normal;
+}
+nav>a>h3, nav>h3{
+	float: right;
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 20px;
+	margin-top: 10px;
+	color: white;
+	font-weight: normal;
 }
 table.job_board{
 	display: inline-block;
 	border: 1px solid gray;
 	border-collapse: collapse;
 	background-color: white;
-	margin: 30px auto;
+	margin: 0 auto;
 	padding: 0;
 	width: 1100px;
 	overflow: hidden;
@@ -47,6 +67,7 @@ table.job_board{
 	display: inline-block;
 	vertical-align: top;
 	padding-top: 5px;
+	width: 100px;
 }
 .pbutton{
 	width: 35px;
@@ -58,11 +79,11 @@ table.job_board{
 	vertical-align: top;
 }
 .Lbutton{
-	background: url('./images/left_arrow.svg')no-repeat;
+	background: url('/assets/img/left_arrow.svg')no-repeat;
 	background-size: 35px 35px;	
 }
 .Rbutton{
-	background: url('./images/right_arrow.svg')no-repeat;
+	background: url('/assets/img/right_arrow.svg')no-repeat;
 	background-size: 35px 35px;	
 }
 .link{
@@ -94,7 +115,7 @@ table.job_board{
 	margin-right: auto;
 	left: 0;
 	right: 0;
-	top: 115px;
+	top: 100px;
 }
 .des{
 	text-align: left;
@@ -131,4 +152,14 @@ table.job_board{
 #user_search button{
 	height: 24px;
 	width: 100px;	 
+}
+#user_search{
+	margin-bottom: 15px;
+}
+div.job_card{
+	width: 40vw;
+	display: inline-block;
+	vertical-align: top;
+	background-color: white;
+	margin: 10px 4vw;
 }

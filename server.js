@@ -1,9 +1,10 @@
-var express = require("express");
-var app = express();
-var path = require("path");
-var morgan  = require('morgan');
- 
-var bodyParser = require('body-parser');
+var express = require("express"),
+	app = express(),
+	path = require("path"),
+	mongoose = require('mongoose'),
+	morgan  = require('morgan'),
+	bodyParser = require('body-parser');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
@@ -14,12 +15,17 @@ app.use(function(req, res, next) {
 	next();
 });
 
+mongoose.connect('mongodb://localhost/job_board');
+
 app.use(morgan('dev'));
 
 app.use(express.static(__dirname + "/public"));
 
+var apiRoutes = require('./app/routes/api')(app,express);
+app.use('/api', apiRoutes);
+
 app.get('*', function(req,res){
-	res.sendFile(path.join(__dirname + '/public/index.html'));
+	res.sendFile(path.join(__dirname + '/public/app/index.html'));
 });
 
 app.listen(7000, function(){
