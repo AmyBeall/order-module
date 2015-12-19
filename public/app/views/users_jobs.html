@@ -1,0 +1,43 @@
+<div class="users_job_view">
+	<nav>
+		<a href="/"><h1>Tech Job Board</h1></a>
+		<a href="/usersJobs"><h3>My Jobs</h3></a>
+		<h3>Edit Cards</h3>
+	</nav>
+	<div id="new" class="category">
+		<h3> New Cards </h3>
+		<div  ng-repeat="jobs in usersJobs.jobs" class="job_card" ng-hover="selectCard = !selectCard">
+			<h3 class='company' ng-href="{{ jobs.job.url }}" target="_blank">{{ jobs.job.company }}</h3>
+			<p>{{ jobs.job.job_h4 }}</p>
+			<p>{{ jobs.job.location }}</p>
+			<p>{{ jobs.job.date | date : 'shortDate' }}</p>
+			<div ng-show="selectCard">
+				<div>
+					<a href="#" ng-click="showDes = !showDes">Job Description</a>
+					<p ng-bind-html="usersJobs.renderHtml( jobs.job.description )" ng-show="showDes"></p>
+					<div ng-if="jobs.job.git_url">
+						<a ng-href="{{ jobs.job.git_url }}" target="_blank">Source</a>
+					</div>
+					<div ng-if="jobs.job.indeed_url">
+						<a ng-href="{{ jobs.job.indeed_url }}" target="_blank">Source</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="applied" class="category">
+		<h3> Applied </h3>
+	</div>
+	<div id="phone" class="category">
+		<h3> Phone Screening </h3>
+	</div>
+	<div id="interview" class="category">
+		<h3> Interview </h3>
+	</div>
+	<div id="rejected" class="category">
+		<h3> Rejected </h3>
+	</div>
+	<div id="noResponse" class="category">
+		<h3> No Response </h3>
+	</div>
+</div>

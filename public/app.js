@@ -1,1 +1,0 @@
-angular.module('jobBoardApp', ['app.routes', 'jobsCtrl', 'jobsService']);
