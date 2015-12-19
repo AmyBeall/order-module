@@ -28,6 +28,4 @@ app.get('*', function(req,res){
 	res.sendFile(path.join(__dirname + '/public/app/index.html'));
 });
 
-app.listen(7000, function(){
-	console.log("Listening on 7000");
-});
+app.listen(7000);

@@ -4,26 +4,12 @@
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	overflow-x: hidden;
 }
-.job_view {
-	width: 100vw;
-	height: 100vh;
-	background: url('https://ununsplash.imgix.net/reserve/fawrXCzwSsOUMmJr9GGD_alcatraz.jpg?q=75&fm=jpg&s=581307737e7c9f8b24e46d7e770f5769'); 
-    background-size: 100% 100%;
-    position: absolute;
-    text-align: center;
-}
-.users_job_view{
-	width: 100vw;
-	height: 100vh;
-	text-align: center;
-	background-color: #003366;
-}
 nav{
-	background-color:gray;
+	background-color:#1A237E;
 	width: 100%;
 	text-align: left;
 	margin-bottom: 45px;
-}	
+}
 nav>a>h1{
 	color: white;
 	padding: 10px;
@@ -49,6 +35,31 @@ table.job_board{
 	padding: 0;
 	width: 1100px;
 	overflow: hidden;
+}
+.job_view {
+	width: 100vw;
+	height: 100vh;
+	background: url('https://ununsplash.imgix.net/reserve/fawrXCzwSsOUMmJr9GGD_alcatraz.jpg?q=75&fm=jpg&s=581307737e7c9f8b24e46d7e770f5769');
+    background-size: 100% 100%;
+    position: absolute;
+    text-align: center;
+}
+.users_job_view{
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+	background-color: #3F51B5;
+}
+.category{
+	width: 15%;
+	display: inline-block;
+	vertical-align: top;
+	color: #EEFF41;
+	text-shadow: 1px 1px #000000;
+	text-align: center;
+}
+.category>h3{
+	font-weight: lighter;
 }
 .job_board tr{
 	width: 100%;
@@ -80,11 +91,11 @@ table.job_board{
 }
 .Lbutton{
 	background: url('/assets/img/left_arrow.svg')no-repeat;
-	background-size: 35px 35px;	
+	background-size: 35px 35px;
 }
 .Rbutton{
 	background: url('/assets/img/right_arrow.svg')no-repeat;
-	background-size: 35px 35px;	
+	background-size: 35px 35px;
 }
 .link{
 	color: #004C99;
@@ -147,19 +158,27 @@ table.job_board{
 #user_search input{
 	padding:0px 10px;
 	height: 20px;
-	width: 175px;	 
+	width: 175px;
 }
 #user_search button{
 	height: 24px;
-	width: 100px;	 
+	width: 100px;
 }
 #user_search{
 	margin-bottom: 15px;
 }
 div.job_card{
-	width: 40vw;
+	width: 15vw;
 	display: inline-block;
 	vertical-align: top;
 	background-color: white;
-	margin: 10px 4vw;
+	margin: 10px 0;
+	color: black;
+	padding: 5px;
+	box-shadow: 2px 2px 2px #000000;
+	text-shadow: none;
+	text-align: center;
+}
+.job_card>p, a, div{
+	text-align: left;
 }

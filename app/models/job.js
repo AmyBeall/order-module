@@ -4,13 +4,19 @@ var Schema = mongoose.Schema;
 
 // user schema
 var JobSchema = new Schema({
+		user: Number,
+		boardPos: String,
 		order: Number,
 		job: Object,
-		applied: String,
-		resonse: String,
 		notes: [{
 			title: String,
 			note: String
+		}],
+		appliedDate: Date,
+		rejected: Boolean,
+		interview:[{
+			name: String,
+			notes: String
 		}]
 });
 

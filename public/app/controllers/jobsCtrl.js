@@ -7,7 +7,7 @@ angular.module('jobsCtrl', [])
 		location = '94109',
 		num_per_page = 4,
 
-		get_jobs = function(position, location){	
+		get_jobs = function(position, location){
 			ctrl.processing = true;
 			jobFactory.getJobsData(position, location)
 			.then(function(response){
@@ -30,15 +30,15 @@ angular.module('jobsCtrl', [])
 		get_jobs(position, location);
 	}
 	ctrl.saveJob = function(job) {
-    
+
     	ctrl.message = '';
 
-		usersJobsFactory.create(job) 
+		usersJobsFactory.create(job)
 			.success(function(data) {
         		ctrl.message = data.message;
         		console.log(data.message);
       		});
-      	job.checked = true;	
+      	job.checked = true;
       	$scope.checked = "";
 	}
 	ctrl.renderHtml = function(htmlCode){
@@ -57,5 +57,5 @@ angular.module('jobsCtrl', [])
 			ctrl.pg_num += 1;
 			ctrl.pages = paginateService(ctrl.pg_num, num_per_page, filtered_jobs);
 		}
-	}		
-});	
+	}
+});
