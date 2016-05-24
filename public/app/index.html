@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Tech Job Board</title>
+	<title>Inventory</title>
 	<base href="/">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/assets/css/stylesheet.css">
@@ -11,15 +11,15 @@
 	<script src='/assets/js/x2js-v1.1.5/xml2json.min.js'></script>
 	<script src='/app/app.js'></script>
 	<script src='/app/app.routes.js'></script>
-	<script src='/app/controllers/jobsCtrl.js'></script>
-	<script src='/app/controllers/usersJobsCtrl.js'></script>
-	<script src='/app/services/usersJobsSvc.js'></script>
-	<script src='/app/services/paginateSvc.js'></script>
-	<script src='/app/services/jobsSvc.js'></script>
-	<script src='/app/services/gitAPIPvdr.js'></script>
-	<script src='/app/services/indeedAPIPvdr.js'></script>
+	<script src='/app/controllers/configCtrl.js'></script>
+	<!-- // <script src='/app/controllers/usersJobsCtrl.js'></script>
+	// <script src='/app/services/usersJobsSvc.js'></script>
+	// <script src='/app/services/paginateSvc.js'></script> -->
+	<script src='/app/services/configSvc.js'></script>
+	<script src='/app/services/itemSvc.js'></script>
+	<!-- // <script src='/app/services/indeedAPIPvdr.js'></script> -->
 </head>	
-<body ng-app="jobBoardApp">
+<body ng-app="inventoryApp">
 	
 	<div class='container'>
 		<div ng-view=''></div>

@@ -5,8 +5,10 @@ var express = require("express"),
 	morgan  = require('morgan'),
 	bodyParser = require('body-parser');
 
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
 
 app.use(function(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -15,7 +17,7 @@ app.use(function(req, res, next) {
 	next();
 });
 
-mongoose.connect('mongodb://localhost/job_board');
+mongoose.connect('mongodb://localhost/ikes_inventory');
 
 app.use(morgan('dev'));
 
@@ -28,4 +30,4 @@ app.get('*', function(req,res){
 	res.sendFile(path.join(__dirname + '/public/app/index.html'));
 });
 
-app.listen(7000);
+app.listen(5000);

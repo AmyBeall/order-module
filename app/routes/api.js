@@ -1,74 +1,125 @@
-var Job = require('../models/job');
+var Configure = require('../models/configure');
+var MenuItem = require('../models/item');
 
 module.exports = function(app, express){
 
 	var apiRouter = express.Router();
-	var order = 0;
-	apiRouter.route('/jobs')
+	apiRouter.route('/configure')
 		
 		.post(function(req,res){
 			
-			var job = new Job();
+			var configure = new Configure();
 
-			job.job = req.body;
-			job.order = order;
-
-			job.save(function(err){
+			configure.type = req.body.type;
+			configure.list = req.body.list;
+			configure.save(function(err){
 				if(err){
 					if(err.code == 11000)
-						return res.json({ success: false, message: 'This job has already been saved!'});
+						return res.json({ success: false, message: 'This configuration has already been saved!'});
 					else
 						return res.send(err);
 				}
-				console.log(job);
-				order+=1;
-				console.log(order);
-				res.json({ message: 'Added to My Jobs!' });
+				res.json({ message: 'Successful configuration' });
 			})
 		})
 
 		.get(function(req,res){
-			Job.find(function(err, jobs){
+
+
+			Configure.find(function(err, configuration){
 				if(err) res.send(err);
-				res.json(jobs);
+				res.json(configuration);
 			});
 		});
 
-	// apiRouter.route('/jobs/:job_id')
+	apiRouter.route('/configure/:list_id')
 
-	// 	// get the job with that id
-	// 	// (accessed at GET http://localhost:8080/api/job/:job_id)
-	// 	.get(function(req,res){
-	// 		job.findById(req.params.job_id, function(err, job){
-	// 			if (err) res.send(err);
+		.get(function(req,res){
+			Configure.findById(req.params.list_id, function(err, list){
+				if (err) res.send(err);
+				res.json(list);
+			});
+		})
 
-	// 			//return that job
-	// 			res.json(job);
-	// 		});
-	// 	})
+		//update the job with this id
+		//(access at PUT http://localhost:8080/api/jobs/:job_id)
+		.put(function(req,res){
+			// use our job model to find the job we want
+			Configure.findById(req.params.list_id, function(err, list){
+				if (err) res.send(err);
+				//update the jobs info only if its new
+				list.list = req.body;
 
-	// 	//update the job with this id
-	// 	//(access at PUT http://localhost:8080/api/jobs/:job_id)
-	// 	.put(function(req,res){
+				// if(req.body.jobname) job.jobname = req.body.jobname;
+				// if(req.body.password) job.password = req.body.password;
 
-	// 		//use our job model to find the job we want
-	// 		job.findById(req.params.job_id, function(err, job){
-	// 			if (err) res.send(err);
+				// save the job
+				list.save(function(err){
+					if(err) res.send(err);
 
-	// 			//update the jobs info only if its new
-	// 			if(req.body.name) job.name = req.body.name;
-	// 			if(req.body.jobname) job.jobname = req.body.jobname;
-	// 			if(req.body.password) job.password = req.body.password;
+					//return a message
+					res.json({ message: 'job updated!' });
+				})
+			});
+		})
+		apiRouter.route('/menuItem')
+		
+		.post(function(req,res){
+			console.log(req.body);
+			var menuItem = new MenuItem();
 
-	// 			//save the job
-	// 			job.save(function(err){
-	// 				if(err) res.send(err);
+			menuItem.type = req.body.type;
+			menuItem.typeList = req.body.typeList;
+			menuItem.save(function(err){
+				if(err){
+					if(err.code == 11000)
+						return res.json({ success: false, message: 'This configuration has already been saved!'});
+					else
+						return res.send(err);
+				}
+				res.json({ message: 'Successful configuration' });
+			})
+		})
 
-	// 				//return a message
-	// 				res.json({ message: 'job updated!' });
-	// 			})
-	// 		});
-	// 	})
+		.get(function(req,res){
+
+
+			MenuItem.find(function(err, item){
+				if(err) res.send(err);
+				console.log(res.json(item));
+			});
+		});
+
+	apiRouter.route('/menuItem/:list_id')
+
+		.get(function(req,res){
+			MenuItem.findById(req.params.item_id, function(err, item){
+				if (err) res.send(err);
+				res.json(item);
+			});
+		})
+
+		//update the job with this id
+		//(access at PUT http://localhost:8080/api/jobs/:job_id)
+		.put(function(req,res){
+			// use our job model to find the job we want
+			MenuItem.findById(req.params.item_id, function(err, item){
+				if (err) res.send(err);
+				//update the jobs info only if its new
+				// item.list = req.body;
+
+				// if(req.body.jobname) job.jobname = req.body.jobname;
+				// if(req.body.password) job.password = req.body.password;
+
+				// save the job
+				item.save(function(err){
+					if(err) res.send(err);
+
+					//return a message
+					res.json({ message: 'job updated!' });
+				})
+			});
+		})
 
 	// 	//DELETE the job with this id
 	// 	//(access at DELETE http://localhost:8080/api/jobs/:job_id)

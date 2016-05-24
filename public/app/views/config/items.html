@@ -1,0 +1,51 @@
+<a href="/configuration"><h1>Ike's Configuration</h1></a>
+<div class="configEdit">
+	<h2>Menu Items</h2>
+	<!-- <ul>
+		<li ng-repeat="item in config.salads">
+			<h4>Salads</h4>
+			<p>{{ item.name }}</p>
+			<p>{{ item.ingredients[0] }}</p>
+			<button data-ng-click="config.removeCategory(saved)">remove</button>
+		</li>
+	</ul>
+	<ul>
+		<li ng-repeat="item in config.sandwiches">
+			<h4>Sandwiches</h4>
+			<p>{{ item.name }}</p>
+			<p>{{ item.ingredients[0] }}</p>
+			<button data-ng-click="config.removeCategory(saved)">remove</button>
+		</li>
+	</ul> -->
+	<form id="add_ingredient" ng-show="config.hideForm" ng-submit="config.submitMenuItem()">
+	<ul>
+		<h2>Catgories</h2>
+		<li ng-repeat="category in config.categories track by $index">
+			<label for="{{ category }}">{{ category }}</label>
+			<input type="checkbox" id="{{category}}" ng-model="config.items.category" ng-true-value="'{{category}}'" ng-false-value="''">
+		</li>
+	</ul>
+	<ul>
+		<h2>Ingredients</h2>
+		<li>
+			<label ng-repeat="ingredient in config.ingredients">
+			  <input
+			    type="checkbox"
+			    name="selectedIngredients[]"
+			    value="{{ingredient}}"
+			    ng-checked="selection.indexOf(ingredient) > -1"
+			    ng-click="config.toggleSelection(ingredient)"
+			  > {{ingredient}}
+			</label>
+		</li>
+	</ul>
+	
+		<input type="text" class="inputItem" ng-model="config.items.name" placeholder="Name you menu item" ng-click="config.submitMenuItemName()">
+		<p> {{ config.items.name }}</p>
+		<p> {{ config.items.category }}</p>
+		<p ng-repeat="ingredient in config.itemIngredients"> {{ ingredient }}</p>
+	</form>
+	<button class="add" ng-hide="config.hideForm" ng-click="config.newForm()">Add New Item</button>
+	<button class="add" ng-show="config.hideForm" ng-click="config.submitMenuItem()">Add</button>
+</div>
+<button ng-click="config.submitMenuItems()">Update List</button>

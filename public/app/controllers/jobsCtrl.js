@@ -1,5 +1,5 @@
-angular.module('jobsCtrl', [])
-.controller('jobsController', function($scope, $sce, $filter, usersJobsFactory, jobFactory, paginateService){
+angular.module('welcomeCtrl', [])
+.controller('welcomeController', function($scope, $sce, $filter){
 
 	var ctrl = this,
 		filtered_jobs = [],

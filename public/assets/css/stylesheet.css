@@ -4,6 +4,10 @@
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	overflow-x: hidden;
 }
+body{
+	padding: 50px;
+	margin: 50px;
+}
 nav{
 	background-color:#1A237E;
 	width: 100%;
@@ -36,7 +40,7 @@ table.job_board{
 	width: 1100px;
 	overflow: hidden;
 }
-.job_view {
+/*.job_view {
 	width: 100vw;
 	height: 100vh;
 	background: url('https://ununsplash.imgix.net/reserve/fawrXCzwSsOUMmJr9GGD_alcatraz.jpg?q=75&fm=jpg&s=581307737e7c9f8b24e46d7e770f5769');
@@ -181,4 +185,4 @@ div.job_card{
 }
 .job_card>p, a, div{
 	text-align: left;
-}
+}*/

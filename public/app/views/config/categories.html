@@ -1,0 +1,21 @@
+<a href="/configuration"><h1>Ike's Configuration</h1></a>
+<div class="configEdit">
+	<h2>Categories</h2>
+	<ul>
+		<li ng-repeat="saved in config.categories">
+			<p>{{ saved }}</p>
+			<button data-ng-click="config.removeCategory(saved)">remove</button>
+		</li>
+	</ul>
+	<ul>
+		<li ng-repeat="item in config.list">
+			<p>{{ item }}</p>
+			<button data-ng-click="config.removeItem(item)">remove</button>
+		</li>
+	</ul>
+	<form id="add_ingredient" ng-show="config.hideForm" ng-submit="config.submitItem()">
+		<input type="text" class="inputItem" ng-model="config.item" ng-blur="config.submitItem()" placeholder="Add an Ingredient">
+	</form>
+	<button class="add" ng-click="config.newForm()">Add New</button>
+</div>
+<button ng-click="config.submitCategories()">Update List</button>

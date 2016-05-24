@@ -1,2 +1,2 @@
-angular.module('jobBoardApp', ['app.routes', 'jobsCtrl', 'usersJobsCtrl', 'jobsSvc', 'usersJobsSvc', 'paginateSvc', 'gitAPIPvdr', 'indeedAPIPvdr'])
+angular.module('inventoryApp', ['app.routes', 'configCtrl', 'configSvc', 'itemSvc'])
 ; 
