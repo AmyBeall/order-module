@@ -18,4 +18,24 @@
 	</form>
 	<button class="add" ng-click="config.newForm()">Add New</button>
 </div>
-<button ng-click="config.submitIngredients()">Update List</button>
+<button ng-click="config.submitIngredients()">Update Ingredient List</button>
+<div class="configEdit">
+	<h2>Bread</h2>
+	<ul>
+		<li ng-repeat="saved in config.breads">
+			<p>{{ saved }}</p>
+			<button ng-click="config.removeBread(saved)">remove</button>
+		</li>
+	</ul>
+	<ul>
+		<li ng-repeat="item in config.breadList">
+			<p>{{ item }}</p>
+			<button ng-click="config.removeBreadItem(item)">remove</button>
+		</li>
+	</ul>
+	<form id="add_bread" ng-show="config.hideForm" ng-submit="config.submitItem()">
+		<input type="text" class="inputItem" ng-model="config.breadItem" ng-blur="config.submitBreadItem()" placeholder="Add a Bread Type">
+	</form>
+	<button class="add" ng-click="config.newForm()">Add New</button>
+</div>
+<button ng-click="config.submitBreads()">Update Bread List</button>

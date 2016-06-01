@@ -5,6 +5,8 @@ angular.module('app.routes', ['ngRoute'])
 
 	.when('/',{
 		templateUrl: './app/views/welcome.html',
+		controller: 'orderController',
+		controllerAs: 'order'
 	})
 	.when('/configuration',{
 		templateUrl: './app/views/configuration.html',
@@ -30,6 +32,16 @@ angular.module('app.routes', ['ngRoute'])
 		templateUrl: './app/views/config/items.html',
 		controller: 'configController',
 		controllerAs: 'config'
+	})
+	.when('/order',{
+		templateUrl: './app/views/order.html',
+		controller: 'orderController',
+		controllerAs: 'order'
+	})
+	.when('/order/add',{
+		templateUrl: './app/views/add_order.html',
+		controller: 'orderController',
+		controllerAs: 'order'
 	})
 	.otherwise({
 		redirectTo: '/'

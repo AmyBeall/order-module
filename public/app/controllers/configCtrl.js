@@ -2,59 +2,59 @@ angular.module('configCtrl', [])
 .controller('configController', function(configFactory, itemFactory, $scope, $sce, $filter){
 
 	var ctrl = this,
-		saved = [];
-
-		ctrl.ingredients = [];
-		ctrl.categories = [];
-		ctrl.vendors = [];
-		ctrl.savedMenuItems = [];
-		ctrl.menuItems = {};
-		ctrl.salads = [];
-		ctrl.sandwiches = [];
-
-		configFactory.all().success(function(data){
-			saved = data;
-			for(item in saved){
-				if(saved[item].type == "ingredients"){
-					ingredients_id = saved[item]._id;
-					configFactory.get(ingredients_id).success(function(data){
-						ctrl.ingredients = data.list;
-					});
-				}
-				if(saved[item].type == "categories"){
-					categories_id = saved[item]._id;
-					configFactory.get(categories_id).success(function(data){
-						ctrl.categories = data.list;
-					});
-				}
-				if(saved[item].type == "vendors"){
-					vendors_id = saved[item]._id;
-					configFactory.get(vendors_id).success(function(data){
-						ctrl.vendors = data.list;
-					});
-				}
-			}
-		});
-		itemFactory.all().success(function(data){
-			saved = data;
-			for(item in saved){
-				console.log(saved[item].typeList);
-				if(saved[item].type == "Salad"){
-					ctrl.salads = saved[item].typeList;
-					console.log(ctrl.salads);
-					};
-				if(saved[item].type == "sandwiches"){
-					ctrl.sandwiches = saved[item].typeList;
-					console.log(ctrl.sandwiches);
-					};	
-			}
-		})	
-
+		saved = [],
+		newList = {},
+		newItem = {},
+		newItems = [];
+	ctrl.ingredients = [];
+	ctrl.categories = [];
+	ctrl.vendors = [];
+	ctrl.items = [];
+	ctrl.breads = [];
+	ctrl.menuItems = [];
 	ctrl.hideForm = false;
-
 	ctrl.list = [];
-	newList = {};
+	ctrl.breadList = [];
+	ctrl.itemIngredients = [];
+	
 
+	configFactory.all().success(function(data){
+		saved = data;
+		for(item in saved){
+			if(saved[item].type == "ingredients"){
+				ingredients_id = saved[item]._id;
+				configFactory.get(ingredients_id).success(function(data){
+					ctrl.ingredients = data.list;
+				});
+			}
+			if(saved[item].type == "categories"){
+				categories_id = saved[item]._id;
+				configFactory.get(categories_id).success(function(data){
+					ctrl.categories = data.list;
+				});
+			}
+			if(saved[item].type == "vendors"){
+				vendors_id = saved[item]._id;
+				configFactory.get(vendors_id).success(function(data){
+					ctrl.vendors = data.list;
+				});
+			}
+			if(saved[item].type == "breads"){
+				breads_id = saved[item]._id;
+				configFactory.get(breads_id).success(function(data){
+					ctrl.breads = data.list;
+				});
+			}
+		}
+	});
+
+	itemFactory.all().success(function(data){
+		ctrl.menuItems = data;
+	})	
+
+	ctrl.newForm = function() {
+		ctrl.hideForm = true;
+	}
 	ctrl.submitItem = function() {
 		if (ctrl.item) {
 			ctrl.list.push(this.item);
@@ -63,9 +63,6 @@ angular.module('configCtrl', [])
 
 		}
 	};
-	ctrl.newForm = function() {
-		ctrl.hideForm = true;
-	}
 	ctrl.removeItem = function(item){
 		for(var i = ctrl.list.length - 1; i >= 0; i--){
 		    if(ctrl.list[i] == item){
@@ -73,6 +70,14 @@ angular.module('configCtrl', [])
 		    }
 		}
 	}
+	ctrl.submitBreadItem = function() {
+		if (ctrl.breadItem) {
+			ctrl.breadList.push(ctrl.breadItem);
+			ctrl.breadItem = '';
+			ctrl.hideForm = false;
+
+		}
+	};
 
 	ctrl.submitIngredients = function(){
 		if(ctrl.ingredients.length < 1 ){
@@ -81,11 +86,9 @@ angular.module('configCtrl', [])
 			configFactory.create(newList)
 				.success(function(data) {
 	        		ctrl.message = data.message;
-	        		console.log(data);
 	      		});
 		} else {
 			angular.forEach(ctrl.list, function(value,index){
-				console.log(ctrl.ingredients);
                	ctrl.ingredients.push(value);
             })
             ctrl.list = [];
@@ -94,112 +97,251 @@ angular.module('configCtrl', [])
 	        		console.log(data.message);
 	      		});
 		}
+		ctrl.ingredients = [];
 	}
+
 	ctrl.removeIngredient = function(ingredient){
+
 		for(var i = ctrl.ingredients.length - 1; i >= 0; i--){
+
 		    if(ctrl.ingredients[i] == ingredient){
 		        ctrl.ingredients.splice(i,1);
 		    }
 		}
 	}
-	ctrl.submitCategories = function(){
-		if(ctrl.categories.length < 1 ){
-			newList.type = "categories";
-			newList.list = ctrl.list
+	ctrl.submitBreads = function(){
+		if(ctrl.breads.length < 1 ){
+			newList.type = "breads";
+			newList.list = ctrl.breadList
 			configFactory.create(newList)
 				.success(function(data) {
 	        		ctrl.message = data.message;
-	        		console.log(data);
 	      		});
 		} else {
+			angular.forEach(ctrl.breadList, function(value,index){
+				console.log(ctrl.breads);
+               	ctrl.breads.push(value);
+            })
+            ctrl.breadList = [];
+			configFactory.update(breads_id, ctrl.breads)
+				.success(function(data) {
+	        		console.log(data.message);
+	      		});
+		}
+	}
+
+	ctrl.removeBread = function(bread){
+
+		for(var i = ctrl.breads.length - 1; i >= 0; i--){
+
+		    if(ctrl.breads[i] == bread){
+		        ctrl.breads.splice(i,1);
+		    }
+		}
+	}
+
+	ctrl.submitCategories = function(){
+
+		if(ctrl.categories.length < 1 ){
+			newList.type = "categories";
+			newList.list = ctrl.list;
+
+			configFactory.create(newList)
+				.success(function(data) {
+	        		ctrl.message = data.message;
+	      		});
+		} else {
+			ctrl.list = [];
+
 			angular.forEach(ctrl.list, function(value,index){
 				console.log(ctrl.categories);
                	ctrl.categories.push(value);
             })
-            ctrl.list = [];
+            
 			configFactory.update(categories_id, ctrl.categories)
 				.success(function(data) {
 	        		console.log(data.message);
 	      		});
 		}
 	}
+
 	ctrl.removeCategory = function(ingredient){
+
 		for(var i = ctrl.categories.length - 1; i >= 0; i--){
+
 		    if(ctrl.categories[i] == ingredient){
 		        ctrl.categories.splice(i,1);
 		    }
 		}
 	}
+
 	ctrl.submitVendors = function(){
+
 		if(ctrl.vendors.length < 1 ){
 			newList.type = "vendors";
-			newList.list = ctrl.list
+			newList.list = ctrl.list;
+
 			configFactory.create(newList)
 				.success(function(data) {
 	        		ctrl.message = data.message;
-	        		console.log(data);
 	      		});
 		} else {
+			ctrl.list = [];
+
 			angular.forEach(ctrl.list, function(value,index){
 				console.log(ctrl.vendors);
                	ctrl.vendors.push(value);
             })
-            ctrl.list = [];
+            
 			configFactory.update(vendors_id, ctrl.vendors)
 				.success(function(data) {
 	        		console.log(data.message);
 	      		});
 		}
 	}
+
 	ctrl.removeVendor = function(ingredient){
+
 		for(var i = ctrl.vendors.length - 1; i >= 0; i--){
+		    
 		    if(ctrl.vendors[i] == ingredient){
 		        ctrl.vendors.splice(i,1);
 		    }
 		}
 	}
-	ctrl.itemIngredients = [];
-	ctrl.toggleSelection = function toggleSelection(ingredient) {
-    var idx = ctrl.itemIngredients.indexOf(ingredient);
+	
+	ctrl.toggleSelection = function(ingredient) {
+	    var idx = ctrl.itemIngredients.indexOf(ingredient);
+	    if (idx > -1) {
+	      ctrl.itemIngredients.splice(idx, 1);
+	    } else {
+	      ctrl.itemIngredients.push(ingredient);
+	    }
+	};
+	ctrl.addMenuItem = function(){
+		newItem = {};
+		item = {};
+		item.name = ctrl.items.name;
+		item.ingredients = ctrl.itemIngredients;
+		newItem.typeList = [];
+		exists = "";
+		isthere = "";
+		function addNew(item){
+			newItem.type = ctrl.items.category;
+			newItem.typeList.push(item);
+			newItems.push(newItem);
+		}
 
-    // is currently selected
-    if (idx > -1) {
-      ctrl.itemIngredients.splice(idx, 1);
-    }
+		if(Object.keys(ctrl.menuItems).length < 1){
+			addNew(item);
+			ctrl.menuItems.push(newItem);
+		} else {
+			for(index in ctrl.menuItems){
+				if(ctrl.menuItems[index].type === ctrl.items.category){
+					exists = index;
+				}
+			}
+			for(index in newItems){
+				if(newItems[index].type === ctrl.items.category){
+					isthere = index;
+				}
+			}
+			if(isthere != ""){
+				if(newItems[isthere].type === ctrl.items.category){
+					newItems[isthere].typeList.push(item);
+				} 
+			} else if(exists != ""){
+				if(ctrl.menuItems[exists].type === ctrl.items.category){
+					ctrl.menuItems[exists].typeList.push(item);
+					if(isthere === ""){
+						addNew(item);
+					}
+				} 
+			} else {
+				addNew(item);
+				ctrl.menuItems.push(newItem);
+			}
 
-    // is newly selected
-    else {
-      ctrl.itemIngredients.push(ingredient);
-    }
-  };
-	// ctrl.submitMenuItem = function(){
-	// 	if(Object.keys(ctrl.menuItems).length < 1){
-	// 		console.log(ctrl.items.category+'newObject');
-	// 		var typeList = {};
-	// 		typeList.name = ctrl.items.name;
-	// 		typeList.ingredients = ctrl.itemIngredients;
-	// 		ctrl.menuItems.typeList = typeList;
-	// 		ctrl.menuItems.type = ctrl.items.category;
-	// 		console.log(ctrl.menuItems);
-	// 		itemFactory.create(ctrl.menuItems)
-	// 		.success(function(data) {
- //        		ctrl.message = data.message;
- //        		console.log(data);
- //      		});
-	// 	} else {
-	// 		for(item in ctrl.menuItems){
-	// 			if(item.type == ctrl.items.category){
-	// 				console.log(ctrl.items.category+'repeat');
-	// 				menuItem_id = item._id;
-
-	// 				configFactory.update(item._id, item.typeList)
-	// 			.success(function(data) {
-	//         		console.log(data.message);
-	//       		});
-	// 			} else {
-	// 				console.log(ctrl.items.category+'new');
-	// 			}
-	// 		}
-	// 	}
-	// };		
+		}
+		exists = "";
+		isthere = "";
+		ctrl.items.category = '';
+		ctrl.items.name = '';
+		ctrl.itemIngredients = [];
+		ctrl.hideForm = false;
+	};		
+	ctrl.addMenuItems = function(){
+		exists ="";
+		savedMenuItems = [];
+		itemFactory.all().success(function(data){
+			savedMenuItems = data;
+			function addNewItems(list){
+				itemFactory.create(list).success(function(data){
+					console.log(data);
+				})	
+			}
+			for(menuItem in newItems){
+				if(Object.keys(savedMenuItems).length < 1){
+					addNewItems(newItems[menuItem]);				
+				} else {
+					for(index in savedMenuItems){
+						if(savedMenuItems[index].type === newItems[menuItem].type){
+							exists = index;
+						}
+					}
+					if(exists != ""){
+						if(savedMenuItems[exists].type === newItems[menuItem].type){
+							menu_id = savedMenuItems[exists]._id;
+							itemFactory.update(menu_id, newItems[menuItem].typeList)
+								.success(function(data) {
+					        		console.log(data.message);
+					      		});
+						} 
+					} else {
+						addNewItems(newItems[menuItem]);
+					}
+				}
+			}
+		})
+	};
+	ctrl.removeItem = function(member){
+		console.log(member);
+	}		
+})
+.directive('collection', function ($compile) {
+	
+	return {
+		restrict: "E",
+		replace: true,
+		scope: {
+			collection: '=', remove: '&'
+		},
+		template: "<ul><member ng-repeat='member in collection' member='member' remove='config.removeItem(collection)'></member></ul>"
+	}
+})
+.directive('member', function ($compile) {
+	return {
+		restrict: "E",
+		replace: true,
+		scope: {
+			member: '=', remove: '&'
+		},
+		template: '<li>{{member.name}} </li>',
+		link: function (scope, element, attrs) {
+				if (angular.isArray(scope.member.ingredients)) {
+					element.append("<ingredients ingredients='member.ingredients'></ingredients>"); 
+					$compile(element.contents())(scope)
+				}
+		}
+	}
+})
+.directive('ingredients', function () {
+	return {
+		restrict: "E",
+		replace: true,
+		scope: {
+			ingredients: '='
+		},
+		template: "<ul><li ng-repeat='item in ingredients'>{{item}}</li></ul>"
+	}
 });

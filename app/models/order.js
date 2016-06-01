@@ -7,17 +7,17 @@ var OrderSchema = new Schema({
 	vendor: String,
 	customer: String,
 	address: String,
-	date: Date,
-	setUpTime: Date,
+	pickUpdate: Date,
+	pickUpTime: Date,
 	orderNum: String,
 	item: [{
-		Type: String,
-		Name: String,
-		Customization: String,
-		Quantity: Number
+		type: String,
+		name: String,
+		ingredients: [String],
+		customization: String,
+		quantity: Number
 	}],
-	entryDate: Date,
-	entryUser: String
+	entryDate: Date
 });
 
 module.exports = mongoose.model('Order', OrderSchema);
