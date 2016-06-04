@@ -7,7 +7,7 @@ var OrderSchema = new Schema({
 	vendor: String,
 	customer: String,
 	address: String,
-	pickUpdate: Date,
+	pickUpDate: Date,
 	pickUpTime: Date,
 	orderNum: String,
 	item: [{

@@ -97,7 +97,6 @@ angular.module('configCtrl', [])
 	        		console.log(data.message);
 	      		});
 		}
-		ctrl.ingredients = [];
 	}
 
 	ctrl.removeIngredient = function(ingredient){
