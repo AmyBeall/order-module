@@ -1,4 +1,16 @@
-<h1>Your Orders</h1>
-<div ng-repeat="order in order.orders">
-	<p>{{ order.orderNum }} {{ order.customer }}</p>
-</div>
+<a href="/"><h1>Ike's</h1></a>
+<h2>Your Orders</h2>
+<table>
+	<th>Order Number</th>
+	<th>Customer</th>
+	<th>Vendor</th>
+	<th>Pick Up Date</th>
+	<th>Pick Up Time</th>
+	<tr ng-repeat="order in order.orders">
+		<td>{{ order.orderNum }}</td>
+		<td>{{ order.customer }}</td>
+		<td>{{ order.vendor }}</td>
+		<td>{{ order.pickUpDate | date: "EEE, M/dd" }}</td>
+		<td>{{ order.pickUpTime | date: "h:mm a" }}</td>
+	</tr>
+</table>

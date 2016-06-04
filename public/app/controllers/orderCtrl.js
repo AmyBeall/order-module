@@ -1,5 +1,5 @@
 angular.module('orderCtrl', [])
-.controller('orderController', function(configFactory, itemFactory, orderFactory, $scope, $sce, $filter){
+.controller('orderController', function(configFactory, itemFactory, orderFactory, $scope, $sce, $filter, $location){
 
 	var ctrl = this,
 		order = {},
@@ -15,8 +15,8 @@ angular.module('orderCtrl', [])
 	ctrl.itemIngredients = [];
 	ctrl.item = {};
 	ctrl.orderItems = [];
-	ctrl.item.customization = " ";
 	ctrl.orders = [];
+	ctrl.customization = " ";
 
 	ctrl.showCategories = true;
 	ctrl.showOptions = false;
@@ -107,6 +107,7 @@ angular.module('orderCtrl', [])
 	    }
 	};	
 	ctrl.addItem = function(){
+
 		modifyIngredients = [];
 		angular.copy(ctrl.selectionIngredients, modifyIngredients);
 		var ingredients = "";
@@ -117,7 +118,7 @@ angular.module('orderCtrl', [])
 				}
 			}
 		}
-		if(ctrl.item.customization !== " "){
+		if(ctrl.customization !== " "){
 			ingredients += ",";
 		}
 		if(modifyIngredients.length <= ctrl.itemIngredients.length){
@@ -138,7 +139,8 @@ angular.module('orderCtrl', [])
 		if(ctrl.itemBread){
 			ingredients += " "+ctrl.itemBread+ " bread";
 		}
-		ctrl.item.customization += ingredients;
+		ctrl.customization += ingredients;
+		ctrl.item.customization = ctrl.customization;
 		ctrl.item.ingredients = [];
 		angular.copy(ctrl.itemIngredients, ctrl.item.ingredients);
 		ctrl.item.ingredients.push(ctrl.itemBread);
@@ -159,7 +161,7 @@ angular.module('orderCtrl', [])
 	ctrl.editOrderItems = function(item){
 		idx = ctrl.orderItems.indexOf(item);
 		ctrl.item = ctrl.orderItems[idx];
-		ctrl.item.itemModify = " ";
+		ctrl.customization = " ";
 		ctrl.showIngredients = true;
 		ctrl.orderItems.splice(idx, 1);
 	}
@@ -168,7 +170,7 @@ angular.module('orderCtrl', [])
 		order.vendor = ctrl.orderInfo.vendor;
 		order.customer = ctrl.orderInfo.companyName;
 		order.address = ctrl.orderInfo.companyAddress;
-		order.pickUpdate = ctrl.orderInfo.date;
+		order.pickUpDate = ctrl.orderInfo.date;
 		order.pickUpTime = ctrl.orderInfo.time;
 		order.orderNum = ctrl.orderInfo.orderNumber;
 		for(item in ctrl.orderItems){
@@ -179,6 +181,7 @@ angular.module('orderCtrl', [])
 		orderFactory.create(order)
 			.success(function(data) {
         		console.log(data.message);
+        		$location.path( "/order" );
       		});
 	}
 

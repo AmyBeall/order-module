@@ -1,4 +1,5 @@
-<h1>Place an Order</h1>
+<a href="/"><h1>Ike's</h1></a>
+<h2>Place an Order</h2>
 <div ng-show="order.hideform">
 	<div class="block-info">
 		<p>Order Number: <span>{{ order.orderInfo.orderNumber }}</span></p>
@@ -72,7 +73,7 @@
 			</select>
 		</label>
 		<label for="modify">Add Comment:
-			<textarea ng-model="order.item.customization" id="modify" cols="30" rows="4" value=""></textarea>
+			<textarea ng-model="order.customization" id="modify" cols="30" rows="4" value=""></textarea>
 		</label>
 		<label for="quantity">Quantity:
 			<input type="number" id="quantity" ng-model="order.item.quantity">
