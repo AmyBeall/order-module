@@ -2,12 +2,13 @@
 *{
 	padding: 0;
 	margin: 0;
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font 
 	overflow-x: hidden;
 }
 body{
-	padding: 50px;
-	margin: 50px;
+	padding: 0;
+	margin: 1px;
 }
 nav{
 	background-color:#1A237E;
@@ -31,25 +32,190 @@ nav>a>h3, nav>h3{
 	color: white;
 	font-weight: normal;
 }
-.block-info{
-	display: inline-block;
-	vertical-align: top;
+a.main-btn {
+	text-decoration: none;
+	padding-top: 20px;
+}
+h1 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-color: #4b4b4b;
+	font-size: 25px;
+}
+h2 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-color: #4b4b4b;
+	font-size: 18px;
+}
+h3 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-color: #4b4b4b;
+	font-size: 15px;
 }
 /*-------------------------------------------Welcome Page Elements-------------------------------------------------------*/
+#main-message {
+	width: 60%;
+	margin: auto;
+	padding-bottom: 100px;
+}
 #main-menu {
 	margin: 20px auto;
     width: 60%;
-    border: 3px solid #73AD21;
 }
 .main-btn {
-	background: #73AD21;
+	background: #A10978;
+	border: 2px solid #B0A8A6;
 	border-radius: 35px;
 	width: 250px;
 	height: 40px;
 	margin: 20px auto;
 	display: block;
 	text-align: center;
-	vertical-align: text-bottom;
 	font-family: 'Roboto', sans-serif;
+	font-size: 18px;
 	color: white;
+}
+/*----------------------------------------------Ordering Page Elements-------------------------------------------------------*/
+#head {
+	margin-bottom: 15px;
+	padding-bottom: 20px;
+	background-color: #A10978; 
+}
+h1.brand  {
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	padding-top: 5px;
+}
+h2.page-instructions	{
+	text-align: center;
+	padding: 30px 0 30px 0;
+
+}
+#customer-fields {
+	width: 30%;
+	float: left;
+	padding: 0 0 0 15px;
+}
+.order-item {
+	height: 35px;
+}
+.block-info{
+	display: block;
+	vertical-align: top;
+}
+.fancy-fields {
+	height: 25px;
+	width: 200px;
+	border: 1px solid #B0A8A6;
+	border-radius: 35px;
+}
+.fancy-fields-small	{
+	height: 25px;
+	width: 130px;
+	border: 1px solid #B0A8A6;
+	border-radius: 35px;
+	text-align: center;
+}
+.fancy-fields-xs	{
+	height: 25px;
+	width: 80px;
+	border: 1px solid #B0A8A6;
+	border-radius: 35px;
+	text-align: center;
+}
+label {
+	font-family: 'Roboto', sans-serif;
+}
+p {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+}
+p.order-info {
+	font-weight: 500;
+}
+span	{
+	font-weight: 100;
+}
+form {
+	display: inline;
+}
+.cat-btn {
+	background: #A10978;
+	border: none;
+	border-radius: 35px;
+	height: 20px;
+	min-width: 25%;
+	display: inline-block;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	margin: 10px;
+	font-size: 12px;
+	color: white;
+	vertical-align: top;
+}
+.fancy-selector {
+	height: 27px;
+	background: white;
+	vertical-align: top;
+}
+.item-btn {
+	border: 1px solid #A10978;
+	background: #A10978;
+	border-radius: 35px;
+	max-width: 35%;
+	min-width: 5%;
+	margin: 3px 0 3px 0;
+	text-align: center;
+	font-size: 13px;
+	color: white;
+}
+#items-ordered {
+	width: 28.9%;
+	display: inline-block;
+}
+#order-display	{
+	width: 40%;
+	float: right;
+	display: inline-block;
+	height: auto;
+}
+td.order-summary	{
+	text-align: left;
+	font-weight: 300;
+	font-size: 14px;
+}
+th.summary-column	{
+	padding-right: 120px;
+	font-weight: 500;
+	margin: 10px;
+}
+/*Singling this element out to allow for better rendering on table by centering while the rest are align to the left*/
+td.summary-quantity	{ 
+	text-align: center;
+	font-weight: 300;
+}
+th.summary-column-quantity	{
+	text-align: center;
+}
+.edit-btn	{
+	background: #A10978;
+	border: none;
+	border-radius: 35px;
+	height: 25px;
+	min-width: 30px;
+	display: inline-block;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	margin: 10px;
+	font-size: 12px;
+	color: white;
+	vertical-align: top;
+	float: right;
+}
+.order-component	{
+	display: block;
+	padding: 7px;
 }
