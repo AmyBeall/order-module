@@ -65,6 +65,70 @@ angular.module('orderCtrl', [])
 	}
 	ctrl.init();
 
+	var requests = [];
+	// Change the name of sheet ID '0' (the default first sheet on every
+	// spreadsheet)
+	requests.push({
+	  updateSheetProperties: {
+	    properties: {sheetId: 0, title: 'New Sheet Name'},
+	    fields: 'title'
+	  }
+	});
+	// Insert the values 1, 2, 3 into the first row of the spreadsheet with a
+	// different background color in each.
+	requests.push({
+	  updateCells: {
+	    start: {sheetId: 0, rowIndex: 0, columnIndex: 0},
+	    rows: [{
+	      values: [{
+	        userEnteredValue: {numberValue: 1},
+	        userEnteredFormat: {backgroundColor: {red: 1}}
+	      }, {
+	        userEnteredValue: {numberValue: 2},
+	        userEnteredFormat: {backgroundColor: {blue: 1}}
+	      }, {
+	        userEnteredValue: {numberValue: 3},
+	        userEnteredFormat: {backgroundColor: {green: 1}}
+	      }]
+	    }],
+	    fields: 'userEnteredValue,userEnteredFormat.backgroundColor'
+	  }
+	});
+	// Write "=A1+1" into A2 and fill the formula across A2:C5 (so B2 is
+	// "=B1+1", C2 is "=C1+1", A3 is "=A2+1", etc..)
+	requests.push({
+	  repeatCell: {
+	    range: {
+	      sheetId: 0,
+	      startRowIndex: 1,
+	      endRowIndex: 6,
+	      startColumnIndex: 0,
+	      endColumnIndex: 3
+	    },
+	    cell: {userEnteredValue: {formulaValue: '=A1 + 1'}},
+	    fields: 'userEnteredValue'
+	  }
+	});
+	
+	requests.push({
+	  copyPaste: {
+	    source: {
+	      sheetId: 0,
+	      startRowIndex: 0,
+	      endRowIndex: 1,
+	      startColumnIndex: 0,
+	      endColumnIndex: 3
+	    },
+	    destination: {
+	      sheetId: 0,
+	      startRowIndex: 1,
+	      endRowIndex: 6,
+	      startColumnIndex: 0,
+	      endColumnIndex: 3
+	    },
+	    pasteType: 'PASTE_FORMAT'
+	  }
+	});
 	ctrl.addOrderInfo = function(){
 		ctrl.hideform = true;
 		if(ctrl.orderItems.length > 0){
@@ -169,6 +233,7 @@ angular.module('orderCtrl', [])
 		ctrl.orderItems.splice(idx, 1);
 	}
 	ctrl.submitOrder = function(){
+		requests = requests;
 		order.item = [];
 		order.vendor = ctrl.orderInfo.vendor;
 		order.customer = ctrl.orderInfo.companyName;
@@ -180,6 +245,11 @@ angular.module('orderCtrl', [])
 			order.item.push(ctrl.orderItems[item]);
 		}
 		order.entryDate = new Date();
+
+		orderFactory.sheetCreate(requests)
+			.success(function(data) {
+        		console.log(data);
+      		});	
 
 		orderFactory.create(order)
 			.success(function(data) {

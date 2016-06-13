@@ -17,7 +17,7 @@ app.use(function(req, res, next) {
 	next();
 });
 
-mongoose.connect('mongodb://localhost/ikes_inventory');
+mongoose.connect('mongodb://localhost/Catering_System_inventory');
 
 app.use(morgan('dev'));
 
@@ -25,6 +25,8 @@ app.use(express.static(__dirname + "/public"));
 
 var apiRoutes = require('./app/routes/api')(app,express);
 app.use('/api', apiRoutes);
+var sheetsRoutes = require('./app/routes/sheets')(app,express);
+app.use('/sheets', sheetsRoutes);
 
 app.get('*', function(req,res){
 	res.sendFile(path.join(__dirname + '/public/app/index.html'));

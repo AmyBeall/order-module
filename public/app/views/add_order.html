@@ -1,6 +1,17 @@
-<a href="/">
-<div id="head">
-	<h1 class="brand">Ordering System</h1></a>	
+<a href="/"><h1>Catering System</h1></a>
+<h2>Place an Order</h2>
+<div ng-show="order.hideform">
+	<div class="block-info">
+		<p>Order Number: <span>{{ order.orderInfo.orderNumber }}</span></p>
+		<p>Company Name: <span>{{ order.orderInfo.companyName }}</span></p>
+		<p>Company Address: <div>{{ order.orderInfo.companyAddress }}</div></p>
+	</div>
+	<div class="block-info">
+		<p>Vendor: <span>{{ order.orderInfo.vendor }}</span></p>
+		<p>Pick-Up Date: <span>{{ order.orderInfo.date | date: "EEE, M/dd" }}</span></p>
+		<p>Pick-Up Time: <span>{{ order.orderInfo.time | date: "h:mm a" }}</span></p>
+		<p>Number of People: <span>{{ order.orderInfo.headCount }}</span></p>
+	</div>
 </div>
 <div id="customer-fields">
 	<h2 class="page-instructions">Place an Order</h2>

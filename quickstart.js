@@ -5,7 +5,7 @@ var googleAuth = require('google-auth-library');
 
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/sheets.googleapis.com-nodejs-quickstart.json
-var SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
+var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
     process.env.USERPROFILE) + '/.credentials/';
 var TOKEN_PATH = TOKEN_DIR + 'sheets.googleapis.com-nodejs-quickstart.json';
@@ -46,80 +46,83 @@ function authorize(credentials, callback) {
   });
 }
 
-/**
- * Get and store new token after prompting for user authorization, and then
- * execute the given callback with the authorized OAuth2 client.
- *
- * @param {google.auth.OAuth2} oauth2Client The OAuth2 client to get token for.
- * @param {getEventsCallback} callback The callback to call with the authorized
- *     client.
- */
-function getNewToken(oauth2Client, callback) {
-  var authUrl = oauth2Client.generateAuthUrl({
-    access_type: 'offline',
-    scope: SCOPES
-  });
-  console.log('Authorize this app by visiting this url: ', authUrl);
-  var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-  rl.question('Enter the code from that page here: ', function(code) {
-    rl.close();
-    oauth2Client.getToken(code, function(err, token) {
-      if (err) {
-        console.log('Error while trying to retrieve access token', err);
-        return;
-      }
-      oauth2Client.credentials = token;
-      storeToken(token);
-      callback(oauth2Client);
-    });
-  });
-}
-
-/**
- * Store token to disk be used in later program executions.
- *
- * @param {Object} token The token to store to disk.
- */
-function storeToken(token) {
-  try {
-    fs.mkdirSync(TOKEN_DIR);
-  } catch (err) {
-    if (err.code != 'EEXIST') {
-      throw err;
-    }
-  }
-  fs.writeFile(TOKEN_PATH, JSON.stringify(token));
-  console.log('Token stored to ' + TOKEN_PATH);
-}
-
-/**
- * Print the names and majors of students in a sample spreadsheet:
- * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
- */
 function listMajors(auth) {
-  var sheets = google.sheets('v4');
-  sheets.spreadsheets.values.get({
-    auth: auth,
-    spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-    range: 'Class Data!A2:E',
-  }, function(err, response) {
-    if (err) {
-      console.log('The API returned an error: ' + err);
-      return;
-    }
-    var rows = response.values;
-    if (rows.length == 0) {
-      console.log('No data found.');
-    } else {
-      console.log('Name, Major:');
-      for (var i = 0; i < rows.length; i++) {
-        var row = rows[i];
-        // Print columns A and E, which correspond to indices 0 and 4.
-        console.log('%s, %s', row[0], row[4]);
-      }
+  var spreadsheetId = '1unrdH4prm-LChI74S7aRvW5Rh1YUTspyiQDwyjUBBFw';
+  var requests = [];
+  // Change the name of sheet ID '0' (the default first sheet on every
+  // spreadsheet)
+  requests.push({
+    updateSheetProperties: {
+      properties: {sheetId: 0, title: 'New Sheet Name'},
+      fields: 'title'
     }
   });
-}
+  // Insert the values 1, 2, 3 into the first row of the spreadsheet with a
+  // different background color in each.
+  requests.push({
+    updateCells: {
+      start: {sheetId: 0, rowIndex: 0, columnIndex: 0},
+      rows: [{
+        values: [{
+          userEnteredValue: {numberValue: 1},
+          userEnteredFormat: {backgroundColor: {red: 1}}
+        }, {
+          userEnteredValue: {numberValue: 2},
+          userEnteredFormat: {backgroundColor: {blue: 1}}
+        }, {
+          userEnteredValue: {numberValue: 3},
+          userEnteredFormat: {backgroundColor: {green: 1}}
+        }]
+      }],
+      fields: 'userEnteredValue,userEnteredFormat.backgroundColor'
+    }
+  });
+  // Write "=A1+1" into A2 and fill the formula across A2:C5 (so B2 is
+  // "=B1+1", C2 is "=C1+1", A3 is "=A2+1", etc..)
+  requests.push({
+    repeatCell: {
+      range: {
+        sheetId: 0,
+        startRowIndex: 1,
+        endRowIndex: 6,
+        startColumnIndex: 0,
+        endColumnIndex: 3
+      },
+      cell: {userEnteredValue: {formulaValue: '=A1 + 1'}},
+      fields: 'userEnteredValue'
+    }
+  });
+ 
+  requests.push({
+    copyPaste: {
+      source: {
+        sheetId: 0,
+        startRowIndex: 0,
+        endRowIndex: 1,
+        startColumnIndex: 0,
+        endColumnIndex: 3
+      },
+      destination: {
+        sheetId: 0,
+        startRowIndex: 1,
+        endRowIndex: 6,
+        startColumnIndex: 0,
+        endColumnIndex: 3
+      },
+      pasteType: 'PASTE_FORMAT'
+    }
+  });
+
+  var batchUpdateRequest = {requests: requests}
+var sheets = google.sheets('v4');
+  sheets.spreadsheets.batchUpdate({
+      auth: auth,
+      spreadsheetId: spreadsheetId,
+      resource: batchUpdateRequest
+      }, function(err, response) {
+        if(err) {
+          // Handle error
+          console.log(err);
+        }
+    });
+  };
