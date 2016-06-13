@@ -64,7 +64,11 @@ angular.module('configCtrl', [])
 		}
 	};
 	ctrl.removeItem = function(item){
-		for(var i = ctrl.list.length - 1; i >= 0; i--){
+		var i;
+		var item = item;
+		for(i = 0; i < ctrl.list.length; i++){
+			console.log(ctrl.list[i]);
+			console.log(item);
 		    if(ctrl.list[i] == item){
 		        ctrl.list.splice(i,1);
 		    }
@@ -150,7 +154,6 @@ angular.module('configCtrl', [])
 	        		ctrl.message = data.message;
 	      		});
 		} else {
-			ctrl.list = [];
 
 			angular.forEach(ctrl.list, function(value,index){
 				console.log(ctrl.categories);
@@ -161,6 +164,7 @@ angular.module('configCtrl', [])
 				.success(function(data) {
 	        		console.log(data.message);
 	      		});
+	      	ctrl.list = [];	
 		}
 	}
 
@@ -185,7 +189,6 @@ angular.module('configCtrl', [])
 	        		ctrl.message = data.message;
 	      		});
 		} else {
-			ctrl.list = [];
 
 			angular.forEach(ctrl.list, function(value,index){
 				console.log(ctrl.vendors);
@@ -196,6 +199,7 @@ angular.module('configCtrl', [])
 				.success(function(data) {
 	        		console.log(data.message);
 	      		});
+	      	ctrl.list = [];	
 		}
 	}
 
@@ -303,9 +307,9 @@ angular.module('configCtrl', [])
 			}
 		})
 	};
-	ctrl.removeItem = function(member){
-		console.log(member);
-	}		
+	// ctrl.removeItem = function(member){
+	// 	console.log(member);
+	// }		
 })
 .directive('collection', function ($compile) {
 	

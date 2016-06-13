@@ -6,15 +6,15 @@
 	<h2 class="page-instructions">Place an Order</h2>
 	<div ng-show="order.hideform">
 		<div class="block-info">
-			<p class="order-info">Order Number:  </br> <span>{{ order.orderInfo.orderNumber }}</span></p>
-			<p class="order-info">Company Name: </br> <span>{{ order.orderInfo.companyName }}</span></p>
-			<p class="order-info">Company Address: </br> <div>{{ order.orderInfo.companyAddress }}</div></p>
+			<p class="order-info">Order Number  </br> <span class="order-field-result">{{ order.orderInfo.orderNumber }}</span></p>
+			<p class="order-info">Company Name </br> <span class="order-field-result">{{ order.orderInfo.companyName }}</span></p>
+			<p class="order-info">Company Address </br> <div class="order-field-result">{{ order.orderInfo.companyAddress }}</div></p>
 		</div>
 		<div class="block-info">
-			<p class="order-info">Vendor: </br> <span>{{ order.orderInfo.vendor }}</span></p>
-			<p class="order-info">Pick-Up Date: </br> <span>{{ order.orderInfo.date | date: "EEE, M/dd" }}</span></p>
-			<p class="order-info">Pick-Up Time: </br> <span>{{ order.orderInfo.time | date: "h:mm a" }}</span></p>
-			<p class="order-info">Number of People: </br> <span>{{ order.orderInfo.headCount }}</span></p>
+			<p class="order-info">Vendor </br> <span class="order-field-result">{{ order.orderInfo.vendor }}</span></p>
+			<p class="order-info">Pick-Up Date </br> <span class="order-field-result">{{ order.orderInfo.date | date: "EEE, M/dd" }}</span></p>
+			<p class="order-info">Pick-Up Time </br> <span class="order-field-result">{{ order.orderInfo.time | date: "h:mm a" }}</span></p>
+			<p class="order-info">Number of People </br> <span class="order-field-result">{{ order.orderInfo.headCount }}</span></p>
 		</div>
 	</div>
 	<!-- <table ng-if="order.orderItems.length > 0">
@@ -61,24 +61,24 @@
 					<option ng-repeat="vendor in order.vendors" value="{{vendor}}">{{vendor}}</option>
 				</select>
 			</label>
-			<button class="cat-btn" ng-submit="order.addOrderInfo()" ng-hide="order.hideform">Add Info</button>
+			<button class="main-btn" ng-submit="order.addOrderInfo()" ng-hide="order.hideform">Add Info</button>
 	</form>
 
-	<button class="cat-btn" ng-click="order.editOrderInfo()" ng-show="order.hideform">Edit Info</button>
+	<button class="main-btn" ng-click="order.editOrderInfo()" ng-show="order.hideform">Edit Info</button>
 </div>
 <div id="items-ordered">
 	<h2 class="page-instructions">Add Items<h2>
 	<button ng-repeat="category in order.menuItems" ng-click="order.viewOptions(category.type)" ng-show="order.showCategories" class="main-btn">Add {{category.type}}</button>
 	<div ng-show="order.showOptions">
-		<h3>Category: {{ order.category }}</h3>
-		<p class="item-btn" ng-repeat="option in order.options" ng-click="order.viewIngredients(option.name)">+ {{ option.name }}</p>
+		<h3 class= "order-category-title">Category: {{ order.category }}</h3>
+		<p class="item-to-add" ng-repeat="option in order.options" ng-click="order.viewIngredients(option.name)">+ {{ option.name }}</p>
 	</div>
 	<div ng-show="order.showIngredients">
 		<div class="order-component">
 			<h3>Category: {{ order.category }}</h3>
-			<h5>{{ order.name }}</h5>
+			<h5 class="item-added-title">{{ order.name }}</h5>
 		</div>
-		<form ng-submit="order.addItem()">
+		<form class="order-ingredients" ng-submit="order.addItem()">
 			Ingredients: 
 			<label ng-repeat="ingredient in order.selectionIngredients">
 			  <input
@@ -104,15 +104,12 @@
 			</div>
 			<div class="order-component">
 				<label for="quantity">Quantity:
-					<input type="number" id="quantity" ng-model="order.item.quantity">
+					<input class="fancy-fields-xs" type="number" id="quantity" ng-model="order.item.quantity">
 				</label>
 			</div>
-			<button class="cat-btn" ng-submit="order.addItem()">Add Item</button>
+			<button class="main-btn-small" ng-submit="order.addItem()">Add Item</button>
 		</form>
-		<button class="cat-btn" ng-click="order.notAddItem()">Do not Add</button>
-	</div>
-	<div ng-show="order.showSubmit">
-		<button class="cat-btn" ng-click="order.submitOrder()">Submit Order</button>
+		<button class="main-btn-small" ng-click="order.notAddItem()">Delete</button>
 	</div>
 </div>
 <div id="order-display">
@@ -129,4 +126,7 @@
 			<td  class="order-summary"><button class="edit-btn" ng-click="order.editOrderItems(item)">Edit</button></td>
 		</tr>
 	</table>
+	<div ng-show="order.showSubmit">
+		<button id="submit-btn" class="main-btn" ng-click="order.submitOrder()">Submit Order</button>
+	</div>
 </div>
