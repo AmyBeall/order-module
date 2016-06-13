@@ -1,87 +1,132 @@
-<a href="/"><h1>Ike's</h1></a>
-<h2>Place an Order</h2>
-<div ng-show="order.hideform">
-	<div class="block-info">
-		<p>Order Number: <span>{{ order.orderInfo.orderNumber }}</span></p>
-		<p>Company Name: <span>{{ order.orderInfo.companyName }}</span></p>
-		<p>Company Address: <div>{{ order.orderInfo.companyAddress }}</div></p>
-	</div>
-	<div class="block-info">
-		<p>Vendor: <span>{{ order.orderInfo.vendor }}</span></p>
-		<p>Pick-Up Date: <span>{{ order.orderInfo.date | date: "EEE, M/dd" }}</span></p>
-		<p>Pick-Up Time: <span>{{ order.orderInfo.time | date: "h:mm a" }}</span></p>
-		<p>Number of People: <span>{{ order.orderInfo.headCount }}</span></p>
-	</div>
+<a href="/">
+<div id="head">
+	<h1 class="brand">Ordering System</h1></a>	
 </div>
-<table ng-if="order.orderItems.length > 0">
-	<th>Item Name</th>
-	<th>Modifications</th>
-	<th>Quantity</th>
-	<th> </th>
-	<tr ng-repeat="item in order.orderItems">
-		<td>{{ item.name }}</td>
-		<td>{{ item.customization }}</td>
-		<td>{{ item.quantity }}</td>
-		<td><button ng-click="order.editOrderItems(item)">Edit</button></td>
-	</tr>
-</table>
-<form ng-submit="order.addOrderInfo()" ng-hide="order.hideform">
-	<label for="orderNumber">Order Number</label>
-	<input type="text" id="orderNumber" ng-model="order.orderInfo.orderNumber">
-	<label for="companyName">Company Name</label>
-	<input type="text" id="companyName" ng-model="order.orderInfo.companyName">
-	<label for="companyAddress">Company Address</label>
-	<input type="text" id="companyAddress" ng-model="order.orderInfo.companyAddress">
-	<label for="date">Pick Up Date</label> 
-	<input type="date" id="date" ng-model="order.orderInfo.date">
-	<label for="time">Pick Up Time</label>
-	<input type="time" id="time" ng-model="order.orderInfo.time">
-	<label for="headCount">Number of People</label>
-	<input type="number" id="headCount" ng-model="order.orderInfo.headCount">
-	<label for="vendor">
-		<select id="vendor" ng-model="order.orderInfo.vendor">
-			<option value="">Choose Vendor</option>
-			<option ng-repeat="vendor in order.vendors" value="{{vendor}}">{{vendor}}</option>
-		</select>
-	</label>
-	<button ng-submit="order.addOrderInfo()" ng-hide="order.hideform">Add Info</button>
-</form>
-<button ng-click="order.editOrderInfo()" ng-show="order.hideform">Edit Info</button>
-<button ng-repeat="category in order.menuItems" ng-click="order.viewOptions(category.type)" ng-show="order.showCategories">Add {{category.type}}</button>
-<div ng-show="order.showOptions">
-	<h3>Catgory: {{ order.category }}</h3>
-	<p ng-repeat="option in order.options" ng-click="order.viewIngredients(option.name)">{{ option.name }}</p>
-</div>
-<div ng-show="order.showIngredients">
-	<h3>Catgory: {{ order.category }}</h3>
-	<h5>{{ order.name }}</h5>
-	<form ng-submit="order.addItem()">
-		Ingredients: 
-		<label ng-repeat="ingredient in order.selectionIngredients">
-		  <input
-		    type="checkbox"
-		    name="selectionIngredients[]"
-		    value="{{ingredient}}"
-		    ng-checked="order.itemIngredients.indexOf(ingredient) > -1"
-		    ng-click="order.toggleIngredient(ingredient)"
-		  > {{ingredient}}
-		</label>
-		<label for="bread" ng-show="order.showBread">Bread: 
-			<select id="bread" ng-model="order.itemBread">
-				<option value="">Choose Bread</option>
-				<option ng-repeat="bread in order.breads" value="{{bread}}">{{bread}}</option>
-			</select>
-		</label>
-		<label for="modify">Add Comment:
-			<textarea ng-model="order.customization" id="modify" cols="30" rows="4" value=""></textarea>
-		</label>
-		<label for="quantity">Quantity:
-			<input type="number" id="quantity" ng-model="order.item.quantity">
-		</label>
-		<button ng-submit="order.addItem()">Add Item</button>
+<div id="customer-fields">
+	<h2 class="page-instructions">Place an Order</h2>
+	<div ng-show="order.hideform">
+		<div class="block-info">
+			<p class="order-info">Order Number  </br> <span class="order-field-result">{{ order.orderInfo.orderNumber }}</span></p>
+			<p class="order-info">Company Name </br> <span class="order-field-result">{{ order.orderInfo.companyName }}</span></p>
+			<p class="order-info">Company Address </br> <div class="order-field-result">{{ order.orderInfo.companyAddress }}</div></p>
+		</div>
+		<div class="block-info">
+			<p class="order-info">Vendor </br> <span class="order-field-result">{{ order.orderInfo.vendor }}</span></p>
+			<p class="order-info">Pick-Up Date </br> <span class="order-field-result">{{ order.orderInfo.date | date: "EEE, M/dd" }}</span></p>
+			<p class="order-info">Pick-Up Time </br> <span class="order-field-result">{{ order.orderInfo.time | date: "h:mm a" }}</span></p>
+			<p class="order-info">Number of People </br> <span class="order-field-result">{{ order.orderInfo.headCount }}</span></p>
+		</div>
+	</div>
+	<!-- <table ng-if="order.orderItems.length > 0">
+		<th>Item Name</th>
+		<th>Modifications</th>
+		<th>Quantity</th>
+		<th> </th>
+		<tr ng-repeat="item in order.orderItems">
+			<td>{{ item.name }}</td>
+			<td>{{ item.customization }}</td>
+			<td>{{ item.quantity }}</td>
+			<td><button ng-click="order.editOrderItems(item)">Edit</button></td>
+		</tr>
+	</table> -->
+
+	<form ng-submit="order.addOrderInfo()" ng-hide="order.hideform">
+		<div class="order-item">
+			<label for="orderNumber">Order Number</label>
+			<input type="text" id="orderNumber" class="fancy-fields" ng-model="order.orderInfo.orderNumber">
+		</div>
+		<div class="order-item">
+			<label for="companyName">Company Name</label>
+			<input type="text" id="companyName" class="fancy-fields" ng-model="order.orderInfo.companyName">
+		</div>
+		<div class="order-item">
+			<label for="companyAddress">Company Address</label>
+			<input type="text" id="companyAddress" class="fancy-fields" ng-model="order.orderInfo.companyAddress">
+		</div>
+		<div class="order-item">
+			<label for="date">Pick Up Date</label> 
+			<input type="date" id="date" class="fancy-fields-small" ng-model="order.orderInfo.date">
+		</div>
+		<div class="order-item">
+			<label for="time">Pick Up Time</label>
+			<input type="time" id="time" class="fancy-fields-xs" ng-model="order.orderInfo.time">
+		</div>
+		<div class="order-item">
+			<label for="headCount">Number of People</label>
+			<input type="number" id="headCount" class="fancy-fields-xs" ng-model="order.orderInfo.headCount">
+		</div>
+			<label for="vendor">
+				<select class="fancy-selector" id="vendor" ng-model="order.orderInfo.vendor">
+					<option value="">Choose Vendor</option>
+					<option ng-repeat="vendor in order.vendors" value="{{vendor}}">{{vendor}}</option>
+				</select>
+			</label>
+			<button class="main-btn" ng-submit="order.addOrderInfo()" ng-hide="order.hideform">Add Info</button>
 	</form>
-	<button ng-click="order.notAddItem()">Do not Add</button>
+
+	<button class="main-btn" ng-click="order.editOrderInfo()" ng-show="order.hideform">Edit Info</button>
 </div>
-<div ng-show="order.showSubmit">
-	<button ng-click="order.submitOrder()">Submit Order</button>
+<div id="items-ordered">
+	<h2 class="page-instructions">Add Items<h2>
+	<button ng-repeat="category in order.menuItems" ng-click="order.viewOptions(category.type)" ng-show="order.showCategories" class="main-btn">Add {{category.type}}</button>
+	<div ng-show="order.showOptions">
+		<h3 class= "order-category-title">Category: {{ order.category }}</h3>
+		<p class="item-to-add" ng-repeat="option in order.options" ng-click="order.viewIngredients(option.name)">+ {{ option.name }}</p>
+	</div>
+	<div ng-show="order.showIngredients">
+		<div class="order-component">
+			<h3>Category: {{ order.category }}</h3>
+			<h5 class="item-added-title">{{ order.name }}</h5>
+		</div>
+		<form class="order-ingredients" ng-submit="order.addItem()">
+			Ingredients: 
+			<label ng-repeat="ingredient in order.selectionIngredients">
+			  <input
+			    type="checkbox"
+			    name="selectionIngredients[]"
+			    value="{{ingredient}}"
+			    ng-checked="order.itemIngredients.indexOf(ingredient) > -1"
+			    ng-click="order.toggleIngredient(ingredient)"
+			  > {{ingredient}}
+			</label>
+			<div class="order-component">
+				<label for="bread" ng-show="order.showBread">Bread: 
+					<select class="fancy-selector" id="bread" ng-model="order.itemBread">
+						<option value="">Choose Bread</option>
+						<option ng-repeat="bread in order.breads" value="{{bread}}">{{bread}}</option>
+					</select>
+				</label>
+			</div>
+			<div class="order-component">
+				<label for="modify">Add Comment:
+					<textarea ng-model="order.customization" id="modify" cols="30" rows="4" value=""></textarea>
+				</label>
+			</div>
+			<div class="order-component">
+				<label for="quantity">Quantity:
+					<input class="fancy-fields-xs" type="number" id="quantity" ng-model="order.item.quantity">
+				</label>
+			</div>
+			<button class="main-btn-small" ng-submit="order.addItem()">Add Item</button>
+		</form>
+		<button class="main-btn-small" ng-click="order.notAddItem()">Delete</button>
+	</div>
+</div>
+<div id="order-display">
+		<h2 class="page-instructions">Order Summary<h2>
+		<table ng-if="order.orderItems.length > 0">
+		<th class="summary-column">Item Name</th>
+		<th class="summary-column">Modifications</th>
+		<th class="summary-column-quantity">Quantity</th>
+		<th> </th>
+		<tr ng-repeat="item in order.orderItems">
+			<td class="order-summary">{{ item.name }}</td>
+			<td class="order-summary">{{ item.customization }}</td>
+			<td class="summary-quantity">{{ item.quantity }}</td>
+			<td  class="order-summary"><button class="edit-btn" ng-click="order.editOrderItems(item)">Edit</button></td>
+		</tr>
+	</table>
+	<div ng-show="order.showSubmit">
+		<button id="submit-btn" class="main-btn" ng-click="order.submitOrder()">Submit Order</button>
+	</div>
 </div>

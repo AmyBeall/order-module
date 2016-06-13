@@ -148,6 +148,8 @@ angular.module('orderCtrl', [])
 		ctrl.item.name = ctrl.name;
 		ctrl.orderItems.push(ctrl.item);
 		ctrl.item = {};
+		ctrl.customization = '';
+		ctrl.showBread = false;
 		ctrl.showIngredients = false;
 		ctrl.showCategories = true;
 		if(Object.keys(ctrl.orderInfo).length > 0){
@@ -156,6 +158,7 @@ angular.module('orderCtrl', [])
 	}
 	ctrl.notAddItem = function(){
 		ctrl.showIngredients = false;
+		ctrl.showBread = false;
 		ctrl.showCategories = true;
 	}	
 	ctrl.editOrderItems = function(item){
