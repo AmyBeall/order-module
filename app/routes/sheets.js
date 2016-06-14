@@ -24,6 +24,7 @@ module.exports = function(app, express){
 			  // Google Sheets API.
 			  authorize(JSON.parse(content), addOrder);
 			});
+
 			function authorize(credentials, callback) {
 			  var clientSecret = credentials.installed.client_secret;
 			  var clientId = credentials.installed.client_id;
@@ -41,8 +42,8 @@ module.exports = function(app, express){
 			    }
 			  });
 			}
-			function addOrder(auth) {
 			
+			function addOrder(auth) {
 				var spreadsheetId = '1unrdH4prm-LChI74S7aRvW5Rh1YUTspyiQDwyjUBBFw';
 				var batchUpdateRequest = {requests: req.body};
 				var sheets = google.sheets('v4');

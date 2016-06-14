@@ -182,7 +182,7 @@ angular.module('orderCtrl', [])
 				}
 			}
 		}
-		if(ctrl.customization !== " "){
+		if(ctrl.customization != " "){
 			ingredients += ",";
 		}
 		if(modifyIngredients.length <= ctrl.itemIngredients.length){
@@ -212,7 +212,7 @@ angular.module('orderCtrl', [])
 		ctrl.item.name = ctrl.name;
 		ctrl.orderItems.push(ctrl.item);
 		ctrl.item = {};
-		ctrl.customization = '';
+		ctrl.customization = " ";
 		ctrl.showBread = false;
 		ctrl.showIngredients = false;
 		ctrl.showCategories = true;
