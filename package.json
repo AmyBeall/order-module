@@ -1,12 +1,16 @@
 {
-  "name": "Job Board",
-  "description": "Uses Indeed and gitHub jobs API's and puts them into one easy to read format",
+  "name": "ordermodule",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.10.1",
-    "express": "~4.10.0",
     "google-auth-library": "^0.9.8",
-    "googleapis": "^7.1.0",
-    "mongoose": "^3.8.21",
-    "morgan": "^1.6.0"
+    "googleapis": "^7.1.0"
   }
 }
