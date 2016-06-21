@@ -235,20 +235,25 @@ angular.module('orderCtrl', [])
 	ctrl.submitOrder = function(){
 		order.item = [];
 		order.vendor = ctrl.orderInfo.vendor;
-		order.customer = ctrl.orderInfo.companyName;
-		order.address = ctrl.orderInfo.companyAddress;
-		order.pickUpDate = ctrl.orderInfo.date;
-		order.pickUpTime = ctrl.orderInfo.time;
 		order.orderNum = ctrl.orderInfo.orderNumber;
+		order.company = ctrl.orderInfo.companyName;
+		order.contact = ctrl.orderInfo.contact;
+		order.address = ctrl.orderInfo.companyAddress;
+		order.city = ctrl.orderInfo.city;
+		order.phone = ctrl.orderInfo.phone;
+		order.orderDate = ctrl.orderInfo.date;
+		order.setUpTime = ctrl.orderInfo.time;
+		order.headCount = ctrl.orderInfo.headCount;
+		order.total = ctrl.orderInfo.total;
 		for(item in ctrl.orderItems){
 			order.item.push(ctrl.orderItems[item]);
 		}
 		order.entryDate = new Date();
 
-		orderFactory.sheetCreate(requests)
-			.success(function(data) {
-        		console.log(data);
-      		});	
+		// orderFactory.sheetCreate(requests)
+		// 	.success(function(data) {
+  //       		console.log(data);
+  //     		});	
 
 		orderFactory.create(order)
 			.success(function(data) {

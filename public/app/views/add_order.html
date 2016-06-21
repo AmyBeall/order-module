@@ -1,48 +1,32 @@
 <div id="head">
 	<a href="/"><h1 class="brand">Catering System</h1></a>
 </div>
-<!-- <div ng-show="order.hideform">
-	<div class="block-info">
-		<p>Order Number: <span>{{ order.orderInfo.orderNumber }}</span></p>
-		<p>Company Name: <span>{{ order.orderInfo.companyName }}</span></p>
-		<p>Company Address: <div>{{ order.orderInfo.companyAddress }}</div></p>
-	</div>
-	<div class="block-info">
-		<p>Vendor: <span>{{ order.orderInfo.vendor }}</span></p>
-		<p>Pick-Up Date: <span>{{ order.orderInfo.date | date: "EEE, M/dd" }}</span></p>
-		<p>Pick-Up Time: <span>{{ order.orderInfo.time | date: "h:mm a" }}</span></p>
-		<p>Number of People: <span>{{ order.orderInfo.headCount }}</span></p>
-	</div>
-</div> -->
 <div id="customer-fields">
 	<h2 class="page-instructions">Place an Order</h2>
 	<div ng-show="order.hideform">
 		<div class="block-info">
+			<p class="order-info">Vendor </br> <span class="order-field-result">{{ order.orderInfo.vendor }}</span></p>
 			<p class="order-info">Order Number  </br> <span class="order-field-result">{{ order.orderInfo.orderNumber }}</span></p>
 			<p class="order-info">Company Name </br> <span class="order-field-result">{{ order.orderInfo.companyName }}</span></p>
+			<p class="order-info">Contact </br> <div class="order-field-result">{{ order.orderInfo.contact }}</div></p>
 			<p class="order-info">Company Address </br> <div class="order-field-result">{{ order.orderInfo.companyAddress }}</div></p>
+			<p class="order-info">City </br> <div class="order-field-result">{{ order.orderInfo.city }}</div></p>
 		</div>
 		<div class="block-info">
-			<p class="order-info">Pick-Up Date </br> <span class="order-field-result">{{ order.orderInfo.date | date: "EEE, M/dd" }}</span></p>
-			<p class="order-info">Pick-Up Time </br> <span class="order-field-result">{{ order.orderInfo.time | date: "h:mm a" }}</span></p>
+			<p class="order-info">Phone Number</br> <div class="order-field-result">{{ order.orderInfo.phone }}</div></p>
+			<p class="order-info">Order Date </br> <span class="order-field-result">{{ order.orderInfo.date | date: "EEE, M/dd" }}</span></p>
+			<p class="order-info">Set-Up Time </br> <span class="order-field-result">{{ order.orderInfo.time | date: "h:mm a" }}</span></p>
 			<p class="order-info">Number of People </br> <span class="order-field-result">{{ order.orderInfo.headCount }}</span></p>
-			<p class="order-info">Vendor </br> <span class="order-field-result">{{ order.orderInfo.vendor }}</span></p>
+			<p class="order-info">Total Sale </br> <span class="order-field-result">{{ order.orderInfo.total }}</span></p>
 		</div>
 	</div>
-	<!-- <table ng-if="order.orderItems.length > 0">
-		<th>Item Name</th>
-		<th>Modifications</th>
-		<th>Quantity</th>
-		<th> </th>
-		<tr ng-repeat="item in order.orderItems">
-			<td>{{ item.name }}</td>
-			<td>{{ item.customization }}</td>
-			<td>{{ item.quantity }}</td>
-			<td><button ng-click="order.editOrderItems(item)">Edit</button></td>
-		</tr>
-	</table> -->
-
 	<form ng-submit="order.addOrderInfo()" ng-hide="order.hideform">
+		<label for="vendor">
+			<select class="fancy-selector" id="vendor" ng-model="order.orderInfo.vendor">
+				<option value="">Choose Vendor</option>
+				<option ng-repeat="vendor in order.vendors" value="{{vendor}}">{{vendor}}</option>
+			</select>
+		</label>
 		<div class="order-item">
 			<label for="orderNumber">Order Number</label>
 			<input type="text" id="orderNumber" class="fancy-fields" ng-model="order.orderInfo.orderNumber">
@@ -52,8 +36,20 @@
 			<input type="text" id="companyName" class="fancy-fields" ng-model="order.orderInfo.companyName">
 		</div>
 		<div class="order-item">
+			<label for="contact">Contact</label>
+			<input type="text" id="contact" class="fancy-fields" ng-model="order.orderInfo.contact">
+		</div>
+		<div class="order-item">
 			<label for="companyAddress">Company Address</label>
 			<input type="text" id="companyAddress" class="fancy-fields" ng-model="order.orderInfo.companyAddress">
+		</div>
+		<div class="order-item">
+			<label for="city">City</label>
+			<input type="text" id="city" class="fancy-fields" ng-model="order.orderInfo.city">
+		</div>
+		<div class="order-item">
+			<label for="phone">Phone</label>
+			<input type="tel" id="phone" class="fancy-fields" ng-model="order.orderInfo.phone">
 		</div>
 		<div class="order-item">
 			<label for="date">Pick Up Date</label> 
@@ -67,13 +63,11 @@
 			<label for="headCount">Number of People</label>
 			<input type="number" id="headCount" class="fancy-fields-xs" ng-model="order.orderInfo.headCount">
 		</div>
-			<label for="vendor">
-				<select class="fancy-selector" id="vendor" ng-model="order.orderInfo.vendor">
-					<option value="">Choose Vendor</option>
-					<option ng-repeat="vendor in order.vendors" value="{{vendor}}">{{vendor}}</option>
-				</select>
-			</label>
-			<button class="main-btn" ng-submit="order.addOrderInfo()" ng-hide="order.hideform">Add Info</button>
+		<div class="order-item">
+			<label for="total">Order Total</label>
+			<input type="text" id="total" class="fancy-fields" ng-model="order.orderInfo.total">
+		</div>
+		<button class="main-btn" ng-submit="order.addOrderInfo()" ng-hide="order.hideform">Add Info</button>
 	</form>
 
 	<button class="main-btn" ng-click="order.editOrderInfo()" ng-show="order.hideform">Edit Info</button>
