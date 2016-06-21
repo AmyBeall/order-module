@@ -1,16 +1,28 @@
 <a href="/"><h1>Catering System</h1></a>
 <h2>Your Orders</h2>
 <table>
-	<th>Order Number</th>
-	<th>Customer</th>
 	<th>Vendor</th>
-	<th>Pick Up Date</th>
-	<th>Pick Up Time</th>
+	<th>Order Number</th>
+	<th>Company</th>
+	<th>Contact</th>
+	<th>Address</th>
+	<th>City</th>
+	<th>Phone Number</th>
+	<th>Order Date</th>
+	<th>Set-Up Time</th>
+	<th>Headcount</th>
+	<th>Order Total</th>
 	<tr ng-repeat="order in order.orders">
-		<td>{{ order.orderNum }}</td>
-		<td>{{ order.customer }}</td>
 		<td>{{ order.vendor }}</td>
-		<td>{{ order.pickUpDate | date: "EEE, M/dd" }}</td>
-		<td>{{ order.pickUpTime | date: "h:mm a" }}</td>
+		<td>{{ order.orderNum }}</td>
+		<td>{{ order.company }}</td>
+		<td>{{ order.contact }}</td>
+		<td>{{ order.address }}</td>
+		<td>{{ order.city }}</td>
+		<td>{{ order.phone }}</td>
+		<td>{{ order.orderDate | date: "EEE, M/dd" }}</td>
+		<td>{{ order.setUpTime | date: "h:mm a"  }}</td>
+		<td>{{ order.headCount }}</td>
+		<td>${{ order.total }}</td>
 	</tr>
 </table>

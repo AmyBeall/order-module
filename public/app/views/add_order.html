@@ -11,6 +11,8 @@
 			<p class="order-info">Contact </br> <div class="order-field-result">{{ order.orderInfo.contact }}</div></p>
 			<p class="order-info">Company Address </br> <div class="order-field-result">{{ order.orderInfo.companyAddress }}</div></p>
 			<p class="order-info">City </br> <div class="order-field-result">{{ order.orderInfo.city }}</div></p>
+		</div>
+		<div class="block-info">
 			<p class="order-info">Phone Number</br> <div class="order-field-result">{{ order.orderInfo.phone }}</div></p>
 			<p class="order-info">Order Date </br> <span class="order-field-result">{{ order.orderInfo.date | date: "EEE, M/dd" }}</span></p>
 			<p class="order-info">Set-Up Time </br> <span class="order-field-result">{{ order.orderInfo.time | date: "h:mm a" }}</span></p>
@@ -63,7 +65,7 @@
 		</div>
 		<div class="order-item">
 			<label for="total">Order Total</label>
-			<input type="number" id="total" class="fancy-fields" ng-model="order.orderInfo.total">
+			<input type="text" id="total" class="fancy-fields" ng-model="order.orderInfo.total">
 		</div>
 		<button class="main-btn" ng-submit="order.addOrderInfo()" ng-hide="order.hideform">Add Info</button>
 	</form>

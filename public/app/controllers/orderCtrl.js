@@ -250,10 +250,10 @@ angular.module('orderCtrl', [])
 		}
 		order.entryDate = new Date();
 
-		orderFactory.sheetCreate(requests)
-			.success(function(data) {
-        		console.log(data);
-      		});	
+		// orderFactory.sheetCreate(requests)
+		// 	.success(function(data) {
+  //       		console.log(data);
+  //     		});	
 
 		orderFactory.create(order)
 			.success(function(data) {
