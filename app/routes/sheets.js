@@ -97,10 +97,10 @@ function storeToken(token) {
   //     throw err;
   //   }
   // }
-  heroku config:set GOOGLE_ACCESS_TOKEN = token["access_token"];
-  heroku config:set GOOGLE_TOKEN_TYPE = token["token_type"];
-  heroku config:set GOOGLE_REFRESH_TOKEN = token["refresh_token"];
-  heroku config:set EXPIRY_DATE = token["expiry_date"];
-  
-  console.log('Token stored to ' + TOKEN_PATH);
+ //  process.env.GOOGLE_ACCESS_TOKEN = token["access_token"];
+ //  process.env.GOOGLE_TOKEN_TYPE = token["token_type"];
+ // process.env.GOOGLE_REFRESH_TOKEN = token["refresh_token"];
+ // process.env.EXPIRY_DATE = token["expiry_date"];
+
+  console.log(token);
 }	
