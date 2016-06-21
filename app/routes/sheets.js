@@ -11,9 +11,8 @@ module.exports = function(app, express){
 		.post(function(req,res){
 			
 			var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-			var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-			    process.env.USERPROFILE) + '/.credentials/';
-			var TOKEN_PATH = TOKEN_DIR + 'sheets.googleapis.com-nodejs-quickstart.json';
+			var TOKEN_DIR = '/app/routes/';
+			var TOKEN_PATH = TOKEN_DIR + 'client_token.json';
 
 			fs.readFile(__dirname + '/client_secret.json', function processClientSecrets(err, content) {
 			  if (err) {
