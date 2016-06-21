@@ -17,17 +17,26 @@ app.use(function(req, res, next) {
   next();
 });
 
-mongoose.connect('mongodb://localhost/ikes_inventory');
-
-app.use(morgan('dev'));
+var uristring = process.env.MONGODB_URI;
+mongoose.connect(uristring, function (err, res) {
+      if (err) {
+      console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+      } else {
+      console.log ('Succeeded connected to: ' + uristring);
+      }
+    });
 
 app.use(express.static(__dirname + "/public"));
 
 var apiRoutes = require('./app/routes/api')(app,express);
 app.use('/api', apiRoutes);
+var sheetsRoutes = require('./app/routes/sheets')(app,express);
+app.use('/sheets', sheetsRoutes);
 
 app.get('*', function(req,res){
   res.sendFile(path.join(__dirname + '/public/app/index.html'));
 });
-
-app.listen(5000);
+var server = app.listen(process.env.PORT || 8080, function () {
+  var port = server.address().port;
+  console.log("App now running on port", port);
+});
