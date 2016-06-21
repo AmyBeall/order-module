@@ -23,6 +23,7 @@ module.exports = function(app, express){
 			});
 
 			function authorize(credentials, callback) {
+				console.log(credentials);
 			  var clientSecret = credentials.installed.client_secret;
 			  var clientId = credentials.installed.client_id;
 			  var redirectUrl = credentials.installed.redirect_uris[0];
