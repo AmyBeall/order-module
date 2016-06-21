@@ -3,6 +3,8 @@ var readline = require('readline');
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 
+var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
+
 module.exports = function(app, express){
 
 	var apiRouter = express.Router();
@@ -10,8 +12,6 @@ module.exports = function(app, express){
 		
 		.post(function(req,res){
 			
-			var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-
 			fs.readFile(__dirname + '/client_secret.json', function processClientSecrets(err, content) {
 			  if (err) {
 			    console.log('Error loading client secret file: ' + err);
@@ -59,4 +59,48 @@ module.exports = function(app, express){
 
 		});
 	return apiRouter;	
-}		
+}	
+function getNewToken(oauth2Client, callback) {
+  var authUrl = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: SCOPES
+  });
+  console.log('Authorize this app by visiting this url: ', authUrl);
+  var rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  rl.question('Enter the code from that page here: ', function(code) {
+    rl.close();
+    oauth2Client.getToken(code, function(err, token) {
+      if (err) {
+        console.log('Error while trying to retrieve access token', err);
+        return;
+      }
+      oauth2Client.credentials = token;
+      storeToken(token);
+      callback(oauth2Client);
+    });
+  });
+}
+
+/**
+ * Store token to disk be used in later program executions.
+ *
+ * @param {Object} token The token to store to disk.
+ */
+function storeToken(token) {
+  // try {
+  //   fs.mkdirSync(TOKEN_DIR);
+  // } catch (err) {
+  //   if (err.code != 'EEXIST') {
+  //     throw err;
+  //   }
+  // }
+  heroku config:set GOOGLE_ACCESS_TOKEN = token["access_token"];
+  heroku config:set GOOGLE_TOKEN_TYPE = token["token_type"];
+  heroku config:set GOOGLE_REFRESH_TOKEN = token["refresh_token"];
+  heroku config:set EXPIRY_DATE = token["expiry_date"];
+  
+  console.log('Token stored to ' + TOKEN_PATH);
+}	
