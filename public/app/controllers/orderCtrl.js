@@ -233,7 +233,6 @@ angular.module('orderCtrl', [])
 		ctrl.orderItems.splice(idx, 1);
 	}
 	ctrl.submitOrder = function(){
-		requests = requests;
 		order.item = [];
 		order.vendor = ctrl.orderInfo.vendor;
 		order.customer = ctrl.orderInfo.companyName;

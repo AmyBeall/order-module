@@ -11,8 +11,6 @@ module.exports = function(app, express){
 		.post(function(req,res){
 			
 			var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-			var TOKEN_DIR = '/app/routes/';
-			var TOKEN_PATH = TOKEN_DIR + 'client_token.json';
 
 			fs.readFile(__dirname + '/client_secret.json', function processClientSecrets(err, content) {
 			  if (err) {
@@ -32,7 +30,7 @@ module.exports = function(app, express){
 			  var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
 
 			  // Check if we have previously stored a token.
-			  fs.readFile(TOKEN_PATH, function(err, token) {
+			  fs.readFile(__dirname + '/client_token.json', function(err, token) {
 			    if (err) {
 			      getNewToken(oauth2Client, callback);
 			    } else {

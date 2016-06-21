@@ -18,7 +18,7 @@ angular.module('orderSvc', [])
 	};
 	order.sheetCreate = function(order){
 		return $http.post('/sheets/order/', order);
-	}
+	};
 	  // update a user
 	order.update = function(id, order) { 
 		return $http.put('/api/order/' + id, order);
