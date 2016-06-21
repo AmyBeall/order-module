@@ -2,7 +2,6 @@ var express = require("express"),
 	app = express(),
 	path = require("path"),
 	mongoose = require('mongoose'),
-	morgan  = require('morgan'),
 	bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({
@@ -18,8 +17,6 @@ app.use(function(req, res, next) {
 });
 
 mongoose.connect('mongodb://localhost/Catering_System_inventory');
-
-app.use(morgan('dev'));
 
 app.use(express.static(__dirname + "/public"));
 
