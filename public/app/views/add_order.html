@@ -133,6 +133,6 @@
 		</tr>
 	</table>
 	<div ng-show="order.showSubmit">
-		<button id="submit-btn" class="main-btn" ng-click="order.submitOrder()">Submit Order</button>
+		<button id="submit-btn" class="main-btn" ng-hide="order.submitted" ng-click="order.submitOrder()">Submit Order</button>
 	</div>
 </div>

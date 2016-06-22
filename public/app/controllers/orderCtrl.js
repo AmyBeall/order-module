@@ -23,6 +23,7 @@ angular.module('orderCtrl', [])
 	ctrl.showIngredients = false;
 	ctrl.showSubmit = false;
 	ctrl.hideform = false;
+	ctrl.submitted = false;
 
 	ctrl.init = function(){
 		configFactory.all().success(function(data){
@@ -233,6 +234,7 @@ angular.module('orderCtrl', [])
 		ctrl.orderItems.splice(idx, 1);
 	}
 	ctrl.submitOrder = function(){
+		ctrl.submitted = true;
 		order.item = [];
 		order.vendor = ctrl.orderInfo.vendor;
 		order.orderNum = ctrl.orderInfo.orderNumber;

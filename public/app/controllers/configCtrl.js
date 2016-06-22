@@ -16,7 +16,7 @@ angular.module('configCtrl', [])
 	ctrl.list = [];
 	ctrl.breadList = [];
 	ctrl.itemIngredients = [];
-	
+	ctrl.submitted = false;
 
 	configFactory.all().success(function(data){
 		saved = data;
@@ -84,6 +84,7 @@ angular.module('configCtrl', [])
 	};
 
 	ctrl.submitIngredients = function(){
+		ctrl.submitted = true;
 		if(ctrl.ingredients.length < 1 ){
 			newList.type = "ingredients";
 			newList.list = ctrl.list
@@ -113,6 +114,7 @@ angular.module('configCtrl', [])
 		}
 	}
 	ctrl.submitBreads = function(){
+		ctrl.submitted = true;
 		if(ctrl.breads.length < 1 ){
 			newList.type = "breads";
 			newList.list = ctrl.breadList
@@ -145,6 +147,7 @@ angular.module('configCtrl', [])
 
 	ctrl.submitCategories = function(){
 
+		ctrl.submitted = true;
 		if(ctrl.categories.length < 1 ){
 			newList.type = "categories";
 			newList.list = ctrl.list;
@@ -274,6 +277,7 @@ angular.module('configCtrl', [])
 		ctrl.hideForm = false;
 	};		
 	ctrl.addMenuItems = function(){
+		ctrl.submitted = true;
 		exists ="";
 		savedMenuItems = [];
 		itemFactory.all().success(function(data){

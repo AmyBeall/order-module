@@ -19,7 +19,7 @@
 	</form>
 	<button class="add" ng-click="config.newForm()">Add New</button>
 </div>
-<button ng-click="config.submitIngredients()">Update Ingredient List</button>
+<button ng-hide="config.submitted" ng-click="config.submitIngredients()">Update Ingredient List</button>
 <div class="configEdit">
 	<h2>Bread</h2>
 	<ul>
@@ -39,4 +39,4 @@
 	</form>
 	<button class="add" ng-click="config.newForm()">Add New</button>
 </div>
-<button ng-click="config.submitBreads()">Update Bread List</button>
+<button  ng-click="config.submitBreads()">Update Bread List</button>
