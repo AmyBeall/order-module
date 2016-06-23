@@ -72,8 +72,8 @@ a {
     padding: 100px 0 0 0;
 }
 .main-btn {
-	background: #A10978;
-	border: 2px solid #A10978;
+	background: #b539ae;
+	border: 2px solid #b539ae;
 	border-radius: 8px;
 	width: 130px;
 	height: 29px;
@@ -85,8 +85,8 @@ a {
 	color: white;
 }
 .main-btn-small	{
-	background: #A10978;
-	border: 2px solid #A10978;
+	background: #b539ae;
+	border: 2px solid #b539ae;
 	border-radius: 5px;
 	width: 90px;
 	height: 20px;
@@ -102,7 +102,7 @@ a {
 #head {
 	margin-bottom: 15px;
 	padding-bottom: 20px;
-	background-color: #A10978; 
+	background-color: #b539ae; 
 }
 h1.brand  {
 	color: white;
@@ -291,4 +291,11 @@ textarea:focus	{
 #submit-btn	{
 	margin: 300px 200px 0 0;
 	float: right;
+}
+/*-----------------------------View Order Page-------------------------------------------------*/
+.view-order  {
+	padding: 35px 0 0 0
+}
+.order-viewer-line	{
+	padding: 0 50px 15px 0;
 }
