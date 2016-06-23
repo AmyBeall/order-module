@@ -119,16 +119,19 @@ module.exports = function(app, express){
 			
 			.post(function(req,res){
 				var order = new Order();
-
 				order.item = req.body.item;	
 				order.vendor = req.body.vendor;
-				order.customer = req.body.customer;
-				order.address = req.body.address;
-				order.pickUpDate = req.body.pickUpDate;
-				order.pickUpTime = req.body.pickUpTime;
 				order.orderNum = req.body.orderNum;
+				order.company = req.body.company;
+				order.contact = req.body.contact;
+				order.address = req.body.address;
+				order.city = req.body.city;
+				order.phone = req.body.phone;
+				order.orderDate = req.body.orderDate;
+				order.setUpTime = req.body.setUpTime;
+				order.headCount = req.body.headCount;
+				order.total = req.body.total;
 				order.entryDate = req.body.entryDate;
-
 				order.save(function(err){
 					if(err){
 						if(err.code == 11000)

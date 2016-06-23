@@ -60,6 +60,10 @@ h3 {
 a {
 	text-decoration: none;
 }
+td, th{
+	text-align: center;
+	padding: 10px
+}
 /*-------------------------------------------Welcome Page Elements-------------------------------------------------------*/
 #main-message {
 	width: 60%;

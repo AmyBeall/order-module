@@ -1,6 +1,7 @@
 angular.module('orderSvc', []) 
 
 .factory('orderFactory', function($http) {
+	
   	// create a new object
 	var order = {};
   	// get a single user
@@ -12,12 +13,15 @@ angular.module('orderSvc', [])
 		return $http.get('/api/order/');
 	};
 	  // create a user
-	order.create = function(list) {
-		return $http.post('/api/order/', list);
+	order.create = function(order) {
+		return $http.post('/api/order/', order);
+	};
+	order.sheetCreate = function(order){
+		return $http.post('/sheets/order/', order);
 	};
 	  // update a user
-	order.update = function(id, list) { 
-		return $http.put('/api/order/' + id, list);
+	order.update = function(id, order) { 
+		return $http.put('/api/order/' + id, order);
 	};
 	return order; 
 });
