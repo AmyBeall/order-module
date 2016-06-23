@@ -1,28 +1,21 @@
-<a href="/"><h1>Catering System</h1></a>
-<h2>Your Orders</h2>
-<table>
-	<th>Vendor</th>
-	<th>Order Number</th>
-	<th>Company</th>
-	<th>Contact</th>
-	<th>Address</th>
-	<th>City</th>
-	<th>Phone Number</th>
-	<th>Order Date</th>
-	<th>Set-Up Time</th>
-	<th>Headcount</th>
-	<th>Order Total</th>
-	<tr ng-repeat="order in order.orders">
-		<td>{{ order.vendor }}</td>
-		<td>{{ order.orderNum }}</td>
-		<td>{{ order.company }}</td>
-		<td>{{ order.contact }}</td>
-		<td>{{ order.address }}</td>
-		<td>{{ order.city }}</td>
-		<td>{{ order.phone }}</td>
-		<td>{{ order.orderDate | date: "EEE, M/dd" }}</td>
-		<td>{{ order.setUpTime | date: "h:mm a"  }}</td>
-		<td>{{ order.headCount }}</td>
-		<td>${{ order.total }}</td>
-	</tr>
-</table>
+<a href="/">
+	<div id="head">
+		<h1 class="brand">Ordering System</h1>	
+	</div>
+</a>
+<div class="view-order">
+	<table>
+		<th class="order-viewer-line">Order Number</th>
+		<th class="order-viewer-line">Customer</th>
+		<th class="order-viewer-line">Vendor</th>
+		<th class="order-viewer-line">Pick Up Date</th>
+		<th class="order-viewer-line">Pick Up Time</th>
+		<tr ng-repeat="order in order.orders">
+			<td>{{ order.orderNum }}</td>
+			<td>{{ order.customer }}</td>
+			<td>{{ order.vendor }}</td>
+			<td>{{ order.pickUpDate | date: "EEE, M/dd" }}</td>
+			<td>{{ order.pickUpTime | date: "h:mm a" }}</td>
+		</tr>
+	</table>
+</div>
