@@ -1,5 +1,6 @@
 angular.module('configCtrl', [])
-.controller('configController', function(configFactory, itemFactory, $scope, $sce, $filter){
+.controller('configController', function(
+	configFactory, itemFactory, $scope, $sce, $filter){
 
 	var ctrl = this,
 		saved = [],
@@ -311,9 +312,9 @@ angular.module('configCtrl', [])
 			}
 		})
 	};
-	// ctrl.removeItem = function(member){
-	// 	console.log(member);
-	// }		
+	ctrl.removeMenuItem = function(member){
+		console.log(member);
+	}		
 })
 .directive('collection', function ($compile) {
 	
@@ -321,9 +322,9 @@ angular.module('configCtrl', [])
 		restrict: "E",
 		replace: true,
 		scope: {
-			collection: '=', remove: '&'
+			collection: '='
 		},
-		template: "<ul><member ng-repeat='member in collection' member='member' remove='config.removeItem(collection)'></member></ul>"
+		template: "<ul><member ng-repeat='member in collection' member='member'></member></ul>"
 	}
 })
 .directive('member', function ($compile) {
@@ -331,10 +332,13 @@ angular.module('configCtrl', [])
 		restrict: "E",
 		replace: true,
 		scope: {
-			member: '=', remove: '&'
+			member: '='
 		},
-		template: '<li>{{member.name}} </li>',
+		template: "<li>{{member.name}}<button ng-click='remove(member.name)'>Re</button></li>",
 		link: function (scope, element, attrs) {
+				scope.remove = function(member){
+					config.removeMenuItem(member);
+				}
 				if (angular.isArray(scope.member.ingredients)) {
 					element.append("<ingredients ingredients='member.ingredients'></ingredients>"); 
 					$compile(element.contents())(scope)
