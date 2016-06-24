@@ -5,17 +5,31 @@
 </a>
 <div class="view-order">
 	<table>
+		<th class="order-viewer-line">Vendor</th>
 		<th class="order-viewer-line">Order Number</th>
 		<th class="order-viewer-line">Customer</th>
-		<th class="order-viewer-line">Vendor</th>
-		<th class="order-viewer-line">Pick Up Date</th>
-		<th class="order-viewer-line">Pick Up Time</th>
+		<th class="order-viewer-line">Company</th>
+		<th class="order-viewer-line">Contact</th>
+		<th class="order-viewer-line">Address</th>
+		<th class="order-viewer-line">City</th>
+		<th class="order-viewer-line">Phone Number</th>
+		<th class="order-viewer-line">Order Date</th>
+		<th class="order-viewer-line">Set-Up Time</th>
+		<th class="order-viewer-line">Headcount</th>
+		<th class="order-viewer-line">Order Total</th>
 		<tr ng-repeat="order in order.orders">
+			<td>{{ order.vendor }}</td>
 			<td>{{ order.orderNum }}</td>
 			<td>{{ order.customer }}</td>
-			<td>{{ order.vendor }}</td>
-			<td>{{ order.pickUpDate | date: "EEE, M/dd" }}</td>
-			<td>{{ order.pickUpTime | date: "h:mm a" }}</td>
+	 		<td>{{ order.company }}</td>
+	 		<td>{{ order.contact }}</td>
+	 		<td>{{ order.address }}</td>
+	 		<td>{{ order.city }}</td>
+	 		<td>{{ order.phone }}</td>
+	 		<td>{{ order.orderDate | date: "EEE, M/dd" }}</td>
+	 		<td>{{ order.setUpTime | date: "h:mm a"  }}</td>
+	 		<td>{{ order.headCount }}</td>
+	 		<td>${{ order.total }}</td>
 		</tr>
 	</table>
 </div>
