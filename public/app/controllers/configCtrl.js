@@ -278,11 +278,15 @@ angular.module('configCtrl', [])
 		ctrl.hideForm = false;
 	};		
 	ctrl.addMenuItems = function(){
+
 		ctrl.submitted = true;
 		exists ="";
 		savedMenuItems = [];
+		
 		itemFactory.all().success(function(data){
+
 			savedMenuItems = data;
+			
 			function addNewItems(list){
 				itemFactory.create(list).success(function(data){
 					console.log(data);
@@ -312,51 +316,7 @@ angular.module('configCtrl', [])
 			}
 		})
 	};
-	$scope.removeMenuItem = function(member){
+	ctrl.removeMenuItem = function(member){
 		console.log(member);
 	}		
 })
-.directive('collection', function ($compile) {
-	
-	return {
-		restrict: "E",
-		replace: true,
-		scope: {
-			collection: '=',
-			callbackFn: '&'
-		},
-		template: "<div><ul><member ng-repeat='member in collection' member='member'></member></ul><button callback-fn='removeMenuItem(member)'>Remove</button></div>",
-		link: function (scope, element, attrs){
-			scope.callbackFn(scope.member);
-			$compile(element.contents())(scope)
-		}
-	}
-})
-.directive('member', function ($compile) {
-	return {
-		restrict: "E",
-		replace: true,
-		scope: {
-			member: '='
-		},
-		controller: 'configController',
-		controllerAs: 'config',
-		template: "<li>{{member.name}}</li>",
-		link: function (scope, element, attrs) {
-				if (angular.isArray(scope.member.ingredients)) {
-					element.append("<ingredients ingredients='member.ingredients'></ingredients>"); 
-					$compile(element.contents())(scope)
-				}
-		}
-	}
-})
-.directive('ingredients', function () {
-	return {
-		restrict: "E",
-		replace: true,
-		scope: {
-			ingredients: '='
-		},
-		template: "<ul><li ng-repeat='item in ingredients'>{{item}}</li></ul>"
-	}
-});

@@ -2,9 +2,15 @@
 <a href="/configuration"><h3>Configuration</h3></a>
 <div class="configEdit">
 	<h2>Menu Items</h2>
-	<div ng-repeat="item in config.menuItems">
-		<h3>{{item.type}}</h3>
-		<collection collection='item.typeList'></collection>
+	<div ng-repeat="(key, list) in config.menuItems">
+		<h3>Type: {{ list.type }}</h3>
+		<div ng-repeat="(key, item) in list.typeList">
+			<h4>{{ item.name }}</h4>
+			<p ng-repeat="(key, ingredient) in item.ingredients">
+				{{ ingredient }}
+			</p>
+			<button ng-click="config.removeMenuItem(item._id)">Remove Sandwich</button>
+		</div>
 	</div>
 	<form id="add_ingredient" ng-show="config.hideForm" ng-submit="config.addMenuItem()">
 		<ul>
