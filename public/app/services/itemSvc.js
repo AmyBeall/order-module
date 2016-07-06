@@ -19,5 +19,8 @@ angular.module('itemSvc', [])
 	itemList.update = function(id, list) { 
 		return $http.put('/api/menuItem/' + id, list);
 	};
+	itemList.delete = function(id, item_id) { 
+		return $http.patch('/api/menuItem/' + id, item_id);
+	};
 	return itemList; 
 });

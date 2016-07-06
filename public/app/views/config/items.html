@@ -2,14 +2,14 @@
 <a href="/configuration"><h3>Configuration</h3></a>
 <div class="configEdit">
 	<h2>Menu Items</h2>
-	<div ng-repeat="(key, list) in config.menuItems">
+	<div ng-repeat="(key, list) in config.menuItems track by $index">
 		<h3>Type: {{ list.type }}</h3>
 		<div ng-repeat="(key, item) in list.typeList">
 			<h4>{{ item.name }}</h4>
 			<p ng-repeat="(key, ingredient) in item.ingredients">
 				{{ ingredient }}
 			</p>
-			<button ng-click="config.removeMenuItem(item._id)">Remove Sandwich</button>
+			<button ng-click="config.removeMenuItem(item._id, list._id, $index, list.type)">Remove Menu Item</button>
 		</div>
 	</div>
 	<form id="add_ingredient" ng-show="config.hideForm" ng-submit="config.addMenuItem()">
@@ -45,4 +45,4 @@
 
 	<button class="add" ng-hide="config.hideForm" ng-click="config.newForm()">Add New Item</button>
 </div>
-<button ng-hide="config.submitted" ng-click="config.addMenuItems()">Update List</button>
+<button ng-click="config.addMenuItems()">Update List</button>

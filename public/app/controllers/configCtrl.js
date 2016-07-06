@@ -17,7 +17,6 @@ angular.module('configCtrl', [])
 	ctrl.list = [];
 	ctrl.breadList = [];
 	ctrl.itemIngredients = [];
-	ctrl.submitted = false;
 
 	configFactory.all().success(function(data){
 		saved = data;
@@ -85,7 +84,7 @@ angular.module('configCtrl', [])
 	};
 
 	ctrl.submitIngredients = function(){
-		ctrl.submitted = true;
+
 		if(ctrl.ingredients.length < 1 ){
 			newList.type = "ingredients";
 			newList.list = ctrl.list
@@ -115,7 +114,7 @@ angular.module('configCtrl', [])
 		}
 	}
 	ctrl.submitBreads = function(){
-		ctrl.submitted = true;
+
 		if(ctrl.breads.length < 1 ){
 			newList.type = "breads";
 			newList.list = ctrl.breadList
@@ -148,7 +147,6 @@ angular.module('configCtrl', [])
 
 	ctrl.submitCategories = function(){
 
-		ctrl.submitted = true;
 		if(ctrl.categories.length < 1 ){
 			newList.type = "categories";
 			newList.list = ctrl.list;
@@ -279,7 +277,6 @@ angular.module('configCtrl', [])
 	};		
 	ctrl.addMenuItems = function(){
 
-		ctrl.submitted = true;
 		exists ="";
 		savedMenuItems = [];
 		
@@ -316,7 +313,18 @@ angular.module('configCtrl', [])
 			}
 		})
 	};
-	ctrl.removeMenuItem = function(member){
-		console.log(member);
+	ctrl.removeMenuItem = function(member, list, index, type){
+		itemId = {};
+		itemId.item = member;
+		for(menu in ctrl.menuItems){
+			if(ctrl.menuItems[menu].type === type){
+				ctrl.menuItems[menu].typeList.splice(index, 1);
+				itemFactory.delete(list, itemId)
+					.success(function(data) {
+		        		console.log(data.message);
+		      		});
+			}
+		}
+		
 	}		
 })

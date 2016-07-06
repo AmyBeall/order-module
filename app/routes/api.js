@@ -115,74 +115,94 @@ module.exports = function(app, express){
 				})
 			});
 		})
-		apiRouter.route('/order')
-			
-			.post(function(req,res){
-				var order = new Order();
-				order.item = req.body.item;	
-  				order.vendor = req.body.vendor;
-				order.orderNum = req.body.orderNum;
- 				order.company = req.body.company;
- 				order.contact = req.body.contact;
- 				order.address = req.body.address;
- 				order.city = req.body.city;
- 				order.phone = req.body.phone;
- 				order.orderDate = req.body.orderDate;
- 				order.setUpTime = req.body.setUpTime;
- 				order.headCount = req.body.headCount;
- 				order.total = req.body.total;
-  				order.entryDate = req.body.entryDate;
-				order.save(function(err){
-					if(err){
-						if(err.code == 11000)
-							return res.json({ success: false, message: 'This configuration has already been saved!'});
-						else
-							return res.send(err);
-					}
-					res.json({ message: 'Successful configuration' });
-				})
-			})
+		.patch(function(req,res){
+			MenuItem.findOneAndUpdate({"_id" : req.params.item_id}, {$pull:{typeList:{"_id" : req.body.item}}}, function(err, data){
+		        if(err) {
+		          return res.status(500).json({'error' : 'error in deleting address'});
+		        }
 
-			.get(function(req,res){
+		        res.json({ message: 'item deleted!' });
 
-
-				Order.find(function(err, item){
-					if(err) res.send(err);
-					res.json(item);
-				});
-			});
-
-		apiRouter.route('/order/:item_id')
-
-			.get(function(req,res){
-				Order.findById(req.params.item_id, function(err, item){
-					if (err) res.send(err);
-					res.json(item);
-				});
-			})
-
-			.put(function(req,res){
+		      });
+		});
+	apiRouter.route('/order')
 		
-				Order.findById(req.params.item_id, function(err, item){
-					if (err) res.send(err);
-				
-					for(list in req.body){
-						item.typeList.push(req.body[list]);
-					}
-					console.log(item);
-					item.save(function(err){
-						if(err) res.send(err);
-
-						//return a message
-						res.json({ message: 'job updated!' });
-					})
-				});
+		.post(function(req,res){
+			var order = new Order();
+			order.item = req.body.item;	
+				order.vendor = req.body.vendor;
+			order.orderNum = req.body.orderNum;
+				order.company = req.body.company;
+				order.contact = req.body.contact;
+				order.address = req.body.address;
+				order.city = req.body.city;
+				order.phone = req.body.phone;
+				order.orderDate = req.body.orderDate;
+				order.setUpTime = req.body.setUpTime;
+				order.headCount = req.body.headCount;
+				order.total = req.body.total;
+				order.entryDate = req.body.entryDate;
+			order.save(function(err){
+				if(err){
+					if(err.code == 11000)
+						return res.json({ success: false, message: 'This configuration has already been saved!'});
+					else
+						return res.send(err);
+				}
+				res.json({ message: 'Successful configuration' });
 			})
+		})
+
+		.get(function(req,res){
+
+
+			Order.find(function(err, item){
+				if(err) res.send(err);
+				res.json(item);
+			});
+		});
+
+	apiRouter.route('/order/:item_id')
+
+		.get(function(req,res){
+			Order.findById(req.params.item_id, function(err, item){
+				if (err) res.send(err);
+				res.json(item);
+			});
+		})
+
+		.put(function(req,res){
+	
+			Order.findById(req.params.item_id, function(err, item){
+				if (err) res.send(err);
+			
+				for(list in req.body){
+					item.typeList.push(req.body[list]);
+				}
+				console.log(item);
+				item.save(function(err){
+					if(err) res.send(err);
+
+					//return a message
+					res.json({ message: 'job updated!' });
+				})
+			});
+		})
 
 	// 	//DELETE the job with this id
 	// 	//(access at DELETE http://localhost:8080/api/jobs/:job_id)
 	// 	.delete(function(req,res){
-	// 		job.remove({
+		// db.items.update({"_id" : ObjectId("577971e12cb4be263241790d")}, {$pull:{typeList:{"_id" : ObjectId("577978892cb4be2632417911")}}})
+	// 		
+		// Customer.findOneAndUpdate({"_id" : ObjectId("577971e12cb4be263241790d")}, {$pull:{typeList:{"_id" : ObjectId("577978892cb4be2632417911")}}}, function(err, data){
+	 //        if(err) {
+	 //          return res.status(500).json({'error' : 'error in deleting address'});
+	 //        }
+
+	 //        res.json(data);
+
+	 //      });
+	// job.remove({
 	// 			_id: req.params.job_id
 	// 		}, function(err, job){
 	// 			if(err) return res.send(err);
