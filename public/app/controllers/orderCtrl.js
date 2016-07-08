@@ -2,7 +2,7 @@ angular.module('orderCtrl', [])
 .controller('orderController', function(configFactory, itemFactory, orderFactory, $scope, $sce, $filter, $location){
 
 	var ctrl = this,
-		order = {},
+		newOrder = {},
 		idx;
 		
 
@@ -17,6 +17,8 @@ angular.module('orderCtrl', [])
 	ctrl.orderItems = [];
 	ctrl.orders = [];
 	ctrl.customization = " ";
+	ctrl.displayOrder = {};
+	ctrl.displayOneOrder = false;
 
 	ctrl.showCategories = true;
 	ctrl.showOptions = false;
@@ -59,6 +61,12 @@ angular.module('orderCtrl', [])
 		})
 		orderFactory.all().success(function(data){
 			ctrl.orders = data;
+			for(order in ctrl.orders){
+				items = ctrl.orders[order].item;
+				// for(item in items){
+				// 	console.log(items[item]);
+				// }
+			}
 	    })
 		itemFactory.all().success(function(data){
 			ctrl.menuItems = data;
@@ -209,7 +217,7 @@ angular.module('orderCtrl', [])
 		ctrl.item.ingredients = [];
 		angular.copy(ctrl.itemIngredients, ctrl.item.ingredients);
 		ctrl.item.ingredients.push(ctrl.itemBread);
-		ctrl.item.type = ctrl.category;
+		ctrl.item.category = ctrl.category;
 		ctrl.item.name = ctrl.name;
 		ctrl.orderItems.push(ctrl.item);
 		ctrl.item = {};
@@ -235,33 +243,44 @@ angular.module('orderCtrl', [])
 	}
 	ctrl.submitOrder = function(){
 		ctrl.submitted = true;
-		order.item = [];
-		order.vendor = ctrl.orderInfo.vendor;
-		order.orderNum = ctrl.orderInfo.orderNumber;
-		order.company = ctrl.orderInfo.companyName;
-		order.contact = ctrl.orderInfo.contact;
-		order.address = ctrl.orderInfo.companyAddress;
-		order.city = ctrl.orderInfo.city;
-		order.phone = ctrl.orderInfo.phone;
-		order.orderDate = ctrl.orderInfo.date;
-		order.setUpTime = ctrl.orderInfo.time;
-		order.headCount = ctrl.orderInfo.headCount;
-		order.total = ctrl.orderInfo.total;
-		for(item in ctrl.orderItems){
-			order.item.push(ctrl.orderItems[item]);
+		item = [];
+		newOrder.vendor = ctrl.orderInfo.vendor;
+		newOrder.orderNum = ctrl.orderInfo.orderNumber;
+		newOrder.company = ctrl.orderInfo.companyName;
+		newOrder.contact = ctrl.orderInfo.contact;
+		newOrder.address = ctrl.orderInfo.companyAddress;
+		newOrder.city = ctrl.orderInfo.city;
+		newOrder.phone = ctrl.orderInfo.phone;
+		newOrder.orderDate = ctrl.orderInfo.date;
+		newOrder.setUpTime = ctrl.orderInfo.time;
+		newOrder.headCount = ctrl.orderInfo.headCount;
+		newOrder.total = ctrl.orderInfo.total;
+		for(eaitem in ctrl.orderItems){
+			item.push(ctrl.orderItems[eaitem]);
 		}
-		order.entryDate = new Date();
+		newOrder.item = item;
+		newOrder.entryDate = new Date();
 
 		// orderFactory.sheetCreate(requests)
 		// 	.success(function(data) {
   //       		console.log(data);
   //     		});	
-
-		orderFactory.create(order)
+		orderFactory.create(newOrder)
 			.success(function(data) {
         		console.log(data.message);
         		$location.path( "/order" );
       		});
+	}
+	ctrl.viewOrder = function(id){
+		for(order in ctrl.orders){
+			if(ctrl.orders[order]._id === id){
+				ctrl.displayOrder = ctrl.orders[order];
+			}
+		}
+		ctrl.displayOneOrder = true;
+	}
+	ctrl.displayAllOrders = function(){
+		ctrl.displayOneOrder = false;
 	}
 
 });

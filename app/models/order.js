@@ -20,7 +20,7 @@ var OrderSchema = new Schema({
  	headCount: Number,
  	total: String,
 	item: [{
-		type: String,
+		category: String,
 		name: String,
 		ingredients: [String],
 		customization: String,
