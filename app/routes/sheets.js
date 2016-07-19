@@ -31,9 +31,9 @@ module.exports = function(app, express){
 	return apiRouter;	
 }
 function authorize(callback, request) {
-	var key = require('./client_secret.json');
-
-	var jwtClient = new google.auth.JWT(process.env.GOOGLE_EMAIL, null, process.env.PRIVATE_KEY, ['https://www.googleapis.com/auth/spreadsheets'], null);
+	var key = JSON.parse(process.env.PRIVATE_KEY);
+	
+	var jwtClient = new google.auth.JWT(process.env.GOOGLE_EMAIL, null, key, ['https://www.googleapis.com/auth/spreadsheets'], null);
 
 	jwtClient.authorize(function(err, tokens) {
 	  if (err) {
@@ -46,4 +46,5 @@ function authorize(callback, request) {
 	});	
 
 }
+	// var key = require('./client_secret.json');
 	// var jwtClient = new google.auth.JWT(key.client_email, null, key.private_key, ['https://www.googleapis.com/auth/spreadsheets'], null);
