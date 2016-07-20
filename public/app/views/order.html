@@ -3,70 +3,78 @@
 		<h1 class="brand">Ordering System</h1>	
 	</div>
 </a>
-<div class="view-order" ng-if="!order.displayOneOrder">
-	<table>
-		<th class="order-viewer-line">Vendor</th>
-		<th class="order-viewer-line">Order Number</th>
-		<th class="order-viewer-line">Order Date</th>
-		<th class="order-viewer-line">Set-Up Time</th>
-		<th class="order-viewer-line">Headcount</th>
-		<th class="order-viewer-line">Order Total</th>
-		<tr ng-repeat="eaOrder in order.orders">
-			<td>{{ eaOrder.vendor }}</td>
-			<td>
-				<a href="#" ng-click="order.viewOrder(eaOrder._id)">
-					{{ eaOrder.orderNum }}
-				</a>
-			</td>
-	 		<td>{{ eaOrder.orderDate | date: "EEE, M/dd" }}</td>
-	 		<td>{{ eaOrder.setUpTime | date: "h:mm a"  }}</td>
-	 		<td>{{ eaOrder.headCount }}</td>
-	 		<td>${{ eaOrder.total }}</td>
-		</tr>
-	</table>
+<div id="orders-snippet-view">
+	<div class="view-order" ng-if="!order.displayOneOrder">
+		<table>
+			<th class="order-viewer-line">Order Date</th>
+			<th class="order-viewer-line">Vendor</th>
+			<th class="order-viewer-line">Company</th>
+			<!-- <th class="order-viewer-line">Order Number</th> -->
+			<th class="order-viewer-line">Headcount</th>
+			<th class="order-viewer-line">Set-Up Time</th>
+			<th class="order-viewer-line">Order Total</th>
+			<tr ng-repeat="eaOrder in order.orders">
+				<td class="order-output-raw">{{ eaOrder.orderDate | date: "EEE, M/dd" }}</td>
+				<td class="order-output-raw">{{ eaOrder.vendor }}</td>
+				<td class="order-output-raw">{{ order.displayOrder.company }}</td>
+				<td class="order-output-raw">{{ eaOrder.headCount }}</td>
+		 		<td class="order-output-raw">{{ eaOrder.setUpTime | date: "h:mm a"  }}</td>
+		 		<td class="order-output-raw">${{ eaOrder.total }}</td>
+		 		<td class="order-output-raw">
+					<button class="expand" ng-click="order.viewOrder(eaOrder._id)">  +  </button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="display-order" ng-if="order.displayOneOrder">
+		<table>
+			<th class="order-viewer-line">Order Date</th>
+			<th class="order-viewer-line">Vendor</th>
+			<th class="order-viewer-line">Company</th>
+			<th class="order-viewer-line">City</th>
+			<!-- <th class="order-viewer-line">Order Number</th> -->
+			<th class="order-viewer-line">Headcount</th>
+			<th class="order-viewer-line">Set-Up Time</th>
+			<th class="order-viewer-line">Order Total</th>
+			<tr>
+				<td class="order-output-raw">{{ order.displayOrder.orderDate | date: "EEE, M/dd" }}</td>
+				<td class="order-output-raw">{{ order.displayOrder.vendor }}</td>
+				<td class="order-output-raw">{{ order.displayOrder.company }}</td>
+				<td class="order-output-raw">{{ order.displayOrder.city }}</td>
+				<!-- <td class="order-output-raw">{{ order.displayOrder.orderNum }}</td> -->
+				<td class="order-output-raw">{{ order.displayOrder.headCount }}</td>
+		 		<td class="order-output-raw">{{ order.displayOrder.setUpTime | date: "h:mm a"  }}</td>
+		 		<td class="order-output-raw">${{ order.displayOrder.total }}</td>
+			</tr>
+		</table>
+	</div>
 </div>
-<div class="display-order" ng-if="order.displayOneOrder">
-	<button ng-click="order.displayAllOrders()">Display All Orders</button>
+<div id= "orders-complete-view" ng-if="order.displayOneOrder">
 	<table>
-		<th class="order-viewer-line">Vendor</th>
-		<th class="order-viewer-line">Order Number</th>
-		<th class="order-viewer-line">Order Date</th>
-		<th class="order-viewer-line">Set-Up Time</th>
-		<th class="order-viewer-line">Headcount</th>
-		<th class="order-viewer-line">Order Total</th>
-		<tr>
-			<td>{{ order.displayOrder.vendor }}</td>
-			<td>{{ order.displayOrder.orderNum }}</td>
-	 		<td>{{ order.displayOrder.orderDate | date: "EEE, M/dd" }}</td>
-	 		<td>{{ order.displayOrder.setUpTime | date: "h:mm a"  }}</td>
-	 		<td>{{ order.displayOrder.headCount }}</td>
-	 		<td>${{ order.displayOrder.total }}</td>
-		</tr>
-	</table>
-	<table>
-		<th class="order-viewer-line">Company</th>
-		<th class="order-viewer-line">Contact</th>
+		<!-- <th class="order-viewer-line">Company</th> -->
+		<!-- <th class="order-viewer-line">Contact</th>
 		<th class="order-viewer-line">Address</th>
 		<th class="order-viewer-line">City</th>
-		<th class="order-viewer-line">Phone Number</th>
+		<th class="order-viewer-line">Phone Number</th> -->
 		<tr>
-	 		<td>{{ order.displayOrder.company }}</td>
-	 		<td>{{ order.displayOrder.contact }}</td>
-	 		<td>{{ order.displayOrder.address }}</td>
-	 		<td>{{ order.displayOrder.city }}</td>
-	 		<td>{{ order.displayOrder.phone }}</td>
+	 		<!-- <td class="order-output-raw">{{ order.displayOrder.company }}</td> -->
+	 		<!-- <td class="order-output-raw">{{ order.displayOrder.contact }}</td>
+	 		<td class="order-output-raw">{{ order.displayOrder.address }}</td> -->
+	 		<!-- <td class="order-output-raw">{{ order.displayOrder.city }}</td> -->
+	 		<!-- <td class="order-output-raw">{{ order.displayOrder.phone }}</td> -->
 		</tr>
 	</table>
+	<button class="closing" ng-click="order.displayAllOrders()">X</button>
 	<table ng-if="order.displayOrder">
 		<th class="order-viewer-line">Category</th>
 		<th class="order-viewer-line">Name</th>
 		<th class="order-viewer-line">Customization</th>
 		<th class="order-viewer-line">Quantity</th>
 		<tr ng-repeat="item in order.displayOrder.item">
-			<td>{{ item.category }}</td>
-			<td>{{ item.name }}</td>
-			<td>{{ item.customization }}</td>
-			<td>{{ item.quantity }}</td>
+			<td class="order-output-raw">{{ item.category }}</td>
+			<td class="order-output-raw">{{ item.name }}</td>
+			<td class="order-output-raw">{{ item.customization }}</td>
+			<td class="order-output-raw">{{ item.quantity }}</td>
 		</tr>
 	</table>
 </div>
