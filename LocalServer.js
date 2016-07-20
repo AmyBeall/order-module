@@ -26,9 +26,6 @@ app.use(express.static(__dirname + "/public"));
 var apiRoutes = require('./app/routes/api')(app,express);
 app.use('/api', apiRoutes);
 
-var sheetsRoutes = require('./app/routes/sheets')(app,express);
-app.use('/sheets', sheetsRoutes);
-
 app.get('*', function(req,res){
 	res.sendFile(path.join(__dirname + '/public/app/index.html'));
 });
