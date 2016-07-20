@@ -261,10 +261,10 @@ angular.module('orderCtrl', [])
 		newOrder.item = item;
 		newOrder.entryDate = new Date();
 
-		// orderFactory.sheetCreate(requests)
-		// 	.success(function(data) {
-  //       		console.log(data);
-  //     		});	
+		orderFactory.sheetCreate(requests)
+			.success(function(data) {
+        		console.log(data);
+      		});	
 		orderFactory.create(newOrder)
 			.success(function(data) {
         		console.log(data.message);
