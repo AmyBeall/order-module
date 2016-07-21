@@ -29,7 +29,7 @@ module.exports = function(app, express){
 		 			          // Handle error
 		 			          console.log(err);
 		 			        }
-		 			        console.log(response);
+
 		 			        res.json(response);
 		 			    });
 			 	})

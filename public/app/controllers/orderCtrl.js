@@ -237,7 +237,7 @@ angular.module('orderCtrl', [])
 			value.push(ctrl.orderItems[eaitem].name);
 			value.push(ctrl.orderItems[eaitem].quantity);
 		}
-		console.log(value);
+		
 		request.values.push(value);
 		
 		callback(request);
