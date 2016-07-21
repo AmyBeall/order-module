@@ -2,9 +2,7 @@ angular.module('orderCtrl', [])
 .controller('orderController', function(configFactory, itemFactory, orderFactory, $scope, $sce, $filter, $location){
 
 	var ctrl = this,
-		newOrder = {},
 		idx;
-		
 
 	ctrl.vendors = [];
 	ctrl.listIngredients = [];
@@ -74,70 +72,6 @@ angular.module('orderCtrl', [])
 	}
 	ctrl.init();
 
-	var requests = [];
-	// Change the name of sheet ID '0' (the default first sheet on every
-	// spreadsheet)
-	requests.push({
-	  updateSheetProperties: {
-	    properties: {sheetId: 0, title: 'New Sheet Name'},
-	    fields: 'title'
-	  }
-	});
-	// Insert the values 1, 2, 3 into the first row of the spreadsheet with a
-	// different background color in each.
-	requests.push({
-	  updateCells: {
-	    start: {sheetId: 0, rowIndex: 0, columnIndex: 0},
-	    rows: [{
-	      values: [{
-	        userEnteredValue: {numberValue: 1},
-	        userEnteredFormat: {backgroundColor: {red: 1}}
-	      }, {
-	        userEnteredValue: {numberValue: 2},
-	        userEnteredFormat: {backgroundColor: {blue: 1}}
-	      }, {
-	        userEnteredValue: {numberValue: 3},
-	        userEnteredFormat: {backgroundColor: {green: 1}}
-	      }]
-	    }],
-	    fields: 'userEnteredValue,userEnteredFormat.backgroundColor'
-	  }
-	});
-	// Write "=A1+1" into A2 and fill the formula across A2:C5 (so B2 is
-	// "=B1+1", C2 is "=C1+1", A3 is "=A2+1", etc..)
-	requests.push({
-	  repeatCell: {
-	    range: {
-	      sheetId: 0,
-	      startRowIndex: 1,
-	      endRowIndex: 6,
-	      startColumnIndex: 0,
-	      endColumnIndex: 3
-	    },
-	    cell: {userEnteredValue: {formulaValue: '=A1 + 1'}},
-	    fields: 'userEnteredValue'
-	  }
-	});
-	
-	requests.push({
-	  copyPaste: {
-	    source: {
-	      sheetId: 0,
-	      startRowIndex: 0,
-	      endRowIndex: 1,
-	      startColumnIndex: 0,
-	      endColumnIndex: 3
-	    },
-	    destination: {
-	      sheetId: 0,
-	      startRowIndex: 1,
-	      endRowIndex: 6,
-	      startColumnIndex: 0,
-	      endColumnIndex: 3
-	    },
-	    pasteType: 'PASTE_FORMAT'
-	  }
-	});
 	ctrl.addOrderInfo = function(){
 		ctrl.hideform = true;
 		if(ctrl.orderItems.length > 0){
@@ -243,33 +177,22 @@ angular.module('orderCtrl', [])
 	}
 	ctrl.submitOrder = function(){
 		ctrl.submitted = true;
-		item = [];
-		newOrder.vendor = ctrl.orderInfo.vendor;
-		newOrder.orderNum = ctrl.orderInfo.orderNumber;
-		newOrder.company = ctrl.orderInfo.companyName;
-		newOrder.contact = ctrl.orderInfo.contact;
-		newOrder.address = ctrl.orderInfo.companyAddress;
-		newOrder.city = ctrl.orderInfo.city;
-		newOrder.phone = ctrl.orderInfo.phone;
-		newOrder.orderDate = ctrl.orderInfo.date;
-		newOrder.setUpTime = ctrl.orderInfo.time;
-		newOrder.headCount = ctrl.orderInfo.headCount;
-		newOrder.total = ctrl.orderInfo.total;
-		for(eaitem in ctrl.orderItems){
-			item.push(ctrl.orderItems[eaitem]);
-		}
-		newOrder.item = item;
-		newOrder.entryDate = new Date();
+		
+		formatForMongoDB(function(newOrder){
+			
+			orderFactory.create(newOrder)
+				.success(function(data) {
+	        		console.log(data.message);
+	        		$location.path( "/order" );
+	      		});
+		});
 
-		orderFactory.sheetCreate(requests)
-			.success(function(data) {
-        		console.log(data);
-      		});	
-		orderFactory.create(newOrder)
-			.success(function(data) {
-        		console.log(data.message);
-        		$location.path( "/order" );
-      		});
+		formatForGoogleSheets(function(request){
+			orderFactory.sheetCreate(request)
+				.success(function(data) {
+	        		console.log("Added to Sheet");
+	      		});	
+		})
 	}
 	ctrl.viewOrder = function(id){
 		for(order in ctrl.orders){
@@ -283,4 +206,65 @@ angular.module('orderCtrl', [])
 		ctrl.displayOneOrder = false;
 	}
 
+	function formatForGoogleSheets(callback){
+
+		var request = {},
+			value = [],
+			item = {};
+
+		request.majorDimension = "ROWS";
+		request.values = [];
+
+		item.vendor = ctrl.orderInfo.vendor;
+		item.orderNum = ctrl.orderInfo.orderNumber;
+		item.company = ctrl.orderInfo.companyName;
+		item.contact = ctrl.orderInfo.contact;
+		item.address = ctrl.orderInfo.companyAddress;
+		item.city = ctrl.orderInfo.city;
+		item.phone = ctrl.orderInfo.phone;
+		orderDate = ctrl.orderInfo.date;
+		item.orderDate = $filter('date')(orderDate, "EEE, M/dd");
+		setUpTime = ctrl.orderInfo.time;
+		item.setUpTime = $filter('date')(setUpTime, "h:mm a");
+		item.headCount = ctrl.orderInfo.headCount;
+		item.total = ctrl.orderInfo.total;
+
+		for(eaitem in item){
+			value.push(item[eaitem]);
+		}
+		for(eaitem in ctrl.orderItems){
+			value.push(ctrl.orderItems[eaitem].category);
+			value.push(ctrl.orderItems[eaitem].name);
+			value.push(ctrl.orderItems[eaitem].quantity);
+		}
+		console.log(value);
+		request.values.push(value);
+		
+		callback(request);
+	}
+	function formatForMongoDB(callback){
+
+		var newOrder = {},
+			item = [];
+	
+		newOrder.entryDate = new Date();
+		newOrder.vendor = ctrl.orderInfo.vendor;
+		newOrder.orderNum = ctrl.orderInfo.orderNumber;
+		newOrder.company = ctrl.orderInfo.companyName;
+		newOrder.contact = ctrl.orderInfo.contact;
+		newOrder.address = ctrl.orderInfo.companyAddress;
+		newOrder.city = ctrl.orderInfo.city;
+		newOrder.phone = ctrl.orderInfo.phone;
+		newOrder.orderDate = ctrl.orderInfo.date;
+		newOrder.setUpTime = ctrl.orderInfo.time;
+		newOrder.headCount = ctrl.orderInfo.headCount;
+		newOrder.total = ctrl.orderInfo.total;
+
+		for(eaitem in ctrl.orderItems){
+			item.push(ctrl.orderItems[eaitem]);
+		}
+		newOrder.item = item;
+
+		callback(newOrder);
+	}
 });
