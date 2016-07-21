@@ -47,7 +47,11 @@ module.exports = function(app, express){
 			 		          console.log(err);
 			 		        }
 			 		   
-			 		        // emptyRow = response.sheets[0].data[0].rowData.length;
+			 		        if(response.sheets[0].data[0].rowData.length){
+			 		        	emptyRow = response.sheets[0].data[0].rowData.length;
+			 		        } else{
+			 		        	emptyRow = 0;
+			 		        }
 			 		        console.log(response);
 			 			callback(emptyRow);
 			 		})
