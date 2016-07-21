@@ -31,7 +31,7 @@ module.exports = function(app, express){
 		 			          // Handle error
 		 			          console.log(err);
 		 			        }
-		 			        // console.log(response);
+		 			       
 		 			        res.json(response);
 		 			    });
 			 	})
@@ -52,7 +52,7 @@ module.exports = function(app, express){
 			 		        } else{
 			 		        	emptyRow = 0;
 			 		        }
-			 		        console.log(response);
+			 		        
 			 			callback(emptyRow);
 			 		})
 			 	}
