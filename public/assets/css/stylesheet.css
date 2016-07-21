@@ -104,7 +104,7 @@ td, th{
 }
 /*----------------------------------------------Ordering Page Elements-------------------------------------------------------*/
 #head {
-	margin-bottom: 15px;
+	/*margin-bottom: 15px;*/
 	padding-bottom: 20px;
 	background-color: #b539ae; 
 }
@@ -298,8 +298,47 @@ textarea:focus	{
 }
 /*-----------------------------View Order Page-------------------------------------------------*/
 .view-order  {
-	padding: 35px 0 0 0
+	/*padding: 35px 0 0 0*/
 }
 .order-viewer-line	{
-	padding: 0 50px 15px 0;
+	padding: 0 25px 15px 25px;
+	font-size: 15px;
+	font-weight: 500;
+	text-align: center;
+}
+#orders-snippet-view	{
+	width: 60%;
+	float: left;
+}
+#orders-complete-view	{
+	width: 40%;
+	float: right;
+	display: inline-block;
+	height: 100vh;
+	background: #F4F3FB;
+}
+.order-output-raw	{
+	font-size: 12px;
+	font-weight: 300;
+	text-align: center;
+}
+/*-----------------------------------Buttons----------------------------------------------------*/
+.expand	{
+	border: 1px solid #A10978;
+	background: #A10978;
+	border-radius: 50px;
+	color: white;
+	width: 20px;
+	height: 20px;
+	font-size: x-small;
+}
+.closing	{
+	border: 1px solid #A10978;
+	background: #A10978;
+	width: 20px;
+	height: 20px;
+	color: white;
+	font-size: x-small;
+	float: right;
+	border-radius: 35px;
 }
