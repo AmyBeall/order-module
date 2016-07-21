@@ -20,16 +20,18 @@ module.exports = function(app, express){
 			 		emptyRow+=1;
 
 		 			sheets.spreadsheets.values.update({
+		 			      
 		 			      spreadsheetId: spreadsheetId,
 		 			      valueInputOption: "RAW",
 		 			      range : "A"+emptyRow+":Z"+emptyRow,
 		 			      resource: batchUpdateRequest
+		 			  	
 		 			  	}, function(err, response) {
 		 			        if(err) {
 		 			          // Handle error
-		 			          console.log(err);
+		 			          // console.log(err);
 		 			        }
-		 			        console.log(response);
+		 			        // console.log(response);
 		 			        res.json(response);
 		 			    });
 			 	})
@@ -42,11 +44,11 @@ module.exports = function(app, express){
 			 			}, function(err, response) {
 			 		        if(err) {
 			 		          // Handle error
-			 		          console.log(err);
+			 		          // console.log(err);
 			 		        }
 			 		   
 			 		        emptyRow = response.sheets[0].data[0].rowData.length;
-			 		        console.log(emptyRow);
+			 		        // console.log(emptyRow);
 			 			callback(emptyRow);
 			 		})
 			 	}
