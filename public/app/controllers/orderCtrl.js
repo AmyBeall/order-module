@@ -28,13 +28,13 @@ angular.module('orderCtrl', [])
 				
 				for(configList in lists){
 					
-					if(data[item].type == lists[configList]){
+					if(data[item].type == "breads"){
 						
 						var id = data[item]._id;
 						
 						configFactory.get(id).success(function(data){
-							ctrl[lists[configList]] = data.list;
-							console.log(lists[configList]);
+							ctrl["breads"] = data.list;
+							console.log("breads");
 						});
 					}
 				}
