@@ -34,6 +34,7 @@ angular.module('orderCtrl', [])
 						
 						configFactory.get(id).success(function(data){
 							ctrl[configList] = data.list;
+							console.log(configList);
 						});
 					}
 				}
