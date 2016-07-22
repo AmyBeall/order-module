@@ -13,7 +13,8 @@ app.use(bodyParser.json());
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, 22 Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 
+    'X-Requested-With, content-type, 22 Authorization');
   next();
 });
 
@@ -31,10 +32,11 @@ app.use(express.static(__dirname + "/public"));
 var apiRoutes = require('./app/routes/api')(app,express);
 app.use('/api', apiRoutes);
 
-key = {
+var key = {
   client_email: process.env.GOOGLE_EMAIL,
   private_key: JSON.parse(process.env.PRIVATE_KEY)
 }
+
 var sheetsRoutes = require('./app/routes/sheets')(app, express, key);
 app.use('/sheets', sheetsRoutes);
 
