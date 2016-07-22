@@ -22,7 +22,7 @@ angular.module('orderCtrl', [])
 		
 		configFactory.all().success(function(data){
 			
-			var lists = ["ingredients", "categories", "vendors", "breads"];
+			var lists = ["categories", "vendors", "ingredients", "breads"];
 			
 			for(item in data){
 				
