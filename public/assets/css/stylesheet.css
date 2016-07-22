@@ -38,10 +38,10 @@ a.main-btn	{
 	text-decoration: none;
 	padding-top: 25px;
 }
-a.welcome-btn	{
+/*a.welcome-btn	{
 	text-decoration: none;
 	padding-top: 15px;
-}
+}*/
 a:focus {
 	outline: none;
 	border-color: #df9eed;
@@ -60,13 +60,13 @@ h1 {
 h2 {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
-	font-color: #4b4b4b;
+	font-color: #6c7a89;
 	font-size: 18px;
 }
 h3 {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
-	font-color: #4b4b4b;
+	font-color: #6c7a89;
 	font-size: 15px;
 }
 a {
@@ -75,6 +75,41 @@ a {
 td, th{
 	text-align: center;
 	padding: 10px
+}
+select	{
+   margin: 50px;
+   border: none;
+   border-radius: 35px;
+   width: 19px;
+   margin: 0 auto;
+   font-size: 12px;
+   color: #fff;
+   height: 19px;
+   background: url(http://nlitenmusic.neocities.org/nliten-music/images/white-arrow-down.png) 50% / 60% no-repeat #b539ae;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
+select:focus	{
+	outline: none;
+	border-color: #df9eed;
+	box-shadow: 0 0 10px #df9eed;
+}
+label	{
+	display: block;
+	padding: 10px 0 0 0;
+	font-size: 14px;
+	font-weight: 300;
+}
+input:focus	{
+	outline: none;
+	border-color: none;
+	box-shadow: 0 0 10px transparent;
+}
+input	{
+	border: none;
+	border-bottom: 1.5px solid #e6e6e6;
+	width: 250px;
 }
 /*-------------------------------------------Welcome Page Elements-------------------------------------------------------*/
 #main-message {
@@ -87,7 +122,7 @@ td, th{
     width: 30%;
     height: 30vh;
     padding: 100px 0 0 0;
-    border: 3px solid #e6e6e6;
+    border: 3px solid ;
     background: #F4F3FB;
 }
 .welcome-btn {
@@ -95,7 +130,7 @@ td, th{
 	border: 2px solid #b539ae;
 	border-radius: 35px;
 	width: 200px;
-	height: 35px;
+	height: 45px;
 	margin: 20px auto;
 	display: block;
 	text-align: center;
@@ -180,7 +215,7 @@ h2.page-instructions	{
 	display: block;
 	vertical-align: top;
 }
-.fancy-fields {
+/*.fancy-fields {
 	height: 25px;
 	width: 200px;
 	border: 1px solid #B0A8A6;
@@ -200,12 +235,7 @@ h2.page-instructions	{
 	border: 1px solid #B0A8A6;
 	border-radius: 35px;
 	text-align: center;
-}
-input:focus	{
-	outline: none;
-	border-color: #df9eed;
-	box-shadow: 0 0 10px #df9eed;
-}
+}*/
 label {
 	font-family: 'Roboto', sans-serif;
 }
@@ -238,16 +268,11 @@ form {
 	color: white;
 	vertical-align: top;
 }
-.fancy-selector {
+/*.fancy-selector {
 	height: 27px;
 	background: white;
 	vertical-align: top;
-}
-select:focus	{
-	outline: none;
-	border-color: #df9eed;
-	box-shadow: 0 0 10px #df9eed;
-}
+}*/
 .item-btn {
 	border: 1px solid #A10978;
 	background: #A10978;
@@ -371,6 +396,24 @@ textarea:focus	{
 	font-weight: 300;
 	text-align: center;
 }
+/*------------------------------------Configuration Main Page-----------------------------------*/
+.sub-title-config	{
+	/*float: left;*/
+	font-size: 20px;
+	font-weight: 500;
+	margin: 100px 0 -90px 0;
+	text-align: center;
+	color: #6c7a89;
+}
+#config-menu	{
+	margin: 100px auto;
+    width: 30%;
+    height: 30vh;
+    padding: 60px 0 60px 0;
+    border: 3px solid #e6e6e6;
+    background: #F4F3FB;
+}
+
 /*-----------------------------------Buttons----------------------------------------------------*/
 .expand	{
 	border: 1px solid #A10978;
