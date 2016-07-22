@@ -83,6 +83,7 @@ angular.module('orderCtrl', [])
 	ctrl.viewIngredients = function(name){
 		
 		ctrl.name = name;
+		ctrl.itemIngredients = [];
 		ctrl.showOptions = false;
 		ctrl.showIngredients = true;
 
