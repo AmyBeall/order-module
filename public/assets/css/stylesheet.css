@@ -86,7 +86,7 @@ td, th{
     border: 3px solid #e6e6e6;
     background: #F4F3FB;
 }
-.main-btn {
+/*.main-btn {
 	background: #b539ae;
 	border: 2px solid #b539ae;
 	border-radius: 35px;
@@ -132,7 +132,7 @@ td, th{
 	font-size: 10px;
 	color: white;
 
-}
+}*/
 /*----------------------------------------------Ordering Page Elements-------------------------------------------------------*/
 #head {
 	/*margin-bottom: 15px;*/
