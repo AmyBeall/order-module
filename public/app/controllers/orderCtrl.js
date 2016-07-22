@@ -1,184 +1,182 @@
+
 angular.module('orderCtrl', [])
 .controller('orderController', function(configFactory, itemFactory, orderFactory, $scope, $sce, $filter, $location){
 
 	var ctrl = this,
 		idx;
 
-	ctrl.ingredients = [];
-	ctrl.categories = [];
 	ctrl.vendors = [];
-	ctrl.breads = [];
+	ctrl.listIngredients = [];
+	ctrl.categories = [];
+	ctrl.menuItems = [];
+	ctrl.orderInfo = {};
+	ctrl.options = [];
+	ctrl.itemIngredients = [];
+	ctrl.item = {};
+	ctrl.orderItems = [];
+	ctrl.orders = [];
+	ctrl.customization = " ";
+	ctrl.displayOrder = {};
+	ctrl.displayOneOrder = false;
 
 	ctrl.showCategories = true;
-
-	ctrl.displayOneOrder = false;
-	ctrl.hideform = false;
 	ctrl.showOptions = false;
 	ctrl.showIngredients = false;
 	ctrl.showSubmit = false;
+	ctrl.hideform = false;
 	ctrl.submitted = false;
 
 	ctrl.init = function(){
-		
 		configFactory.all().success(function(data){
-			
-			var lists = ["categories", "vendors", "ingredients", "breads"];
-			
-			for(item in data){
+			saved = data;
+			for(item in saved){
+				if(saved[item].type == "ingredients"){
+					ingredients_id = saved[item]._id;
+					configFactory.get(ingredients_id).success(function(data){
+						ctrl.listIngredients = data.list;
+					});
+				}
+				if(saved[item].type == "categories"){
+					categories_id = saved[item]._id;
+					configFactory.get(categories_id).success(function(data){
+						ctrl.categories = data.list;
+					});
+				}
+				if(saved[item].type == "vendors"){
+					vendors_id = saved[item]._id;
+					configFactory.get(vendors_id).success(function(data){
+						ctrl.vendors = data.list;
 				
-				for(configList in lists){
-					
-					if(data[item].type == lists[configList]){
-						
-						var id = data[item]._id;
-						
-						configFactory.get(id).success(function(data){
-							
-							ctrl[lists[configList]] = data.list;
-						});
-					}
+					});
+				}
+				if(saved[item].type == "breads"){
+					breads_id = saved[item]._id;
+					configFactory.get(breads_id).success(function(data){
+						ctrl.breads = data.list;
+				
+					});
 				}
 			}
 		})
 		orderFactory.all().success(function(data){
-			
 			ctrl.orders = data;
-			
 			for(order in ctrl.orders){
-				
 				items = ctrl.orders[order].item;
+				// for(item in items){
+				// 	console.log(items[item]);
+				// }
 			}
 	    })
 		itemFactory.all().success(function(data){
-			
 			ctrl.menuItems = data;
 		})
 	}
 	ctrl.init();
 
 	ctrl.addOrderInfo = function(){
-		
 		ctrl.hideform = true;
-		
-		if(ctrl.orderItems.length > 0) ctrl.showSubmit = true;
+		if(ctrl.orderItems.length > 0){
+			ctrl.showSubmit = true;
+		}
 	}
 	ctrl.editOrderInfo = function(){
-		
 		ctrl.hideform = false;
 	}
 	ctrl.viewOptions = function(category){
-
 		ctrl.category = category;
-		ctrl.showOptions = true;
-		ctrl.showCategories = false;
-
-		if(category === 'Sandwiches') ctrl.showBread = true;
-
 		for(cat in ctrl.menuItems){
 			if(ctrl.menuItems[cat].type === category){
 				ctrl.options = ctrl.menuItems[cat].typeList;
 			}
 		}
+		if(category === 'Sandwiches'){
+			ctrl.showBread = true;
+		}
+		ctrl.showOptions = true;
+		ctrl.showCategories = false;
 	}
 	ctrl.viewIngredients = function(name){
-		
 		ctrl.name = name;
-		ctrl.itemIngredients = [];
-		ctrl.showOptions = false;
-		ctrl.showIngredients = true;
-
 		for(option in ctrl.options){
-
 			if(ctrl.options[option].name === name){
-
 				ctrl.selectionIngredients = ctrl.options[option].ingredients;
 				angular.copy(ctrl.selectionIngredients, ctrl.itemIngredients);
 			}
 		}
+		ctrl.showOptions = false;
+		ctrl.showIngredients = true;
 	}
 	ctrl.toggleIngredient = function(ingredient) {
-
-		var ing = ctrl.itemIngredients,
-			idx = ing.indexOf(ingredient);
-
-	    idx > -1 ? ing.splice(idx, 1) : ing.push(ingredient);
+	    idx = ctrl.itemIngredients.indexOf(ingredient);
+	    if (idx > -1) {
+	      ctrl.itemIngredients.splice(idx, 1);
+	    } else {
+	      ctrl.itemIngredients.push(ingredient);
+	    }
 	};	
 	ctrl.addItem = function(){
 
-		var ingredientStr = "",
-			modifyIngredients = [],
-			item = {
-				category : ctrl.category,
-				name : ctrl.name,
-				ingredients : []
-			};
-
+		modifyIngredients = [];
 		angular.copy(ctrl.selectionIngredients, modifyIngredients);
-		angular.copy(ctrl.itemIngredients, item.ingredients);
-		
-		if(ctrl.customization) ingredientStr += ctrl.customization+",";
-
-		for(mod in modifyIngredients){
-			
-			for(ingredient in item.ingredients){
-
-				if(modifyIngredients[mod] === item.ingredients[ingredient]){
-					
-					modifyIngredients.splice(mod, 1);
+		var ingredients = "";
+		for(modIngredient in modifyIngredients){
+			for(itemIngredient in ctrl.itemIngredients){
+				if(modifyIngredients[modIngredient] === ctrl.itemIngredients[itemIngredient]){
+					modifyIngredients.splice(modIngredient, 1);
 				}
 			}
 		}
-		if(modifyIngredients.length <= item.ingredients.length){
-			
-			for(modIngredient in modifyIngredients){
-				
-				ingredientStr += " no "+modifyIngredients[modIngredient]+",";
-			}
-		} else {
-					
-			for(ingredient in item.ingredients){
-				
-				ingredientStr += " "+item.ingredients[ingredient];
-			}
-			if(modifyIngredients.length > item.ingredients.length) ingredientStr += " only, ";
-			if(item.ingredients.length > 0) ingredientStr += ", ";
+		if(ctrl.customization != " "){
+			ingredients += ",";
 		}
-
-		if(ctrl.itemBread) ingredientStr += " "+ctrl.itemBread+ " bread";
-
-		item.customization += ingredientStr;
-		item.ingredients.push(ctrl.itemBread);
-		
-		ctrl.orderItems.push(item);
-		
+		if(modifyIngredients.length <= ctrl.itemIngredients.length){
+			for(modIngredient in modifyIngredients){
+				ingredients += " no "+modifyIngredients[modIngredient]+",";
+			}
+		} else if(ctrl.itemIngredients.length < modifyIngredients.length){
+			for(ingredient in ctrl.itemIngredients){
+				ingredients += " "+ctrl.itemIngredients[ingredient];
+			}
+			ingredients += " only,";
+		} else if(ctrl.itemIngredients.length > 0){
+			for(ingredient in ctrl.itemIngredients){
+				ingredients += " "+ctrl.itemIngredients[ingredient];
+			}
+			ingredients += ",";
+		}
+		if(ctrl.itemBread){
+			ingredients += " "+ctrl.itemBread+ " bread";
+		}
+		ctrl.customization += ingredients;
+		ctrl.item.customization = ctrl.customization;
+		ctrl.item.ingredients = [];
+		angular.copy(ctrl.itemIngredients, ctrl.item.ingredients);
+		ctrl.item.ingredients.push(ctrl.itemBread);
+		ctrl.item.category = ctrl.category;
+		ctrl.item.name = ctrl.name;
+		ctrl.orderItems.push(ctrl.item);
+		ctrl.item = {};
 		ctrl.customization = " ";
-		ctrl.showCategories = true;
 		ctrl.showBread = false;
 		ctrl.showIngredients = false;
-
+		ctrl.showCategories = true;
 		if(Object.keys(ctrl.orderInfo).length > 0){
-			
 			ctrl.showSubmit = true;
 		}
 	}
 	ctrl.notAddItem = function(){
-
 		ctrl.showIngredients = false;
 		ctrl.showBread = false;
 		ctrl.showCategories = true;
 	}	
 	ctrl.editOrderItems = function(item){
-
-		var idx = ctrl.orderItems.indexOf(item);
-
+		idx = ctrl.orderItems.indexOf(item);
+		ctrl.item = ctrl.orderItems[idx];
 		ctrl.customization = " ";
 		ctrl.showIngredients = true;
-		ctrl.item = ctrl.orderItems[idx];
-
 		ctrl.orderItems.splice(idx, 1);
 	}
 	ctrl.submitOrder = function(){
-
 		ctrl.submitted = true;
 		
 		formatForMongoDB(function(newOrder){
@@ -189,8 +187,8 @@ angular.module('orderCtrl', [])
 	        		$location.path( "/order" );
 	      		});
 		});
+
 		formatForGoogleSheets(function(request){
-			
 			orderFactory.sheetCreate(request)
 				.success(function(data) {
 	        		console.log("Added to Sheet");
@@ -198,19 +196,14 @@ angular.module('orderCtrl', [])
 		})
 	}
 	ctrl.viewOrder = function(id){
-
-		ctrl.displayOneOrder = true;
-
 		for(order in ctrl.orders){
-
 			if(ctrl.orders[order]._id === id){
-
 				ctrl.displayOrder = ctrl.orders[order];
 			}
 		}
+		ctrl.displayOneOrder = true;
 	}
 	ctrl.displayAllOrders = function(){
-		
 		ctrl.displayOneOrder = false;
 	}
 
@@ -218,9 +211,7 @@ angular.module('orderCtrl', [])
 
 		var request = {},
 			value = [],
-			item = {},
-			orderDate = ctrl.orderInfo.date,
-			setUpTime = ctrl.orderInfo.time;
+			item = {};
 
 		request.majorDimension = "ROWS";
 		request.values = [];
@@ -232,21 +223,22 @@ angular.module('orderCtrl', [])
 		item.address = ctrl.orderInfo.companyAddress;
 		item.city = ctrl.orderInfo.city;
 		item.phone = ctrl.orderInfo.phone;
+		orderDate = ctrl.orderInfo.date;
 		item.orderDate = $filter('date')(orderDate, "EEE, M/dd");
+		setUpTime = ctrl.orderInfo.time;
 		item.setUpTime = $filter('date')(setUpTime, "h:mm a");
 		item.headCount = ctrl.orderInfo.headCount;
 		item.total = ctrl.orderInfo.total;
 
 		for(eaitem in item){
-
 			value.push(item[eaitem]);
 		}
 		for(eaitem in ctrl.orderItems){
-
 			value.push(ctrl.orderItems[eaitem].category);
 			value.push(ctrl.orderItems[eaitem].name);
 			value.push(ctrl.orderItems[eaitem].quantity);
 		}
+		
 		request.values.push(value);
 		
 		callback(request);
@@ -270,7 +262,6 @@ angular.module('orderCtrl', [])
 		newOrder.total = ctrl.orderInfo.total;
 
 		for(eaitem in ctrl.orderItems){
-			
 			item.push(ctrl.orderItems[eaitem]);
 		}
 		newOrder.item = item;
