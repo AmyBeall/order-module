@@ -332,8 +332,8 @@ th.summary-column-quantity	{
 }
 .item-to-add	{
 	font-size: 13px;
-	font-weight: 400;
-	padding: 0 0 0 20%;
+	font-weight: 300;
+	padding: 0 0 0 15%;
 	color: #4b4b4b;
 }
 .item-added-title {
@@ -350,9 +350,10 @@ th.summary-column-quantity	{
 	padding: 0 0 5% 5%;
 }
 textarea	{
-	border-radius: 15px;
+	border-radius: 5px;
 	vertical-align: middle;
-	border: 1px solid #B0A8A6;
+	border: 1px solid #e6e6e6;
+	background: #F4F3FB;
 	text-align: center;
 }
 textarea:focus	{
@@ -414,13 +415,13 @@ textarea:focus	{
 
 /*-----------------------------------Buttons----------------------------------------------------*/
 .expand	{
-	border: 1px solid #A10978;
-	background: #A10978;
+	border: 1px solid #b539ae;
+	background: #b539ae;
+	background: url(../../assets/img/plus_icon.png) 50% / 50% no-repeat #b539ae;
 	border-radius: 50px;
-	color: white;
-	width: 20px;
-	height: 20px;
-	font-size: x-small;
+	width: 19px;
+	height: 19px;
+	padding-top: 2px;
 }
 .closing	{
 	border: 1px solid #A10978;

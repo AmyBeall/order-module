@@ -77,7 +77,7 @@
 	<button ng-repeat="category in order.menuItems" ng-click="order.viewOptions(category.type)" ng-show="order.showCategories" class="main-btn">Add {{category.type}}</button>
 	<div ng-show="order.showOptions">
 		<h3 class="order-category-title">Category: {{ order.category }}</h3>
-		<p class="item-to-add" ng-repeat="option in order.options" ng-click="order.viewIngredients(option.name)">+ {{ option.name }}</p>
+		<p class="item-to-add" ng-repeat="option in order.options" ng-click="order.viewIngredients(option.name)"><button class="expand"></button> {{ option.name }}</p>
 	</div>
 	<div ng-show="order.showIngredients">
 			<h3 class="order-category-title">Category: {{ order.category }}</h3>
