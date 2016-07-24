@@ -34,6 +34,10 @@ nav>a>h3, nav>h3 {
 	color: white;
 	font-weight: normal;
 }
+p {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+}
 a.main-btn	{
 	text-decoration: none;
 	padding-top: 25px;
@@ -77,6 +81,7 @@ td, th{
 	padding: 10px
 }
 select	{
+   display: inline;	
    margin: 50px;
    border: none;
    border-radius: 35px;
@@ -89,6 +94,7 @@ select	{
    -webkit-appearance: none;
    -moz-appearance: none;
    appearance: none;
+   font-family: 'Roboto', sans-serif;
 }
 select:focus	{
 	outline: none;
@@ -96,8 +102,8 @@ select:focus	{
 	box-shadow: 0 0 10px #df9eed;
 }
 label	{
-	display: block;
-	padding: 10px 0 0 0;
+	display: inline-block;
+	padding: 6px 0 10px 0;
 	font-size: 14px;
 	font-weight: 300;
 }
@@ -122,7 +128,7 @@ input	{
     width: 30%;
     height: 30vh;
     padding: 100px 0 0 0;
-    border: 3px solid ;
+    border: 3px solid #e6e6e6;
     background: #F4F3FB;
 }
 .welcome-btn {
@@ -200,48 +206,43 @@ h1.brand  {
 h2.page-instructions	{
 	text-align: center;
 	padding: 30px 0 30px 0;
+	color: #6c7a89;
+	font-weight: 400;
+	font-size: 20px;
 
 }
 #customer-fields {
-	width: 30%;
+	width: 28%;
 	float: left;
 	padding: 0 0 0 15px;
+	border-right: 2px solid #e6e6e6;
+	height: 100vh;
 }
 .order-item {
 	height: 35px;
-	padding: 5px 0 0 0;
+	padding: 5px 0 10px 0;
 }
-.block-info{
+.block-info {
 	display: block;
 	vertical-align: top;
 }
 /*.fancy-fields {
 	height: 25px;
-	width: 200px;
-	border: 1px solid #B0A8A6;
-	border-radius: 35px;
+	width: 50px;
+	border-bottom: 1.5px solid #e6e6e6;
+	text-align: center;
+}*/
+.fancy-fields-xs {
+	height: 25px;
+	width: 80px;
+	border: none;
 	text-align: center;
 }
 .fancy-fields-small	{
 	height: 25px;
-	width: 130px;
-	border: 1px solid #B0A8A6;
-	border-radius: 35px;
+	width: 120px;
+	border: none;
 	text-align: center;
-}
-.fancy-fields-xs	{
-	height: 25px;
-	width: 80px;
-	border: 1px solid #B0A8A6;
-	border-radius: 35px;
-	text-align: center;
-}*/
-label {
-	font-family: 'Roboto', sans-serif;
-}
-p {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 100;
 }
 p.order-info {
 	font-weight: 500;
@@ -285,8 +286,10 @@ form {
 	color: white;
 }
 #items-ordered {
-	width: 28.9%;
+	width: 28%;
 	display: inline-block;
+	border-right: 2px solid #e6e6e6;
+	height: 100vh;
 }
 #order-display	{
 	width: 40%;
@@ -303,57 +306,48 @@ th.summary-column	{
 	padding-right: 120px;
 	font-weight: 500;
 	margin: 10px;
+	font-size: 15px;
+	font-weight: 400;
 }
 /*Singling this element out to allow for better rendering on table by centering while the rest are align to the left*/
 td.summary-quantity	{ 
 	text-align: center;
 	font-weight: 300;
+	font-size: 14px;
 }
 th.summary-column-quantity	{
 	text-align: center;
-}
-.edit-btn	{
-	background: #A10978;
-	border: none;
-	border-radius: 35px;
-	height: 25px;
-	min-width: 30px;
-	display: inline-block;
-	text-align: center;
-	font-family: 'Roboto', sans-serif;
-	margin: 10px;
-	font-size: 12px;
-	color: white;
-	vertical-align: top;
-	float: right;
+	font-size: 15px;
+	font-weight: 400;
 }
 .order-component	{
 	display: block;
-	padding: 10px;
+	padding: 0 0 5% 5%;
 }
 .order-category-title	{
 	font-size: 15px;
-	padding: 0 0 5px 0;
+	padding: 10% 0 10% 15%;
 	color: #4b4b4b;
+	font-weight: 400;
 }
 .item-to-add	{
 	font-size: 13px;
-	font-weight: 500;
-	padding: 5px 0 0 5px;
+	font-weight: 400;
+	padding: 0 0 0 20%;
 	color: #4b4b4b;
 }
 .item-added-title {
 	font-size: 15px;
-	font-weight: 500;
+	font-weight: 400;
 	color: #4b4b4b;
 	text-align: center;
-	padding: 12px 0 10px 0;
+	padding: 0 0 5% 0;
 }
 .order-ingredients	{
 	font-size: 15px;
 	font-weight: 300;
 	color: #4b4b4b;
-	padding: 5px 0 0 5px;
+	padding: 0 0 5% 5%;
 }
 textarea	{
 	border-radius: 15px;
@@ -369,6 +363,10 @@ textarea:focus	{
 #submit-btn	{
 	margin: 300px 200px 0 0;
 	float: right;
+}
+#headCount	{
+	border-bottom: 1.5px solid #e6e6e6;
+	width: 50px; 
 }
 /*-----------------------------View Order Page-------------------------------------------------*/
 .view-order  {
@@ -443,4 +441,62 @@ textarea:focus	{
 	outline: none;
 	border-color: none;
 	box-shadow: none;
+}
+.edit-btn	{
+	background: #A10978;
+	background: url(../../assets/img/pen_con.png) 50% / 45% no-repeat #b539ae;
+	border: none;
+	border-radius: 35px;
+	height: 25px;
+	min-width: 25px;
+	display: inline-block;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	margin: 10px;
+	font-size: 12px;
+	color: white;
+	vertical-align: top;
+	float: right;
+}
+.btn-block	{
+	padding: 5% 0 0 10%;
+	display: inline-block;
+}
+/*--------------------------Webkits-------------------------------*/
+::-webkit-inner-spin-button {
+		display: none;
+}
+::-webkit-calendar-picker-indicator {
+  		color: transparent;
+  		opacity: 1
+}
+::-webkit-calendar-picker-indicator {
+	background: url(http://nlitenmusic.neocities.org/nliten-music/images/white-arrow-down.png) 50% / 60% no-repeat #b539ae;
+	border-radius: 50px;
+	width: 11px;
+	height: 14.5px;
+}
+::-webkit-datetime-edit-text {
+	color: #e6e6e6;
+}
+::-webkit-datetime-edit-month-field	{
+	color: #e6e6e6;
+}
+::-webkit-datetime-edit-day-field	{
+	color: #e6e6e6;
+}
+::-webkit-datetime-edit-year-field	{
+	color: #e6e6e6;
+}
+::-webkit-datetime-edit-hour-field	{
+	color: #e6e6e6;
+}
+::-webkit-datetime-edit-minute-field	{
+	color: #e6e6e6;
+}
+::-webkit-datetime-edit-ampm-field	{
+	color: #e6e6e6;
+}
+::-webkit-clear-button	{
+	display: none;
 }
