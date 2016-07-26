@@ -26,6 +26,7 @@
 				<option value=""></option>
 				<option ng-repeat="vendor in order.vendors" value="{{vendor}}">{{vendor}}</option>
 			</select>
+			<p class="fancy-selector">{{order.orderInfo.vendor}}</p>
 
 		<div class="order-item">
 			<label for="orderNumber">Order Number:</label>
@@ -85,20 +86,20 @@
 		<form class="order-ingredients" ng-submit="order.addItem()">
 			Ingredients: 
 			<label ng-repeat="ingredient in order.selectionIngredients">
-			  <input
+			  <input class="ing-selection"
 			    type="checkbox"
 			    name="selectionIngredients[]"
 			    value="{{ingredient}}"
 			    ng-checked="order.itemIngredients.indexOf(ingredient) > -1"
 			    ng-click="order.toggleIngredient(ingredient)"
-			  > {{ingredient}}
-			</label>
+			  >{{ingredient}}</label>
 			<div class="order-component">
 				<label for="bread" ng-show="order.showBread">Bread: 
 					<select class="fancy-selector" id="bread" ng-model="order.itemBread">
 						<option value="">Choose Bread</option>
 						<option ng-repeat="bread in order.breads" value="{{bread}}">{{bread}}</option>
 					</select>
+					<p class="fancy-selector">{{order.itemBread}}</p>			
 				</label>
 			</div>
 			<div class="order-component">
