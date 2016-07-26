@@ -1,25 +1,30 @@
-<div id="head">
-	<a href="/"><h1 class="brand">Catering System</h1></a>
+<div class="fondo">
+	<div id="head">
+		<a href="/"><h1 class="brand">Catering System</h1></a>
+		<a href="/configuration" class="config-btn"><img src="../../assets/img/configure.png" width="30" height="30"></a>
+	</div>
+	<div class="side-bar">
+		<form id="add_ingredient" ng-show="config.hideForm" ng-submit="config.submitItem()">
+			<input type="text" class="inputItem" ng-model="config.item" ng-blur="config.submitItem()" placeholder="Add a Vendor">
+		</form>
+		<div class="config-buttons">
+			<button class="add" ng-click="config.newForm()">Add New</button>
+			<button class="add" ng-click="config.submitVendors()">Save Vendor</button>
+		</div>
+	</div>
+	<div class="content-panel">
+		<h2 class="config-subtitle">Vendors</h2>
+		<ul class="config-items">
+			<li ng-repeat="saved in config.vendors">
+				<p class="config-item-saved">{{ saved }}</p>
+				<button data-ng-click="config.removeVendor(saved)" class="minus-btn"></button>
+			</li>
+		</ul>
+		<ul>
+			<li ng-repeat="item in config.list">
+				<p>{{ item }}</p>
+				<button data-ng-click="config.removeItem(item)">remove</button>
+			</li>
+		</ul>
+	</div>
 </div>
-<!-- <a href="/"><h1>Catering System</h1></a> -->
-<a href="/configuration"><h3>Configuration</h3></a>
-<div class="configEdit">
-	<h2>Vendors</h2>
-	<ul>
-		<li ng-repeat="saved in config.vendors">
-			<p>{{ saved }}</p>
-			<button data-ng-click="config.removeVendor(saved)">remove</button>
-		</li>
-	</ul>
-	<ul>
-		<li ng-repeat="item in config.list">
-			<p>{{ item }}</p>
-			<button data-ng-click="config.removeItem(item)">remove</button>
-		</li>
-	</ul>
-	<form id="add_ingredient" ng-show="config.hideForm" ng-submit="config.submitItem()">
-		<input type="text" class="inputItem" ng-model="config.item" ng-blur="config.submitItem()" placeholder="Add an Ingredient">
-	</form>
-	<button class="add" ng-click="config.newForm()">Add New</button>
-</div>
-<button ng-click="config.submitVendors()">Update List</button>

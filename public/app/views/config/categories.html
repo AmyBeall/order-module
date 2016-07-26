@@ -1,22 +1,32 @@
-<a href="/"><h1>Catering System</h1></a>
-<a href="/configuration"><h3>Configuration</h3></a>
-<div class="configEdit">
-	<h2>Categories</h2>
-	<ul>
-		<li ng-repeat="saved in config.categories">
-			<p>{{ saved }}</p>
-			<button class="main-btn-small"data-ng-click="config.removeCategory(saved)">remove</button>
-		</li>
-	</ul>
-	<ul>
-		<li ng-repeat="item in config.list">
-			<p>{{ item }}</p>
-			<button class="main-btn-small" data-ng-click="config.removeItem(item)">remove</button>
-		</li>
-	</ul>
-	<form id="add_ingredient" ng-show="config.hideForm" ng-submit="config.submitItem()">
-		<input class="fancy-fields" type="text" class="inputItem" ng-model="config.item" ng-blur="config.submitItem()" placeholder="Add an Ingredient">
-	</form>
-	<button class="main-btn-small" class="add" ng-click="config.newForm()">Add New</button>
+<div id="head">
+	<a href="/"><h1 class="brand">Catering System</h1></a>
+	<a href="/configuration" class="config-btn"><img src="../../assets/img/configure.png" width="30" height="30"></a>
 </div>
-<button class="main-btn-small" ng-click="config.submitCategories()" ng-hide="config.submitted">Update List</button>
+<div class="fondo">
+	<div class="side-bar">
+		<form id="add_ingredient" ng-show="config.hideForm" ng-submit="config.submitItem()">
+			<input type="text" class="inputItem" ng-model="config.item" ng-blur="config.submitItem()" placeholder="Add a Category">
+		</form>
+		<div class="config-buttons">
+			<button class="add" class="add" ng-click="config.newForm()">Add New</button>
+			<button class="add" ng-click="config.submitCategories()" ng-hide="config.submitted">Save Category</button>
+		</div>
+	</div>
+	<div class="content-panel">
+		<div class="configEdit">
+			<h2 class="config-subtitle">Categories</h2>
+			<ul class="config-items">
+				<li ng-repeat="saved in config.categories">
+					<p class="config-item-saved">{{ saved }}</p>
+					<button class="minus-btn" data-ng-click="config.removeCategory(saved)"></button>
+				</li>
+			</ul>
+			<ul>
+				<li ng-repeat="item in config.list">
+					<p>{{ item }}</p>
+					<button class="main-btn-small" data-ng-click="config.removeItem(item)">remove</button>
+				</li>
+			</ul>	
+		</div>
+	</div>
+</div>

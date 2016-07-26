@@ -88,7 +88,7 @@ select	{
    width: 19px;
    margin: 0 auto;
    font-size: 12px;
-   color: #fff;
+   color: transparent;
    height: 19px;
    background: url(http://nlitenmusic.neocities.org/nliten-music/images/white-arrow-down.png) 50% / 60% no-repeat #b539ae;
    -webkit-appearance: none;
@@ -117,6 +117,10 @@ input	{
 	border-bottom: 1.5px solid #e6e6e6;
 	width: 250px;
 }
+.fondo	{
+	background: #eeeeee;
+	height: 100vh;
+}
 /*-------------------------------------------Welcome Page Elements-------------------------------------------------------*/
 #main-message {
 	width: 60%;
@@ -130,67 +134,8 @@ input	{
     padding: 100px 0 0 0;
     border: 3px solid #e6e6e6;
     background: #F4F3FB;
-}
-.welcome-btn {
-	background: #b539ae;
-	border: 2px solid #b539ae;
-	border-radius: 35px;
-	width: 200px;
-	height: 45px;
-	margin: 20px auto;
-	display: block;
-	text-align: center;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
-	font-size: 18px;
-	color: white;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-  	transition: all 0.3s ease-in-out;
-}
-.welcome-btn::after: {
-	  content: '';
-	  position: absolute;
-	  z-index: -1;
-	  width: 100%;
-	  height: 100%;
-	  opacity: 0;
-	  border-radius: 5px;
-	  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-	  transition: opacity 0.3s ease-in-out;
-}
-.welcome-btn:hover	{
-	transform: scale(1.2, 1.2);
-}
-.welcome-btn:hover::after	{
-	opacity: 1;
-}
-.main-btn {
-	background: #b539ae;
-	border: 2px solid #b539ae;
-	border-radius: 35px;
-	width: 130px;
-	height: 29px;
-	margin: 20px auto;
-	display: block;
-	text-align: center;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
-	font-size: 13px;
-	color: white;
-}
-.main-btn-small	{
-	background: #b539ae;
-	border: 2px solid #b539ae;
-	border-radius: 35px;
-	width: 90px;
-	height: 20px;
-	margin: 20px 20px 0 40px;
-	display: inline-block;
-	text-align: center;
-	font-family: 'Roboto', sans-serif;
-	font-size: 10px;
-	color: white;
-
+    min-height: 200px;
+    min-width: 200px;
 }
 /*----------------------------------------------Ordering Page Elements-------------------------------------------------------*/
 #head {
@@ -269,11 +214,11 @@ form {
 	color: white;
 	vertical-align: top;
 }
-/*.fancy-selector {
-	height: 27px;
-	background: white;
-	vertical-align: top;
-}*/
+.fancy-selector {
+	display:inline;
+	font size: 13px;
+	font-weight: 300;
+}
 .item-btn {
 	border: 1px solid #A10978;
 	background: #A10978;
@@ -349,6 +294,11 @@ th.summary-column-quantity	{
 	color: #4b4b4b;
 	padding: 0 0 5% 5%;
 }
+input.ing-selection	{
+	font-size: 13px;
+	font-weight: 300;
+	width: 23px;
+}
 textarea	{
 	border-radius: 5px;
 	vertical-align: middle;
@@ -414,6 +364,67 @@ textarea:focus	{
 }
 
 /*-----------------------------------Buttons----------------------------------------------------*/
+.welcome-btn {
+	background: #b539ae;
+	border: 2px solid #b539ae;
+	border-radius: 35px;
+	width: 200px;
+	height: 45px;
+	margin: 20px auto;
+	display: block;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 18px;
+	color: white;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  	transition: all 0.3s ease-in-out;
+}
+.welcome-btn::after: {
+	  content: '';
+	  position: absolute;
+	  z-index: -1;
+	  width: 100%;
+	  height: 100%;
+	  opacity: 0;
+	  border-radius: 5px;
+	  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+	  transition: opacity 0.3s ease-in-out;
+}
+.welcome-btn:hover	{
+	transform: scale(1.2, 1.2);
+}
+.welcome-btn:hover::after	{
+	opacity: 1;
+}
+.main-btn {
+	background: #b539ae;
+	border: 2px solid #b539ae;
+	border-radius: 35px;
+	width: 130px;
+	height: 29px;
+	margin: 20px auto;
+	display: block;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 13px;
+	color: white;
+}
+.main-btn-small	{
+	background: #b539ae;
+	border: 2px solid #b539ae;
+	border-radius: 35px;
+	width: 90px;
+	height: 20px;
+	margin: 20px 20px 0 40px;
+	display: inline-block;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size: 10px;
+	color: white;
+
+}
 .expand	{
 	border: 1px solid #b539ae;
 	background: #b539ae;
@@ -422,6 +433,16 @@ textarea:focus	{
 	width: 19px;
 	height: 19px;
 	padding-top: 2px;
+}
+.minus-btn	{
+	border: 1px solid #b539ae;
+	background: #b539ae;
+	background: url(../../assets/img/minus_icon.png) 50% / 50% no-repeat #b539ae;
+	border-radius: 50px;
+	width: 19px;
+	height: 19px;
+	padding-top: 2px;
+	display: inline-block;
 }
 .closing	{
 	border: 1px solid #A10978;
@@ -463,6 +484,15 @@ textarea:focus	{
 	padding: 5% 0 0 10%;
 	display: inline-block;
 }
+.add {
+	width: 100px;
+	height: 25px;
+	border-radius: 35px;
+	background: #b539ae;
+	color: #fff;
+	border: none;
+	display: inline-block;
+}
 /*--------------------------Webkits-------------------------------*/
 ::-webkit-inner-spin-button {
 		display: none;
@@ -500,4 +530,47 @@ textarea:focus	{
 }
 ::-webkit-clear-button	{
 	display: none;
+}
+::-webkit-input-placeholder	{
+	font-size: 14px;
+}
+::-webkit-input-placeholder-shown	{
+	font-size: 14px;
+}
+/*-------------------------------Configuration---------------------------*/
+.side-bar	{
+	width: 20%;
+	height: 100vh;
+	background: #fff;
+	border-right: 2px solid #b539ae;
+	float: left;
+	display: inline-block;
+}
+.config-buttons	{
+	margin: 0 0 0 40px;
+	width: 100%;
+	position: absolute;
+	top: 60%;
+}
+.inputItem	{
+	margin: 350px 0 20px 40px;
+	width: 200px;
+	height: 25px;
+}
+.config-subtitle	{
+	margin: 20px 0 0 50%;
+}
+.content-panel	{
+	width: 79%;
+	float: right;
+	height: 100vh;
+	display: inline-block;
+	background: #eeeeee;
+}
+.config-items	{
+	margin: 10px 0 0 40px;
+}
+.config-item-saved	{
+	font-size: 15px;
+	display: inline-block;
 }
