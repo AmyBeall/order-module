@@ -268,4 +268,5 @@ angular.module('orderCtrl', [])
 
 		callback(newOrder);
 	}
-});
+
+})

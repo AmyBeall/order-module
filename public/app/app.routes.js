@@ -43,6 +43,11 @@ angular.module('app.routes', ['ngRoute'])
 		controller: 'orderController',
 		controllerAs: 'order'
 	})
+	.when('/order/line',{
+		templateUrl: './app/views/lineScreen.html',
+		controller: 'LineController',
+		controllerAs: 'line'
+	})
 	.otherwise({
 		redirectTo: '/'
 	});

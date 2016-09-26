@@ -16,7 +16,7 @@
 			<tr ng-repeat="eaOrder in order.orders">
 				<td class="order-output-raw">{{ eaOrder.orderDate | date: "EEE, M/dd" }}</td>
 				<td class="order-output-raw">{{ eaOrder.vendor }}</td>
-				<td class="order-output-raw">{{ order.displayOrder.company }}</td>
+				<td class="order-output-raw">{{ eaOrder.company }}</td>
 				<td class="order-output-raw">{{ eaOrder.headCount }}</td>
 		 		<td class="order-output-raw">{{ eaOrder.setUpTime | date: "h:mm a"  }}</td>
 		 		<td class="order-output-raw">${{ eaOrder.total }}</td>

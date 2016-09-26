@@ -1,2 +1,2 @@
-angular.module('inventoryApp', ['app.routes', 'configCtrl', 'orderCtrl', 'configSvc', 'itemSvc', 'orderSvc'])
+angular.module('inventoryApp', ['app.routes', 'configCtrl', 'orderCtrl','lineCtrl','AlertModalCtrl','confirmModalCtrl','modalsSvc','configSvc', 'itemSvc', 'orderSvc','modalsSvc','bnModalsDir'])
 ; 

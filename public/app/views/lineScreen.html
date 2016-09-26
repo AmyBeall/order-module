@@ -1,0 +1,92 @@
+<a href="/">
+	<div id="head">
+		<h1 class="brand">Ordering System</h1>	
+	</div>
+</a>
+<div id="orders-snippet-view">
+	<div class="view-order" ng-if="!order.displayOneOrder">
+		<table>
+			<tr ng-repeat="eaOrder in line.orders">
+		 		<td class="order-output-raw">
+					<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<!--
+
+    // BEGIN: Modals Layout.
+    // --
+    // Our simple modal system makes the assumption that only one modal window can be
+    // open at a time. I find this to be a very reasonable assumption for 99% of use-
+    // cases. And, I'd rather keep it simple and work around the rare use-case in some
+    // other fashion (such as a multi-state modal).
+    // To remove any "magic", I'm explicitly presenting the control properties rather
+    // than trying to hide them behind a compile() step. Notice that rendering a modal
+    // is JUST LIKE RENDERING ANY OTHER VIEW - we have a subview variable which we are
+    // using to swap modals, or remove modals altogether.
+    // The big take-away in the following code is that modal windows aren't a *special*
+    // concept. They are views or components that work the same exact way that the rest
+    // of your application works! Sure, there are a few more rules, like only one open
+    // at a time; but, other than that, there's nothing here that's any different than
+    // any other view you will build. It has a Controller, it has a View, and it works
+    // with other services to execute its functionality.
+-->
+<div
+    bn-modals
+    ng-show="subview"
+    class="m-modals"
+    ng-switch="subview">
+
+    <!-- BEGIN: Alert Modal. -->
+    <div
+        ng-switch-when="alert"
+        ng-controller="AlertModalController"
+        class="modal">
+
+        <p>Company: {{ company }}</p>
+        <p>Headcount: {{ headCount }}</p>
+        <p>Out to Delivery: {{ time | date: "h:mm a" }}</p>
+        	<table>
+        		<tr ng-repeat="item in items">
+        			<td class="order-output-raw">{{ item.quantity }}</td>
+        			<td class="order-output-raw">{{ item.name }}</td>
+        			<td class="order-output-raw">{{ item.customization }}</td>
+        		</tr>
+        	</table>
+        <p>
+            <a ng-click="close()">Close</a>
+        </p>
+
+        <!-- This is to demonstrate that we can jump from one modal to another. -->
+        <p>
+            <a ng-click="jumpToConfirm()" class="jump">Fulfilled</a>
+        </p>
+
+    </div>
+    <!-- END: Alert Modal. -->
+
+
+    <!-- BEGIN: Confirm Modal. -->
+    <div
+        ng-switch-when="confirm"
+        ng-controller="ConfirmModalController"
+        class="modal">
+
+        <p>
+            {{ message }}
+        </p>
+
+        <p>
+            <a ng-click="confirm()">{{ confirmButton }}</a>
+            &mdash;
+            <a ng-click="deny()">{{ denyButton }}</a>
+        </p>
+
+    </div>
+    <!-- END: Confirm Modal. -->
+</div>
+<!-- END: Modals Layout. -->
+    
