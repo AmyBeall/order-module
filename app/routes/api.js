@@ -156,8 +156,8 @@ module.exports = function(app, express){
 
 		.get(function(req,res){
 
-
-			Order.find(function(err, item){
+			now = new Date();
+			Order.find({orderDate: {$gte: now}}, function(err, item){
 				if(err) res.send(err);
 				res.json(item);
 			});

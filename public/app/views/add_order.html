@@ -54,11 +54,11 @@
 		</div>
 		<div class="order-item">
 			<label for="date">Pick Up Date:</label> 
-			<input type="date" id="date" class="fancy-fields-small" ng-model="order.orderInfo.date">
+			<input type="date" ng-model-options="{timezone: -0700 }" id="date" class="fancy-fields-small" ng-model="order.orderInfo.date">
 		</div>
 		<div class="order-item">
 			<label for="time">Pick Up Time:</label>
-			<input type="time" id="time" class="fancy-fields-xs"ng-model="order.orderInfo.time">
+			<input type="time" ng-model-options="{timezone: -0700 }" id="time" class="fancy-fields-xs"ng-model="order.orderInfo.time">
 		</div>
 		<div class="order-item">
 			<label for="headCount">Number of People:</label>

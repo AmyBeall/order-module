@@ -3,15 +3,76 @@
 		<h1 class="brand">Ordering System</h1>	
 	</div>
 </a>
-<div id="orders-snippet-view">
-	<div class="view-order" ng-if="!order.displayOneOrder">
-		<table>
-			<tr ng-repeat="eaOrder in line.orders">
-		 		<td class="order-output-raw">
-					<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
-				</td>
-			</tr>
-		</table>
+<div id="line-view">
+	<div class="time-col title">
+		<h4></h4>
+		<h1>Priority</h1>
+	</div>	
+	<div class="time-col time1" ng-if="!order.displayOneOrder">
+		<h4>Earlier</h4>
+		<div ng-repeat="eaOrder in line.ordersTimeEarly">
+			<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+		</div>
+	</div>
+	<div class="time-col time3" ng-if="!order.displayOneOrder">
+		<h4>8:00 AM</h4>
+		<div ng-repeat="eaOrder in line.ordersTime1">
+			<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+		</div>
+	</div>
+	<div class="time-col time4" ng-if="!order.displayOneOrder">
+		<h4>9:00 AM</h4>
+		<div ng-repeat="eaOrder in line.ordersTime2">
+			<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+		</div>
+	</div>
+	<div class="time-col time5" ng-if="!order.displayOneOrder">
+		<h4>10:00 AM</h4>
+		<div ng-repeat="eaOrder in line.ordersTime3">
+			<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+		</div>
+	</div>
+	<div class="time-col time6" ng-if="!order.displayOneOrder">
+		<h4>11:00 AM</h4>
+		<div ng-repeat="eaOrder in line.ordersTime4">
+			<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+		</div>
+	</div>
+	<div class="time-col time7" ng-if="!order.displayOneOrder">
+		<h4>12:00 PM</h4>
+		<div ng-repeat="eaOrder in line.ordersTime5">
+			<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+		</div>
+	</div>
+	<div class="time-col time2" ng-if="!order.displayOneOrder">
+		<h4>1:00 PM</h4>
+		<div ng-repeat="eaOrder in line.ordersTime6">
+			<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+		</div>
+	</div>
+	<div class="time-col time2" ng-if="!order.displayOneOrder">
+		<h4>2:00 PM</h4>
+		<div ng-repeat="eaOrder in line.ordersTime7">
+			<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+		</div>
+	</div>
+	<div class="time-col time2" ng-if="!order.displayOneOrder">
+		<h4>3:00 PM</h4>
+		<div ng-repeat="eaOrder in line.ordersTime8">
+			<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+		</div>
+	</div>
+	<div class="time-col time2" ng-if="!order.displayOneOrder">
+		<h4>4:00 PM</h4>
+		<div ng-repeat="eaOrder in line.ordersTime9">
+			<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+		</div>
+	</div>
+	<div class="time-col time8" ng-if="!order.displayOneOrder">
+		<h4>Later</h4>
+		<div ng-repeat="eaOrder in line.ordersTimeLate">
+			<button ng-click="line.alertSomething(eaOrder)">{{eaOrder.headCount}} {{eaOrder.city}}</button>
+		</div>
 	</div>
 </div>
 

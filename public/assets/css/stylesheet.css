@@ -623,3 +623,49 @@ a.jump:hover {
     background-color: gold ;
     color: #000000 ;
 }
+#line-view{
+	font-size: 0px;
+}
+div.time-col.title{
+	width: 4.7vw;
+}
+.time-col h4{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-color: #6c7a89;
+	font-size: 16px;
+	text-align: center;
+	height: 5vh;
+	padding-top: 3vh;
+	border-bottom: 2px solid black;
+}
+.time-col button{
+	background: #A10978;
+	border: none;
+	border-radius: 35px;
+	height: 20px;
+	min-width: 25%;
+	display: inline-block;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	margin: 5px;
+	padding: 4px;
+	font-size: 12px;
+	color: white;
+	vertical-align: top;
+}
+.time-col.title h1{
+	margin-top: 35vh;
+	transform: rotate(90deg);
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+}
+div.time-col{
+	width:8.5vw;
+	height: 92vh;
+	border: 1px solid black;
+	display: inline-block;
+	vertical-align: top;
+}
