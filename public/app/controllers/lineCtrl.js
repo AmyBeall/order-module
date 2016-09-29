@@ -35,15 +35,15 @@ angular.module('lineCtrl', [])
 				ctrl.ordersTime7.push(data[datum]);	
 			} else if(data[datum].setUpTime >= '1970-01-01T23:00:00.000Z' && data[datum].setUpTime < '1970-01-01T24:00:00.000Z'){
 				ctrl.ordersTime8.push(data[datum]);	
-			} else if(data[datum].setUpTime >= '1970-01-01T24:00:00.000Z' && data[datum].setUpTime < '1970-01-01T01:00:00.000Z'){
+			} else if(data[datum].setUpTime >= '1970-01-01T24:00:00.000Z' && data[datum].setUpTime < '1970-01-02T01:00:00.000Z'){
 				ctrl.ordersTime9.push(data[datum]);	
-			} else if(data[datum].setUpTime >= '1970-01-01T01:00:00.000Z' && data[datum].setUpTime < '1970-01-01T07:00:00.000Z'){
+			} else if(data[datum].setUpTime >= '1970-01-02T01:00:00.000Z' && data[datum].setUpTime < '1970-01-02T07:00:00.000Z'){
 				ctrl.ordersTimeLate.push(data[datum]);				
 			}
 
 		}
 		console.log(ctrl.ordersTimeEarly);
-		console.log(ctrl.ordersTime2);
+		console.log(ctrl.ordersTimeLate);
 		// ctrl.ordersTime1 = data;
 		// for(order in ctrl.ordersTime1){
 		// 	items = ctrl.ordersTime1[order].item;
