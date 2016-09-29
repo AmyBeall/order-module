@@ -157,12 +157,12 @@ module.exports = function(app, express){
 		.get(function(req,res){
 
 			now = new Date();
-			Order.find({orderDate: {$gte: now}}, function(err, item){
+			Order.find(function(err, item){
 				if(err) res.send(err);
 				res.json(item);
 			});
 		});
-
+		// Order.find({orderDate: {$gte: now}},
 	apiRouter.route('/order/:item_id')
 
 		.get(function(req,res){
