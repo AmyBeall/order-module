@@ -6,7 +6,7 @@
 <div id="line-view">
 	<div class="time-col title">
 		<h4></h4>
-		<h1>Priority</h1>
+		<h1>Orders</h1>
 	</div>	
 	<div class="time-col time1" ng-if="!order.displayOneOrder">
 		<h4>Earlier</h4>
@@ -107,24 +107,31 @@
         ng-controller="AlertModalController"
         class="modal">
 
-        <p>Company: {{ company }}</p>
-        <p>Headcount: {{ headCount }}</p>
-        <p>Out to Delivery: {{ time | date: "h:mm a" }}</p>
+        <p class="modal-txt">Company: {{ company }}</p>
+        <p class="modal-txt">Headcount: {{ headCount }}</p>
+        <p class="modal-txt">Out to Delivery: {{ time | date: "h:mm a" }}</p>
         	<table>
+        		<td class="order-output-title">Quantity</td>
+        		<td class="order-output-title">Item</td>
+        		<td class="order-output-title">Modifications</td>
         		<tr ng-repeat="item in items">
         			<td class="order-output-raw">{{ item.quantity }}</td>
         			<td class="order-output-raw">{{ item.name }}</td>
         			<td class="order-output-raw">{{ item.customization }}</td>
         		</tr>
         	</table>
-        <p>
-            <a ng-click="close()">Close</a>
-        </p>
+        <div class="command-btn">	
+	        <p>
+	            <a ng-click="close()">Close</a>
+	        </p>
+        </div>
 
         <!-- This is to demonstrate that we can jump from one modal to another. -->
-        <p>
-            <a ng-click="jumpToConfirm()" class="jump">Fulfilled</a>
-        </p>
+        <div class="command-btn">
+	        <p>
+	            <a ng-click="jumpToConfirm()" class="jump">Fulfilled</a>
+	        </p>
+        </div>
 
     </div>
     <!-- END: Alert Modal. -->

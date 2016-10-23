@@ -1,3 +1,10 @@
+: root {
+/*Colors*/
+	--primary-purple: #b539ae;
+/*Buttons*/
+	
+}
+
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700);
 *{
 	padding: 0;
@@ -628,6 +635,7 @@ a.jump:hover {
 }
 div.time-col.title{
 	width: 4.7vw;
+
 }
 .time-col h4{
 	font-family: 'Roboto', sans-serif;
@@ -637,14 +645,14 @@ div.time-col.title{
 	text-align: center;
 	height: 5vh;
 	padding-top: 3vh;
-	border-bottom: 2px solid black;
+	border-bottom: 2px solid #e6e6e6;
 }
 .time-col button{
-	background: #A10978;
+	background: #0b98ea;
 	border: none;
 	border-radius: 35px;
-	height: 20px;
-	min-width: 25%;
+	height: 25px;
+	min-width: 10%;
 	display: inline-block;
 	text-align: center;
 	font-family: 'Roboto', sans-serif;
@@ -665,7 +673,27 @@ div.time-col.title{
 div.time-col{
 	width:8.5vw;
 	height: 92vh;
-	border: 1px solid black;
+	border: 1px solid #e6e6e6;
 	display: inline-block;
 	vertical-align: top;
+}
+/*---------------------Modal Styling---------------------------*/
+p.modal-txt {
+	padding: 0 0 10px 0;
+}
+td.order-output-title	{
+	font-size: 14px;
+	color: var(--primary-purple);
+}
+td.order-output-raw	{
+	font-weight: 500;
+	font-size: 13px;
+	font-color: var(--primary-purple);
+}
+.command-btn	{
+	display: inline-block;
+	border: 1px solid black;
+	background: var(-primary-purple);
+	border-radius: 35px;
+	min-width: 20%;
 }
